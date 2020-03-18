@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "unicorn",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "An app that finds connections",
   "engines": {
     "node": ">= 7.0.0"
   },
