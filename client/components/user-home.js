@@ -15,19 +15,26 @@ export class UserHome extends React.Component {
   }
 
   async componentDidMount() {
-    const authorQid = 'Q535';
     const sparqlObj = {
-      type: 'query',
       queryType: 'SELECT',
-      variables: [{id: '?work'}, {id: '?workLabel'}],
+      variables: [
+        {termType: 'Variable', value: 'item'},
+        {termType: 'Variable', value: 'itemLabel'}
+      ],
       where: [
         {
           type: 'bgp',
           triples: [
             {
-              subject: {id: '?work'},
-              predicate: {id: 'http://www.wikidata.org/prop/direct/P50'},
-              object: {id: 'http://www.wikidata.org/entity/Q535'}
+              subject: {termType: 'Variable', value: 'item'},
+              predicate: {
+                termType: 'NamedNode',
+                value: 'http://www.wikidata.org/prop/direct/P1050'
+              },
+              object: {
+                termType: 'NamedNode',
+                value: 'http://www.wikidata.org/entity/Q84263196'
+              }
             }
           ]
         },
@@ -38,17 +45,35 @@ export class UserHome extends React.Component {
               type: 'bgp',
               triples: [
                 {
-                  subject: {id: 'http://www.bigdata.com/rdf#serviceParam'},
-                  predicate: {id: 'http://wikiba.se/ontology#language'},
-                  object: {id: '"[AUTO_LANGUAGE],en,fr,cs,esg"'}
+                  subject: {
+                    termType: 'NamedNode',
+                    value: 'http://www.bigdata.com/rdf#serviceParam'
+                  },
+                  predicate: {
+                    termType: 'NamedNode',
+                    value: 'http://wikiba.se/ontology#language'
+                  },
+                  object: {
+                    termType: 'Literal',
+                    value: '[AUTO_LANGUAGE],en',
+                    language: '',
+                    datatype: {
+                      termType: 'NamedNode',
+                      value: 'http://www.w3.org/2001/XMLSchema#string'
+                    }
+                  }
                 }
               ]
             }
           ],
-          name: {id: 'http://wikiba.se/ontology#label'},
+          name: {
+            termType: 'NamedNode',
+            value: 'http://wikiba.se/ontology#label'
+          },
           silent: false
         }
       ],
+      type: 'query',
       prefixes: {
         wd: 'http://www.wikidata.org/entity/',
         wdt: 'http://www.wikidata.org/prop/direct/',
@@ -60,35 +85,10 @@ export class UserHome extends React.Component {
         bd: 'http://www.bigdata.com/rdf#'
       }
     };
-    sparqlObj.variables = ['?work', '?workLabel'];
+
     const generator = new sparqljs.Generator({});
-    try {
-      const generatedQuery = generator.stringify(sparqlObj);
-      console.log(generatedQuery);
-    } catch (err) {
-      console.log(err);
-    }
-
-    const sparql = `
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX p: <http://www.wikidata.org/prop/>
-PREFIX ps: <http://www.wikidata.org/prop/statement/>
-PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bd: <http://www.bigdata.com/rdf#>
-
-SELECT ?work ?workLabel WHERE {
-  ?work wdt:P50 wd:${authorQid} .
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,fr,cs,esg". }
-}
-`;
-    const parser = new sparqljs.Parser();
-    const parsedQuery = parser.parse(sparql);
-    console.log(parsedQuery);
-
-    const url = wdk.sparqlQuery(sparql);
+    const generatedQuery = generator.stringify(sparqlObj);
+    const url = wdk.sparqlQuery(generatedQuery);
     const {data} = await axios.get(url);
     const simplifiedResults = wdk.simplify.sparqlResults(data);
     console.log(simplifiedResults);
@@ -102,7 +102,7 @@ SELECT ?work ?workLabel WHERE {
         <h3>Welcome, {email}</h3>
         <ol>
           {this.state.result.map(r => (
-            <li key={r.work.value}>{r.work.label}</li>
+            <li key={r.item.value}>{r.item.label}</li>
           ))}
         </ol>
       </div>
