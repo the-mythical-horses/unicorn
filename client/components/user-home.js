@@ -17,29 +17,57 @@ export class UserHome extends React.Component {
   async componentDidMount() {
     const authorQid = 'Q535';
     const sparqlObj = {
+      type: 'query',
       queryType: 'SELECT',
-      variables: [
-        {termType: 'Variable', value: 'work'}
-        //{ termType: 'Variable', value: 'workLabel' },
-      ],
+      variables: [{id: '?work'}, {id: '?workLabel'}],
       where: [
         {
           type: 'bgp',
           triples: [
             {
-              subject: {termType: 'Variable', value: 'work'},
-              predicate: {termType: 'NamedNode', value: 'wdt:P50'},
-              object: {termType: 'NamedNode', value: `wd:${authorQid}`}
+              subject: {id: '?work'},
+              predicate: {id: 'http://www.wikidata.org/prop/direct/P50'},
+              object: {id: 'http://www.wikidata.org/entity/Q535'}
             }
           ]
+        },
+        {
+          type: 'service',
+          patterns: [
+            {
+              type: 'bgp',
+              triples: [
+                {
+                  subject: {id: 'http://www.bigdata.com/rdf#serviceParam'},
+                  predicate: {id: 'http://wikiba.se/ontology#language'},
+                  object: {id: '"[AUTO_LANGUAGE],en,fr,cs,esg"'}
+                }
+              ]
+            }
+          ],
+          name: {id: 'http://wikiba.se/ontology#label'},
+          silent: false
         }
       ],
-      type: 'query',
-      prefixes: {}
+      prefixes: {
+        wd: 'http://www.wikidata.org/entity/',
+        wdt: 'http://www.wikidata.org/prop/direct/',
+        wikibase: 'http://wikiba.se/ontology#',
+        p: 'http://www.wikidata.org/prop/',
+        ps: 'http://www.wikidata.org/prop/statement/',
+        pq: 'http://www.wikidata.org/prop/qualifier/',
+        rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+        bd: 'http://www.bigdata.com/rdf#'
+      }
     };
-    const generator = new sparqljs.Generator();
-    const generatedQuery = generator.stringify(sparqlObj);
-    console.log(generatedQuery);
+    sparqlObj.variables = ['?work', '?workLabel'];
+    const generator = new sparqljs.Generator({});
+    try {
+      const generatedQuery = generator.stringify(sparqlObj);
+      console.log(generatedQuery);
+    } catch (err) {
+      console.log(err);
+    }
 
     const sparql = `
 PREFIX wd: <http://www.wikidata.org/entity/>
