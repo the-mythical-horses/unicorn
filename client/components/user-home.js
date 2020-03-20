@@ -19,11 +19,12 @@ export class UserHome extends React.Component {
     return (
       <div>
         <h3>Welcome, {email}</h3>
+
         <p>Find All Objects With:</p>
         <form method="get" action="/search">
-          Property label:
+          <label htmlFor="pname">Property label:</label>
           <input type="text" name="pname" />
-          Value label:
+          <label htmlFor="qname">Value label:</label>
           <input type="text" name="qname" />
           <button type="submit">Submit</button>
         </form>
