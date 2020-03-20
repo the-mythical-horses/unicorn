@@ -75,19 +75,25 @@ export class Compare extends React.Component {
       }
     });
 
-    const namesResp = await axios.get(
-      wdk.getEntities({
-        ids: Array.from(ids),
-        languages: ['en'],
-        props: ['labels']
-      })
-    );
-    const names = wdk.simplify.entities(namesResp.data.entities);
-    this.setState({
-      results: same,
-      names,
-      complexNames: namesResp.data.entities
-    });
+    if (ids.length > 0) {
+      const namesResp = await axios.get(
+        wdk.getEntities({
+          ids: Array.from(ids),
+          languages: ['en'],
+          props: ['labels']
+        })
+      );
+      const names = wdk.simplify.entities(namesResp.data.entities);
+      this.setState({
+        results: same,
+        names,
+        complexNames: namesResp.data.entities
+      });
+    } else {
+      this.setState({
+        results: same
+      });
+    }
   }
 
   getLabel(id) {
