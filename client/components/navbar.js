@@ -1,32 +1,49 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import M from 'materialize-css';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Unicorn</h1>
+const Navbar = ({handleClick, isLoggedIn}) => {
+  useEffect(() => {
+    M.AutoInit();
+  });
+
+  return (
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+      <div className="nav-wrapper">
+        <h2 className="brand-logo">Unicorn</h2>
+        {isLoggedIn ? (
+          <div>
+            <ul className="right">
+              <li>
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login" className="right">
+              Login
+            </Link>
+            <Link to="/signup" className="right">
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </div>
+      <hr />
     </nav>
-    <hr />
-  </div>
-);
+  );
+};
 
 /**
  * CONTAINER
