@@ -75,7 +75,7 @@ export class Compare extends React.Component {
       }
     });
 
-    if (ids.length > 0) {
+    if (ids.size > 0) {
       const namesResp = await axios.get(
         wdk.getEntities({
           ids: Array.from(ids),
