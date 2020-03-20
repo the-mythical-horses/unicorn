@@ -25,6 +25,7 @@ export class Compare extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.getLabel = this.getLabel.bind(this);
+    this.compareTwo = this.compareTwo.bind(this);
   }
   onChange(evt) {
     this.setState({
@@ -44,32 +45,19 @@ export class Compare extends React.Component {
       wdk.searchEntities(this.state.form.qname2)
     );
     const q2 = q2name2obj.data.search[0].id;
-    const entitiesResp = await axios.get(
-      wdk.getEntities({
-        ids: [q1, q2],
-        languages: ['en'],
-        props: ['info', 'claims']
-      })
-    );
-    const entities = wdk.simplify.entities(entitiesResp.data.entities);
+
+    const entities = this.compareTwo(q1, q2);
+
     const q1claims = Object.keys(entities[q1].claims);
-    console.log(q1claims);
     const q2claims = Object.keys(entities[q2].claims);
-    const same = {};
     const q1Different = {};
     const q2Different = {};
-    const ids = new Set();
+
     q1claims.forEach(c => {
       if (entities[q2].claims[c]) {
         entities[q1].claims[c].forEach(v => {
           if (entities[q2].claims[c].includes(v)) {
-            ids.add(v);
-            ids.add(c);
-            if (same[c]) {
-              same[c].push(v);
-            } else {
-              same[c] = [v];
-            }
+            console.log('something');
           } else {
             // eslint-disable-next-line no-lonely-if
             if (q1Different[c]) {
@@ -81,6 +69,7 @@ export class Compare extends React.Component {
         });
       }
     });
+
     q2claims.forEach(c => {
       if (entities[q1].claims[c]) {
         entities[q2].claims[c].forEach(v => {
@@ -152,6 +141,38 @@ export class Compare extends React.Component {
     }
     return id;
   }
+
+  async compareTwo(q1, q2) {
+    const entitiesResp = await axios.get(
+      wdk.getEntities({
+        ids: [q1, q2],
+        languages: ['en'],
+        props: ['info', 'claims']
+      })
+    );
+    const entities = wdk.simplify.entities(entitiesResp.data.entities);
+    const q1Different = {};
+    console.log(q1claims);
+    const same = {};
+    const ids = new Set();
+    q1claims.forEach(c => {
+      if (entities[q2].claims[c]) {
+        entities[q1].claims[c].forEach(v => {
+          if (entities[q2].claims[c].includes(v)) {
+            ids.add(v);
+            ids.add(c);
+            if (same[c]) {
+              same[c].push(v);
+            } else {
+              same[c] = [v];
+            }
+          }
+        });
+      }
+    });
+    return entities;
+  }
+
   render() {
     const {email} = this.props;
     return (
