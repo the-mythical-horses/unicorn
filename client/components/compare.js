@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable guard-for-in */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -5,7 +7,6 @@ import wdk from 'wikidata-sdk';
 import sparqljs from 'sparqljs';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
 /**
  * COMPONENT
  */
@@ -25,7 +26,6 @@ export class Compare extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.getLabel = this.getLabel.bind(this);
   }
-
   onChange(evt) {
     this.setState({
       form: {
@@ -34,20 +34,16 @@ export class Compare extends React.Component {
       }
     });
   }
-
   async onSubmit(evt) {
     evt.preventDefault();
-
     const q1name2obj = await axios.get(
       wdk.searchEntities(this.state.form.qname1)
     );
     const q1 = q1name2obj.data.search[0].id;
-
     const q2name2obj = await axios.get(
       wdk.searchEntities(this.state.form.qname2)
     );
     const q2 = q2name2obj.data.search[0].id;
-
     const entitiesResp = await axios.get(
       wdk.getEntities({
         ids: [q1, q2],
@@ -57,7 +53,11 @@ export class Compare extends React.Component {
     );
     const entities = wdk.simplify.entities(entitiesResp.data.entities);
     const q1claims = Object.keys(entities[q1].claims);
+    console.log(q1claims);
+    const q2claims = Object.keys(entities[q2].claims);
     const same = {};
+    const q1Different = {};
+    const q2Different = {};
     const ids = new Set();
     q1claims.forEach(c => {
       if (entities[q2].claims[c]) {
@@ -70,32 +70,70 @@ export class Compare extends React.Component {
             } else {
               same[c] = [v];
             }
+          } else {
+            // eslint-disable-next-line no-lonely-if
+            if (q1Different[c]) {
+              q1Different[c].push(v);
+            } else {
+              q1Different[c] = [v];
+            }
+          }
+        });
+      }
+    });
+    q2claims.forEach(c => {
+      if (entities[q1].claims[c]) {
+        entities[q2].claims[c].forEach(v => {
+          if (entities[q1].claims[c].includes(v)) {
+            console.log('something');
+          } else {
+            // eslint-disable-next-line no-lonely-if
+            if (q2Different[c]) {
+              q2Different[c].push(v);
+            } else {
+              q2Different[c] = [v];
+            }
           }
         });
       }
     });
 
-    if (ids.size > 0) {
-      const namesResp = await axios.get(
-        wdk.getEntities({
-          ids: Array.from(ids),
-          languages: ['en'],
-          props: ['labels']
-        })
-      );
-      const names = wdk.simplify.entities(namesResp.data.entities);
-      this.setState({
-        results: same,
-        names,
-        complexNames: namesResp.data.entities
-      });
-    } else {
-      this.setState({
-        results: same
-      });
+    for (let property in q1Different) {
+      if (!q2Different[property]) {
+        delete q1Different[property];
+      }
     }
-  }
+    for (let property in q2Different) {
+      if (!q1Different[property]) {
+        delete q2Different[property];
+      }
+    }
 
+    // const q1DifferentLoop = async () => {
+    //   for (let property in q1Different) {
+    //     await axios.get(
+    //       wdk.getEntities({
+    //       ids: [q1, q2],
+    //       languages: ['en'],
+    //       props: ['info', 'claims']
+    //      })
+    //   );
+    // };
+
+    const namesResp = await axios.get(
+      wdk.getEntities({
+        ids: Array.from(ids),
+        languages: ['en'],
+        props: ['labels']
+      })
+    );
+    const names = wdk.simplify.entities(namesResp.data.entities);
+    this.setState({
+      results: same,
+      names,
+      complexNames: namesResp.data.entities
+    });
+  }
   getLabel(id) {
     if (
       this.state.names[id] &&
@@ -114,7 +152,6 @@ export class Compare extends React.Component {
     }
     return id;
   }
-
   render() {
     const {email} = this.props;
     return (
@@ -137,7 +174,6 @@ export class Compare extends React.Component {
           />
           <button type="submit">Submit</button>
         </form>
-
         <ol>
           {Object.keys(this.state.results).map(p => (
             <li key={p}>
@@ -151,5 +187,4 @@ export class Compare extends React.Component {
     );
   }
 }
-
 export default Compare;
