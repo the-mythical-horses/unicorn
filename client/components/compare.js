@@ -15,6 +15,7 @@ export class Compare extends React.Component {
     this.state = {
       results: {},
       names: {},
+      complexNames: {},
       form: {
         qname1: '',
         qname2: ''
@@ -22,6 +23,7 @@ export class Compare extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.getLabel = this.getLabel.bind(this);
   }
 
   onChange(evt) {
@@ -83,9 +85,28 @@ export class Compare extends React.Component {
     const names = wdk.simplify.entities(namesResp.data.entities);
     this.setState({
       results: same,
-      names
+      names,
+      complexNames: namesResp.data.entities
     });
-    console.log(names);
+  }
+
+  getLabel(id) {
+    if (
+      this.state.names[id] &&
+      this.state.names[id].labels &&
+      this.state.names[id].labels.en
+    ) {
+      return this.state.names[id].labels.en;
+    }
+    if (
+      this.state.complexNames[id] &&
+      this.state.complexNames[id].lemmas &&
+      this.state.complexNames[id].lemmas.en &&
+      this.state.complexNames[id].lemmas.en.value
+    ) {
+      return this.state.complexNames[id].lemmas.en.value;
+    }
+    return id;
   }
 
   render() {
@@ -114,10 +135,9 @@ export class Compare extends React.Component {
         <ol>
           {Object.keys(this.state.results).map(p => (
             <li key={p}>
-              {this.state.names[p].labels.en}:{' '}
-              {this.state.results[p]
-                .map(q => this.state.names[q].labels.en)
-                .join(', ')}
+              {`${this.getLabel(p)}: ${this.state.results[p]
+                .map(q => this.getLabel(q))
+                .join(', ')}`}
             </li>
           ))}
         </ol>
