@@ -17,17 +17,17 @@ const AuthForm = props => {
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
-        <div>
+        <div className="input-field col s6">
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" />
+          <input className="validate" name="email" type="text" />
         </div>
-        <div>
+        <div className="input-field col s6">
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input className="validate" name="password" type="password" />
         </div>
         <div>
           <button className="btn waves-effect waves-light" type="submit">

@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import M from 'materialize-css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faProjectDiagram} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   useEffect(() => {
@@ -13,13 +15,20 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <h2 className="brand-logo">Unicorn</h2>
+        {/* <FontAwesomeIcon className="icon" icon={faProjectDiagram} /> */}
+        <Link to="/home" className="brand-logo">
+          Unicorn
+        </Link>
+
         {isLoggedIn ? (
           <div>
-            <ul className="right">
+            <ul className="right hide-on-med-and-down">
+              {/* The navbar will show these links after you log in */}
               <li>
-                {/* The navbar will show these links after you log in */}
                 <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/compare">Compare</Link>
               </li>
               <li>
                 <a href="#" onClick={handleClick}>
@@ -30,17 +39,18 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           </div>
         ) : (
           <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login" className="right">
-              Login
-            </Link>
-            <Link to="/signup" className="right">
-              Sign Up
-            </Link>
+            <ul className="right hide-on-med-and-down">
+              {/* The navbar will show these links before you log in */}
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Sign Up</Link>
+              </li>
+            </ul>
           </div>
         )}
       </div>
-      <hr />
     </nav>
   );
 };
