@@ -17,6 +17,7 @@ export class Compare extends React.Component {
     super(props);
     this.state = {
       results: {},
+      l2results: {},
       names: {},
       complexNames: {},
       form: {
@@ -29,9 +30,11 @@ export class Compare extends React.Component {
     this.getLabel = this.getLabel.bind(this);
     this.compareTwo = this.compareTwo.bind(this);
   }
+
   componentDidMount() {
     M.AutoInit();
   }
+
   onChange(evt) {
     this.setState({
       form: {
@@ -40,6 +43,49 @@ export class Compare extends React.Component {
       }
     });
   }
+
+  async compareTwo(entities, q1, q2) {
+    console.log(q1, q2);
+    const q1Different = {};
+    const same = {};
+    const ids = new Set();
+    const q1claims = Object.keys(entities[q1].claims);
+    q1claims.forEach(c => {
+      if (entities[q2].claims[c]) {
+        entities[q1].claims[c].forEach(v => {
+          const entitiesq2claimscvalues = entities[q2].claims[c].map(
+            v => v.value
+          );
+          if (entitiesq2claimscvalues.includes(v.value)) {
+            ids.add(v.value);
+            ids.add(c);
+            if (same[c]) {
+              same[c].push(v.value);
+            } else {
+              same[c] = [v.value];
+            }
+          }
+        });
+      }
+    });
+    if (ids.size > 0) {
+      const namesResp = await axios.get(
+        wdk.getEntities({
+          ids: Array.from(ids),
+          languages: ['en'],
+          props: ['labels']
+        })
+      );
+      const namesEntities = namesResp.data.entities;
+      const names = wdk.simplify.entities(namesEntities);
+      this.setState({
+        names: {...this.state.names, ...names},
+        complexNames: {...this.state.complexNames, ...namesEntities}
+      });
+    }
+    return same;
+  }
+
   async onSubmit(evt) {
     evt.preventDefault();
     const q1name2obj = await axios.get(
@@ -51,7 +97,20 @@ export class Compare extends React.Component {
     );
     const q2 = q2name2obj.data.search[0].id;
 
-    const entities = this.compareTwo(q1, q2);
+    const entitiesResp = await axios.get(
+      wdk.getEntities({
+        ids: [q1, q2],
+        languages: ['en'],
+        props: ['info', 'claims']
+      })
+    );
+    const entities = wdk.simplify.entities(entitiesResp.data.entities, {
+      keepTypes: true
+    });
+
+    const results = await this.compareTwo(entities, q1, q2);
+
+    this.setState({results});
 
     const q1claims = Object.keys(entities[q1].claims);
     const q2claims = Object.keys(entities[q2].claims);
@@ -61,31 +120,36 @@ export class Compare extends React.Component {
     q1claims.forEach(c => {
       if (entities[q2].claims[c]) {
         entities[q1].claims[c].forEach(v => {
-          if (entities[q2].claims[c].includes(v)) {
-            console.log('something');
-          } else {
-            // eslint-disable-next-line no-lonely-if
+          const entitiesq2claimscvalues = entities[q2].claims[c].map(
+            v => v.value
+          );
+          if (
+            !entitiesq2claimscvalues.includes(v.value) &&
+            v.type === 'wikibase-item'
+          ) {
             if (q1Different[c]) {
-              q1Different[c].push(v);
+              q1Different[c].push(v.value);
             } else {
-              q1Different[c] = [v];
+              q1Different[c] = [v.value];
             }
           }
         });
       }
     });
-
     q2claims.forEach(c => {
       if (entities[q1].claims[c]) {
         entities[q2].claims[c].forEach(v => {
-          if (entities[q1].claims[c].includes(v)) {
-            console.log('something');
-          } else {
-            // eslint-disable-next-line no-lonely-if
+          const entitiesq1claimscvalues = entities[q1].claims[c].map(
+            v => v.value
+          );
+          if (
+            !entitiesq1claimscvalues.includes(v.value) &&
+            v.type === 'wikibase-item'
+          ) {
             if (q2Different[c]) {
-              q2Different[c].push(v);
+              q2Different[c].push(v.value);
             } else {
-              q2Different[c] = [v];
+              q2Different[c] = [v.value];
             }
           }
         });
@@ -103,31 +167,33 @@ export class Compare extends React.Component {
       }
     }
 
-    // const q1DifferentLoop = async () => {
-    //   for (let property in q1Different) {
-    //     await axios.get(
-    //       wdk.getEntities({
-    //       ids: [q1, q2],
-    //       languages: ['en'],
-    //       props: ['info', 'claims']
-    //      })
-    //   );
-    // };
-
-    const namesResp = await axios.get(
+    console.log('q1d', q1Different, 'q2d', q2Different);
+    const fetchList = [
+      ...Object.values(q1Different).flat(),
+      ...Object.values(q2Different).flat()
+    ];
+    const l2entitiesResp = await axios.get(
       wdk.getEntities({
-        ids: Array.from(ids),
+        ids: fetchList,
         languages: ['en'],
-        props: ['labels']
+        props: ['info', 'claims']
       })
     );
-    const names = wdk.simplify.entities(namesResp.data.entities);
-    this.setState({
-      results: same,
-      names,
-      complexNames: namesResp.data.entities
+    const level2entities = wdk.simplify.entities(l2entitiesResp.data.entities, {
+      keepTypes: true
     });
+    for (let property in q1Different) {
+      const results = await this.compareTwo(
+        level2entities,
+        q1Different[property][0],
+        q2Different[property][0]
+      );
+      this.setState({
+        l2results: {...this.state.l2results, [property]: results}
+      });
+    }
   }
+
   getLabel(id) {
     if (
       this.state.names[id] &&
@@ -145,37 +211,6 @@ export class Compare extends React.Component {
       return this.state.complexNames[id].lemmas.en.value;
     }
     return id;
-  }
-
-  async compareTwo(q1, q2) {
-    const entitiesResp = await axios.get(
-      wdk.getEntities({
-        ids: [q1, q2],
-        languages: ['en'],
-        props: ['info', 'claims']
-      })
-    );
-    const entities = wdk.simplify.entities(entitiesResp.data.entities);
-    const q1Different = {};
-    console.log(q1claims);
-    const same = {};
-    const ids = new Set();
-    q1claims.forEach(c => {
-      if (entities[q2].claims[c]) {
-        entities[q1].claims[c].forEach(v => {
-          if (entities[q2].claims[c].includes(v)) {
-            ids.add(v);
-            ids.add(c);
-            if (same[c]) {
-              same[c].push(v);
-            } else {
-              same[c] = [v];
-            }
-          }
-        });
-      }
-    });
-    return entities;
   }
 
   render() {
@@ -214,6 +249,25 @@ export class Compare extends React.Component {
                 .join(', ')}`}
             </li>
           ))}
+        </ol>
+        <ol>
+          {/*
+          {Object.keys(this.state.l2results).map(p => {
+            <li key={p}>
+              <ol>
+                {`${this.getLabel(p)}: ${Object.keys(
+                  this.state.l2results[p]
+                ).map(p2 => (
+                  <li key={p2}>
+                    {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
+                      .map(q => this.getLabel(q))
+                      .join(', ')}`}
+                  </li>
+                ))}}`}
+              </ol>
+            </li>;
+          })}
+             */}
         </ol>
       </div>
     );
