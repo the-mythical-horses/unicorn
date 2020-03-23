@@ -227,8 +227,7 @@ export class Compare extends React.Component {
     const {email} = this.props;
     return (
       <div>
-        <p>Compare:</p>
-        <form onSubmit={this.onSubmit}>
+        <form id="compareForm" onSubmit={this.onSubmit}>
           <div className="input-field col s6">
             <label htmlFor="qname1">Object 1</label>
             <input
@@ -238,6 +237,9 @@ export class Compare extends React.Component {
               value={this.state.form.qname1}
             />
           </div>
+          <button type="submit" className="waves-effect waves-light btn">
+            Compare
+          </button>
           <div className="input-field col s6">
             <label htmlFor="qname2">Object 2</label>
             <input
@@ -247,35 +249,92 @@ export class Compare extends React.Component {
               value={this.state.form.qname2}
             />
           </div>
-          <button type="submit" className="waves-effect waves-light btn">
-            Submit
-          </button>
         </form>
-        <ol>
-          {Object.keys(this.state.results).map(p => (
-            <li key={p}>
-              {`${this.getLabel(p)}: ${this.state.results[p]
-                .map(q => this.getLabel(q))
-                .join(', ')}`}
-            </li>
-          ))}
-        </ol>
-        <ol>
-          {Object.keys(this.state.l2results).map(p => (
-            <li key={p}>
-              {`${this.getLabel(p)}: `}
-              <ol>
-                {Object.keys(this.state.l2results[p]).map(p2 => (
-                  <li key={p2}>
-                    {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
-                      .map(q => this.getLabel(q))
-                      .join(', ')}`}
-                  </li>
-                ))}
-              </ol>
-            </li>
-          ))}
-        </ol>
+
+        <div id="elisCards">
+          <div className="elisCard smallCards">
+            <div className="smallTitle">Harry Potter</div>
+            <div className="smallSubTitle">Harry Potter character</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg" />
+            <div className="smallPictureDescription">picture description</div>
+            <div className="smallMain">
+              <div className="theSmalls">
+                <div className="smallInfoH">First appearance</div>
+                <div className="smallInfoD">
+                  Harry Potter and the Philosopher's Stone
+                </div>
+              </div>
+            </div>
+            <div className="smallInfo">
+              <div className="smallInfoTitle">Information</div>
+              <div className="smallInfoMain">
+                <div className="theSmalls">
+                  <div className="smallInfoH">First appearance</div>
+                  <div className="smallInfoD">
+                    Harry Potter and the Philosopher's Stone
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="elisCard bigCards">
+            <div className="bigTitle">How They Compare:</div>
+            <div className="levelHeader">Level 1</div>
+            <ol>
+              {Object.keys(this.state.results).map(p => (
+                <li key={p}>
+                  {`${this.getLabel(p)}: ${this.state.results[p]
+                    .map(q => this.getLabel(q))
+                    .join(', ')}`}
+                </li>
+              ))}
+            </ol>
+            <div className="levelHeader">Level 2</div>
+            <ol>
+              {Object.keys(this.state.l2results).map(p => (
+                <li key={p}>
+                  {`${this.getLabel(p)}: `}
+                  <ol>
+                    {Object.keys(this.state.l2results[p]).map(p2 => (
+                      <li key={p2}>
+                        {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
+                          .map(q => this.getLabel(q))
+                          .join(', ')}`}
+                      </li>
+                    ))}
+                  </ol>
+                </li>
+              ))}
+            </ol>
+            <div className="levelHeader">Level 3</div>
+          </div>
+          <div className="elisCard smallCards">
+            <div className="smallTitle">Ronald Weasly</div>
+            <div className="smallSubTitle">Harry Potter character</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Ron_Weasley_poster.jpg" />
+            <div className="smallPictureDescription">picture description</div>
+            <div className="smallMain">
+              <div className="theSmalls">
+                <div className="smallInfoH">First appearance</div>
+                <div className="smallInfoD">
+                  Harry Potter and the Philosopher's Stone
+                </div>
+              </div>
+            </div>
+            <div className="smallInfo">
+              <div className="smallInfoTitle">Information</div>
+              <div className="smallInfoMain">
+                <div className="theSmalls">
+                  <div className="smallInfoH">First appearance</div>
+                  <div className="smallInfoD">
+                    Harry Potter and the Philosopher's Stone
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
