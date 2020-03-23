@@ -1,33 +1,59 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import M from 'materialize-css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faProjectDiagram} from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Unicorn</h1>
+const Navbar = ({handleClick, isLoggedIn}) => {
+  useEffect(() => {
+    M.AutoInit();
+  });
+
+  return (
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/compare">Compare</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+      <div className="nav-wrapper">
+        {/* <FontAwesomeIcon className="icon" icon={faProjectDiagram} /> */}
+        <Link to="/home" className="brand-logo">
+          Unicorn
+        </Link>
+
+        {isLoggedIn ? (
+          <div>
+            <ul className="right hide-on-med-and-down">
+              {/* The navbar will show these links after you log in */}
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/compare">Compare</Link>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <ul className="right hide-on-med-and-down">
+              {/* The navbar will show these links before you log in */}
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Sign Up</Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     </nav>
-    <hr />
-  </div>
-);
+  );
+};
 
 /**
  * CONTAINER

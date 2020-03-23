@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+
 body {
   font-family: sans-serif;
 }
@@ -15,7 +17,20 @@ nav a {
   margin: 1em;
 }
 
+.brand-logo {
+  margin: 10px;
+  font-family: 'Lobster', cursive;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.material-icons {
+  margin: 10px;
 }

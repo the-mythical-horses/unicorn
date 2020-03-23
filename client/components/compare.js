@@ -7,6 +7,8 @@ import wdk from 'wikidata-sdk';
 import sparqljs from 'sparqljs';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import M from 'materialize-css';
+
 /**
  * COMPONENT
  */
@@ -26,6 +28,9 @@ export class Compare extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.getLabel = this.getLabel.bind(this);
     this.compareTwo = this.compareTwo.bind(this);
+  }
+  componentDidMount() {
+    M.AutoInit();
   }
   onChange(evt) {
     this.setState({
@@ -179,21 +184,27 @@ export class Compare extends React.Component {
       <div>
         <p>Compare:</p>
         <form onSubmit={this.onSubmit}>
-          <label htmlFor="qname1">Object 1:</label>
-          <input
-            type="text"
-            name="qname1"
-            onChange={this.onChange}
-            value={this.state.form.qname1}
-          />
-          <label htmlFor="qname2">Object 2:</label>
-          <input
-            type="text"
-            name="qname2"
-            onChange={this.onChange}
-            value={this.state.form.qname2}
-          />
-          <button type="submit">Submit</button>
+          <div className="input-field col s6">
+            <label htmlFor="qname1">Object 1</label>
+            <input
+              type="text"
+              name="qname1"
+              onChange={this.onChange}
+              value={this.state.form.qname1}
+            />
+          </div>
+          <div className="input-field col s6">
+            <label htmlFor="qname2">Object 2</label>
+            <input
+              type="text"
+              name="qname2"
+              onChange={this.onChange}
+              value={this.state.form.qname2}
+            />
+          </div>
+          <button type="submit" className="waves-effect waves-light btn">
+            Submit
+          </button>
         </form>
         <ol>
           {Object.keys(this.state.results).map(p => (
