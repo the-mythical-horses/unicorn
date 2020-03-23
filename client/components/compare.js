@@ -251,23 +251,20 @@ export class Compare extends React.Component {
           ))}
         </ol>
         <ol>
-          {/*
-          {Object.keys(this.state.l2results).map(p => {
+          {Object.keys(this.state.l2results).map(p => (
             <li key={p}>
               <ol>
-                {`${this.getLabel(p)}: ${Object.keys(
-                  this.state.l2results[p]
-                ).map(p2 => (
+                {`${this.getLabel(p)}: `}
+                {Object.keys(this.state.l2results[p]).map(p2 => (
                   <li key={p2}>
                     {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
                       .map(q => this.getLabel(q))
                       .join(', ')}`}
                   </li>
-                ))}}`}
+                ))}
               </ol>
-            </li>;
-          })}
-             */}
+            </li>
+          ))}
         </ol>
       </div>
     );
