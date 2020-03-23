@@ -46,17 +46,16 @@ export class Compare extends React.Component {
 
   async compareTwo(entities, q1, q2) {
     console.log(q1, q2);
-    const q1Different = {};
     const same = {};
     const ids = new Set();
     const q1claims = Object.keys(entities[q1].claims);
     q1claims.forEach(c => {
       if (entities[q2].claims[c]) {
         entities[q1].claims[c].forEach(v => {
-          const entitiesq2claimscvalues = entities[q2].claims[c].map(
+          const entitiesQ2ClaimsCValues = entities[q2].claims[c].map(
             v => v.value
           );
-          if (entitiesq2claimscvalues.includes(v.value)) {
+          if (entitiesQ2ClaimsCValues.includes(v.value)) {
             ids.add(v.value);
             ids.add(c);
             if (same[c]) {
