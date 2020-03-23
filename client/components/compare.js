@@ -68,26 +68,12 @@ export class Compare extends React.Component {
         });
       }
     });
-    if (ids.size > 0) {
-      const namesResp = await axios.get(
-        wdk.getEntities({
-          ids: Array.from(ids),
-          languages: ['en'],
-          props: ['labels']
-        })
-      );
-      const namesEntities = namesResp.data.entities;
-      const names = wdk.simplify.entities(namesEntities);
-      this.setState({
-        names: {...this.state.names, ...names},
-        complexNames: {...this.state.complexNames, ...namesEntities}
-      });
-    }
-    return same;
+    return [same, Array.from(ids)];
   }
 
   async onSubmit(evt) {
     evt.preventDefault();
+    const ids = new Set();
     const q1name2obj = await axios.get(
       wdk.searchEntities(this.state.form.qname1)
     );
@@ -108,7 +94,8 @@ export class Compare extends React.Component {
       keepTypes: true
     });
 
-    const results = await this.compareTwo(entities, q1, q2);
+    const [results, l1ids] = await this.compareTwo(entities, q1, q2);
+    l1ids.forEach(id => ids.add(id));
 
     this.setState({results});
 
@@ -167,7 +154,6 @@ export class Compare extends React.Component {
       }
     }
 
-    console.log('q1d', q1Different, 'q2d', q2Different);
     const fetchList = [
       ...Object.values(q1Different).flat(),
       ...Object.values(q2Different).flat()
@@ -183,13 +169,30 @@ export class Compare extends React.Component {
       keepTypes: true
     });
     for (let property in q1Different) {
-      const results = await this.compareTwo(
+      const [results, l2ids] = await this.compareTwo(
         level2entities,
         q1Different[property][0],
         q2Different[property][0]
       );
+      l2ids.forEach(id => ids.add(id));
       this.setState({
         l2results: {...this.state.l2results, [property]: results}
+      });
+    }
+    Object.keys(q1Different).forEach(id => ids.add(id));
+    if (ids.size > 0) {
+      const namesResp = await axios.get(
+        wdk.getEntities({
+          ids: Array.from(ids),
+          languages: ['en'],
+          props: ['labels']
+        })
+      );
+      const namesEntities = namesResp.data.entities;
+      const names = wdk.simplify.entities(namesEntities);
+      this.setState({
+        names: {...this.state.names, ...names},
+        complexNames: {...this.state.complexNames, ...namesEntities}
       });
     }
   }
@@ -251,23 +254,20 @@ export class Compare extends React.Component {
           ))}
         </ol>
         <ol>
-          {/*
-          {Object.keys(this.state.l2results).map(p => {
+          {Object.keys(this.state.l2results).map(p => (
             <li key={p}>
+              {`${this.getLabel(p)}: `}
               <ol>
-                {`${this.getLabel(p)}: ${Object.keys(
-                  this.state.l2results[p]
-                ).map(p2 => (
+                {Object.keys(this.state.l2results[p]).map(p2 => (
                   <li key={p2}>
                     {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
                       .map(q => this.getLabel(q))
                       .join(', ')}`}
                   </li>
-                ))}}`}
+                ))}
               </ol>
-            </li>;
-          })}
-             */}
+            </li>
+          ))}
         </ol>
       </div>
     );
