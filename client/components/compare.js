@@ -73,6 +73,10 @@ export class Compare extends React.Component {
 
   async onSubmit(evt) {
     evt.preventDefault();
+    this.setState({
+      results: {},
+      l2results: {}
+    });
     const ids = new Set();
     const q1name2obj = await axios.get(
       wdk.searchEntities(this.state.form.qname1)
@@ -146,10 +150,12 @@ export class Compare extends React.Component {
     for (let property in q1Different) {
       if (!q2Different[property]) {
         delete q1Different[property];
+        delete q2Different[property];
       }
     }
     for (let property in q2Different) {
       if (!q1Different[property]) {
+        delete q1Different[property];
         delete q2Different[property];
       }
     }
@@ -181,18 +187,19 @@ export class Compare extends React.Component {
     }
     Object.keys(q1Different).forEach(id => ids.add(id));
     if (ids.size > 0) {
-      const namesResp = await axios.get(
-        wdk.getEntities({
-          ids: Array.from(ids),
-          languages: ['en'],
-          props: ['labels']
-        })
-      );
-      const namesEntities = namesResp.data.entities;
-      const names = wdk.simplify.entities(namesEntities);
-      this.setState({
-        names: {...this.state.names, ...names},
-        complexNames: {...this.state.complexNames, ...namesEntities}
+      const urls = wdk.getManyEntities({
+        ids: Array.from(ids),
+        languages: ['en'],
+        props: ['labels']
+      });
+      urls.forEach(async url => {
+        const namesResp = await axios.get(url);
+        const namesEntities = namesResp.data.entities;
+        const names = wdk.simplify.entities(namesEntities);
+        this.setState({
+          names: {...this.state.names, ...names},
+          complexNames: {...this.state.complexNames, ...namesEntities}
+        });
       });
     }
   }
