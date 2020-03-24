@@ -127,8 +127,9 @@ button {
   margin: 5px;
   text-align: center;
 }
-img {
+.compare-img {
   margin-left: 10px;
+  height: 350px;
 }
 .smallPictureDescription {
   text-align: center;

@@ -16,10 +16,16 @@ export class Compare extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      left: {},
+      right: {},
       results: {},
       l2results: {},
       names: {},
       complexNames: {},
+      leftImage: '/img/leftUnicorn.png',
+      leftImageDesc: '',
+      rightImage: '/img/rightUnicorn.png',
+      rightImageDesc: '',
       form: {
         qname1: '',
         qname2: ''
@@ -70,6 +76,41 @@ export class Compare extends React.Component {
     return [same, Array.from(ids)];
   }
 
+  async getImage(entities, q) {
+    if (!entities[q].claims.P18) {
+      return '';
+    }
+    const wikiResp = await axios.get(
+      'https://commons.wikimedia.org/w/api.php',
+      {
+        params: {
+          action: 'query',
+          titles: `File:${entities[q].claims.P18[0].value}`, // TODO get multiple imgs in one request by separating with pipe character?
+          prop: 'imageinfo',
+          iiprop: 'url|extmetadata',
+          origin: '*',
+          format: 'json'
+        }
+      }
+    );
+    for (let page in wikiResp.data.query.pages) {
+      if (wikiResp.data.query.pages[page].imageinfo) {
+        if (
+          wikiResp.data.query.pages[page].imageinfo[0].extmetadata
+            .ImageDescription
+        ) {
+          return [
+            wikiResp.data.query.pages[page].imageinfo[0].url,
+            wikiResp.data.query.pages[page].imageinfo[0].extmetadata
+              .ImageDescription.value
+          ];
+        }
+        return [wikiResp.data.query.pages[page].imageinfo[0].url, ''];
+      }
+    }
+    return '';
+  }
+
   async onSubmit(evt) {
     evt.preventDefault();
     this.setState({
@@ -90,12 +131,27 @@ export class Compare extends React.Component {
       wdk.getEntities({
         ids: [q1, q2],
         languages: ['en'],
-        props: ['info', 'claims']
+        props: ['info', 'claims', 'labels', 'descriptions', 'sitelinks']
       })
     );
     const entities = wdk.simplify.entities(entitiesResp.data.entities, {
-      keepTypes: true
+      keepTypes: true,
+      addUrl: true
     });
+    this.setState({
+      left: entities[q1],
+      right: entities[q2]
+    });
+    console.log(entities);
+
+    const [leftImage, leftImageDesc] = await this.getImage(entities, q1);
+    if (leftImage) {
+      this.setState({leftImage, leftImageDesc});
+    }
+    const [rightImage, rightImageDesc] = await this.getImage(entities, q2);
+    if (rightImage) {
+      this.setState({rightImage, rightImageDesc});
+    }
 
     const [results, l1ids] = await this.compareTwo(entities, q1, q2);
     l1ids.forEach(id => ids.add(id));
@@ -252,26 +308,25 @@ export class Compare extends React.Component {
 
         <div id="elisCards">
           <div className="elisCard smallCards">
-            <div className="smallTitle">Harry Potter</div>
-            <div className="smallSubTitle">Harry Potter character</div>
-            <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg" />
-            <div className="smallPictureDescription">picture description</div>
-            <div className="smallMain">
-              <div className="theSmalls">
-                <div className="smallInfoH">First appearance</div>
-                <div className="smallInfoD">
-                  Harry Potter and the Philosopher's Stone
-                </div>
-              </div>
+            <div className="smallTitle">
+              {this.state.left.labels ? this.state.left.labels.en : ''}
             </div>
+            <div className="smallSubTitle">
+              {this.state.left.descriptions
+                ? this.state.left.descriptions.en
+                : ''}
+            </div>
+            <img className="compare-img" src={this.state.leftImage} />
+            <div
+              className="smallPictureDescription"
+              dangerouslySetInnerHTML={{__html: this.state.leftImageDesc}}
+            ></div>
             <div className="smallInfo">
               <div className="smallInfoTitle">Information</div>
               <div className="smallInfoMain">
                 <div className="theSmalls">
                   <div className="smallInfoH">First appearance</div>
-                  <div className="smallInfoD">
-                    Harry Potter and the Philosopher's Stone
-                  </div>
+                  <div className="smallInfoD">XXX</div>
                 </div>
               </div>
             </div>
@@ -309,26 +364,25 @@ export class Compare extends React.Component {
             <div className="levelHeader">Level 3</div>
           </div>
           <div className="elisCard smallCards">
-            <div className="smallTitle">Ronald Weasly</div>
-            <div className="smallSubTitle">Harry Potter character</div>
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Ron_Weasley_poster.jpg" />
-            <div className="smallPictureDescription">picture description</div>
-            <div className="smallMain">
-              <div className="theSmalls">
-                <div className="smallInfoH">First appearance</div>
-                <div className="smallInfoD">
-                  Harry Potter and the Philosopher's Stone
-                </div>
-              </div>
+            <div className="smallTitle">
+              {this.state.right.labels ? this.state.right.labels.en : ''}
             </div>
+            <div className="smallSubTitle">
+              {this.state.right.descriptions
+                ? this.state.right.descriptions.en
+                : ''}
+            </div>
+            <img className="compare-img" src={this.state.rightImage} />
+            <div
+              className="smallPictureDescription"
+              dangerouslySetInnerHTML={{__html: this.state.rightImageDesc}}
+            ></div>
             <div className="smallInfo">
               <div className="smallInfoTitle">Information</div>
               <div className="smallInfoMain">
                 <div className="theSmalls">
                   <div className="smallInfoH">First appearance</div>
-                  <div className="smallInfoD">
-                    Harry Potter and the Philosopher's Stone
-                  </div>
+                  <div className="smallInfoD">XXX</div>
                 </div>
               </div>
             </div>
