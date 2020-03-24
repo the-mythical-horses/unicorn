@@ -205,6 +205,7 @@ button {
 .smallInfoD {
   display: flex;
   flex-direction: row;
+  text-align: end;
   justify-content: flex-end;
   flex-wrap: wrap;
   max-width: 80px;
