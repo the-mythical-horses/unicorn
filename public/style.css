@@ -7,6 +7,12 @@ body {
   /* background-color: rgb(248, 242, 242); */
 }
 
+:root {
+  --color1: black;
+  --color2: rgb(12, 12, 12);
+  --color3: rgb(223, 8, 194);
+}
+
 a {
   text-decoration: none;
 }
@@ -53,7 +59,7 @@ button {
 
 #ourNav {
   /* background: #3a080b; */
-  background: black;
+  background: var(--color1);
 }
 
 .footer-container {
@@ -70,7 +76,7 @@ button {
   bottom: '0';
   height: 100px;
   width: 100%;
-  background-color: black;
+  background-color: var(--color1);
   margin-top: 50px;
 }
 
@@ -87,7 +93,7 @@ button {
 .card {
   height: 550px;
   width: 300px;
-  background-color: maroon;
+  background-color: var(--color2);
 }
 
 .cards {
@@ -101,33 +107,31 @@ button {
   margin-left: 300px;
 }
 #try-it-btn {
-  background-color: rgb(155, 139, 1);
+  background-color: var(--color3);
   margin-bottom: 20px;
 }
 
 #ci1 {
-  /* background-color:rgb(105, 15, 15); */
 }
 #ci1t {
-  color: maroon;
+  color: var(--color2);
   font-weight: bold;
 }
 #ci2 {
 }
 #ci2t {
-  color: maroon;
+  color: var(--color2);
   font-weight: bold;
 }
 #ci3 {
 }
 #ci3t {
-  color: maroon;
+  color: var(--color2);
   font-weight: bold;
 }
 .card-content {
-  background-color: black;
-  color: rgb(194, 176, 18);
-  /* font-weight: bold; */
+  background-color: var(--color1);
+  color: var(--color3);
 }
 
 .waves-effect {
@@ -158,8 +162,7 @@ button {
   text-align: center;
   font-size: 125%;
   font-weight: bold;
-  background: #3a080b;
-  /* background: #b50001; */
+  background: var(--color2);
   color: white;
 }
 .smallSubTitle {
@@ -173,14 +176,10 @@ button {
 .smallPictureDescription {
   text-align: center;
 }
-.smallMain {
-}
-.smallInfo {
-}
 .smallInfoTitle {
   text-align: center;
   font-weight: bold;
-  background: #3a080b;
+  background: var(--color2);
   color: white;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -217,15 +216,16 @@ button {
   text-align: center;
   font-size: 125%;
   font-weight: bold;
-  background: #3a080b;
+  background: var(--color2);
   color: white;
 }
+
 .levelHeader {
   text-align: center;
   font-weight: bold;
-  /* background: rgb(155, 139, 1); */
-  background: rgb(209, 5, 158);
-  color: #3a080b;
+  background: var(--color3);
+  /* background: rgb(209, 5, 158); */
+  color: var(--color2);
   margin-top: 5px;
 }
 
@@ -236,18 +236,11 @@ button {
   align-items: center;
   margin: 20px;
   margin-top: 35px;
-  /* padding: 20px;
-  padding-top: 35px;
-  margin-top: 30px;
-  border: 5px black solid;
-  border-bottom: none;
-  border-left: none;
-  border-right: none; */
 }
 
-#gold {
-  color: rgb(155, 139, 1);
+#unicorn {
+  color: var(--color3);
 }
 #compare-btn {
-  background-color: rgb(155, 139, 1);
+  background-color: var(--color3);
 }
