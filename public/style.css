@@ -98,11 +98,13 @@ button {
 
 .gh-button {
   margin: 10px;
-  
+}
+
 #elisCards {
   display: flex;
   flex-direction: row;
 }
+
 .elisCard {
   display: flex;
   flex-direction: column;
