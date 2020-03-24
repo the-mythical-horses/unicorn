@@ -10,7 +10,7 @@ body {
 :root {
   --color1: black;
   --color2: rgb(12, 12, 12);
-  --color3: rgb(223, 8, 194);
+  --color3: rgb(187, 108, 176);
 }
 
 a {
@@ -241,6 +241,9 @@ button {
 
 #unicorn {
   color: var(--color3);
+  margin-left: 15px;
+  margin-bottom: 7px;
+  font-family: fantasy;
 }
 #compare-btn {
   background-color: var(--color3);
