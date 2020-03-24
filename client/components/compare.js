@@ -62,7 +62,9 @@ export class Compare extends React.Component {
             v => v.value
           );
           if (entitiesQ2ClaimsCValues.includes(v.value)) {
-            ids.add(v.value);
+            if (v.type === 'wikibase-item') {
+              ids.add(v.value);
+            }
             ids.add(c);
             if (same[c]) {
               same[c].push(v.value);
