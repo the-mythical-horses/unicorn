@@ -78,7 +78,17 @@ export class Compare extends React.Component {
   }
 
   async getImage(entities, q) {
-    if (!entities[q].claims.P18) {
+    let picClaim = null;
+    if (entities[q].claims.P18) {
+      picClaim = entities[q].claims.P18;
+    } else if (entities[q].claims.P154) {
+      picClaim = entities[q].claims.P154;
+    } else if (entities[q].claims.P158) {
+      picClaim = entities[q].claims.P158;
+    } else if (entities[q].claims.P109) {
+      picClaim = entities[q].claims.P109;
+    }
+    if (!picClaim) {
       return '';
     }
     const wikiResp = await axios.get(
@@ -86,7 +96,7 @@ export class Compare extends React.Component {
       {
         params: {
           action: 'query',
-          titles: `File:${entities[q].claims.P18[0].value}`, // TODO get multiple imgs in one request by separating with pipe character?
+          titles: `File:${picClaim[0].value}`, // TODO get multiple imgs in one request by separating with pipe character?
           prop: 'imageinfo',
           iiprop: 'url|extmetadata',
           origin: '*',
@@ -148,12 +158,21 @@ export class Compare extends React.Component {
     const [leftImage, leftImageDesc] = await this.getImage(entities, q1);
     if (leftImage) {
       this.setState({leftImage, leftImageDesc});
+    } else {
+      this.setState({
+        leftImage: '/img/leftUnicorn.png',
+        leftImageDesc: ''
+      });
     }
     const [rightImage, rightImageDesc] = await this.getImage(entities, q2);
     if (rightImage) {
       this.setState({rightImage, rightImageDesc});
+    } else {
+      this.setState({
+        rightImage: '/img/rightUnicorn.png',
+        rightImageDesc: ''
+      });
     }
-
     const [results, l1ids] = this.compareTwo(entities, q1, q2);
     l1ids.forEach(id => ids.add(id));
 
