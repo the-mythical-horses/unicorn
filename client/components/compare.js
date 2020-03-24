@@ -243,6 +243,18 @@ export class Compare extends React.Component {
       });
     }
     Object.keys(q1Different).forEach(id => ids.add(id));
+    [q1, q2].forEach(q => {
+      Object.keys(entities[q].claims)
+        .slice(0, 5)
+        .forEach(pid => {
+          entities[q].claims[pid].forEach(v => {
+            if (v.type === 'wikibase-item') {
+              ids.add(v.value);
+            }
+          });
+          ids.add(pid);
+        });
+    });
     if (ids.size > 0) {
       const urls = wdk.getManyEntities({
         ids: Array.from(ids),
@@ -326,10 +338,19 @@ export class Compare extends React.Component {
             <div className="smallInfo">
               <div className="smallInfoTitle">Information</div>
               <div className="smallInfoMain">
-                <div className="theSmalls">
-                  <div className="smallInfoH">First appearance</div>
-                  <div className="smallInfoD">XXX</div>
-                </div>
+                {this.state.left.claims &&
+                  Object.keys(this.state.left.claims)
+                    .slice(0, 5)
+                    .map(c => (
+                      <div className="theSmalls" key={c}>
+                        <div className="smallInfoH">{this.getLabel(c)}</div>
+                        <div className="smallInfoD">
+                          {this.state.left.claims[c]
+                            .map(v => this.getLabel(v.value))
+                            .join(', ')}
+                        </div>
+                      </div>
+                    ))}
               </div>
             </div>
           </div>
@@ -382,10 +403,19 @@ export class Compare extends React.Component {
             <div className="smallInfo">
               <div className="smallInfoTitle">Information</div>
               <div className="smallInfoMain">
-                <div className="theSmalls">
-                  <div className="smallInfoH">First appearance</div>
-                  <div className="smallInfoD">XXX</div>
-                </div>
+                {this.state.right.claims &&
+                  Object.keys(this.state.right.claims)
+                    .slice(0, 5)
+                    .map(c => (
+                      <div className="theSmalls" key={c}>
+                        <div className="smallInfoH">{this.getLabel(c)}</div>
+                        <div className="smallInfoD">
+                          {this.state.right.claims[c]
+                            .map(v => this.getLabel(v.value))
+                            .join(', ')}
+                        </div>
+                      </div>
+                    ))}
               </div>
             </div>
           </div>
