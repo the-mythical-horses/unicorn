@@ -104,6 +104,7 @@ button {
   display: flex;
   flex-direction: row;
 }
+
 .elisCard {
   display: flex;
   flex-direction: column;
