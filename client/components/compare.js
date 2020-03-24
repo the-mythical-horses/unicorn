@@ -51,7 +51,6 @@ export class Compare extends React.Component {
   }
 
   async compareTwo(entities, q1, q2) {
-    console.log(q1, q2);
     const same = {};
     const ids = new Set();
     const q1claims = Object.keys(entities[q1].claims);
@@ -133,7 +132,7 @@ export class Compare extends React.Component {
       wdk.getEntities({
         ids: [q1, q2],
         languages: ['en'],
-        props: ['info', 'claims', 'labels', 'descriptions', 'sitelinks']
+        props: ['info', 'claims', 'labels', 'descriptions']
       })
     );
     const entities = wdk.simplify.entities(entitiesResp.data.entities, {
@@ -221,16 +220,22 @@ export class Compare extends React.Component {
       ...Object.values(q1Different).flat(),
       ...Object.values(q2Different).flat()
     ];
-    const l2entitiesResp = await axios.get(
-      wdk.getEntities({
-        ids: fetchList,
-        languages: ['en'],
-        props: ['info', 'claims']
-      })
-    );
-    const level2entities = wdk.simplify.entities(l2entitiesResp.data.entities, {
-      keepTypes: true
+    const l2entitiesUrls = wdk.getManyEntities({
+      ids: fetchList,
+      languages: ['en'],
+      props: ['info', 'claims']
     });
+    let level2entities = {};
+    for (let i = 0; i < l2entitiesUrls.length; i++) {
+      const l2entitiesResp = await axios.get(l2entitiesUrls[i]);
+      const l2entitiesSimplified = wdk.simplify.entities(
+        l2entitiesResp.data.entities,
+        {
+          keepTypes: true
+        }
+      );
+      level2entities = {...level2entities, ...l2entitiesSimplified};
+    }
     for (let property in q1Different) {
       const [results, l2ids] = await this.compareTwo(
         level2entities,
