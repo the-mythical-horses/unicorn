@@ -4,6 +4,7 @@
 body {
   font-family: sans-serif;
   position: relative;
+  /* background-color: rgb(248, 242, 242); */
 }
 
 a {
@@ -50,6 +51,11 @@ button {
   font-size: 20px;
 }
 
+#ourNav {
+  /* background: #3a080b; */
+  background: black;
+}
+
 .footer-container {
   position: relative;
 }
@@ -64,7 +70,8 @@ button {
   bottom: '0';
   height: 100px;
   width: 100%;
-  background-color: #ec6d74;
+  background-color: black;
+  margin-top: 50px;
 }
 
 /* #home-page {
@@ -74,22 +81,53 @@ button {
 
 .card-image {
   object-fit: contain;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .card {
-  height: 350px;
+  height: 550px;
   width: 300px;
+  background-color: maroon;
 }
 
 .cards {
   display: flex;
   flex-direction: row;
-  align-content: center;
+  /* align-content: center; */
   justify-content: center;
-  text-align: center;
+  /* text-align: center; */
+  /* margin-top: 80px; */
   margin: 20px;
   margin-left: 300px;
+}
+#try-it-btn {
+  background-color: rgb(155, 139, 1);
+  margin-bottom: 20px;
+}
+
+#ci1 {
+  /* background-color:rgb(105, 15, 15); */
+}
+#ci1t {
+  color: maroon;
+  font-weight: bold;
+}
+#ci2 {
+}
+#ci2t {
+  color: maroon;
+  font-weight: bold;
+}
+#ci3 {
+}
+#ci3t {
+  color: maroon;
+  font-weight: bold;
+}
+.card-content {
+  background-color: black;
+  color: rgb(194, 176, 18);
+  /* font-weight: bold; */
 }
 
 .waves-effect {
@@ -120,7 +158,8 @@ button {
   text-align: center;
   font-size: 125%;
   font-weight: bold;
-  background: #b50001;
+  background: #3a080b;
+  /* background: #b50001; */
   color: white;
 }
 .smallSubTitle {
@@ -141,7 +180,7 @@ button {
 .smallInfoTitle {
   text-align: center;
   font-weight: bold;
-  background: #b50001;
+  background: #3a080b;
   color: white;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -178,14 +217,15 @@ button {
   text-align: center;
   font-size: 125%;
   font-weight: bold;
-  background: #b50001;
+  background: #3a080b;
   color: white;
 }
 .levelHeader {
   text-align: center;
   font-weight: bold;
-  background: rgb(2, 150, 137);
-  color: white;
+  /* background: rgb(155, 139, 1); */
+  background: rgb(209, 5, 158);
+  color: #3a080b;
   margin-top: 5px;
 }
 
@@ -203,4 +243,11 @@ button {
   border-bottom: none;
   border-left: none;
   border-right: none; */
+}
+
+#gold {
+  color: rgb(155, 139, 1);
+}
+#compare-btn {
+  background-color: rgb(155, 139, 1);
 }

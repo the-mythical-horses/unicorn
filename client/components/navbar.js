@@ -13,10 +13,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   });
 
   return (
-    <nav>
+    <nav id="ourNav">
       <div className="nav-wrapper">
         {/* <FontAwesomeIcon className="icon" icon={faProjectDiagram} /> */}
-        <Link to="/home" className="brand-logo">
+        <Link to="/home" className="brand-logo" id="gold">
           Unicorn
         </Link>
 

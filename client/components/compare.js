@@ -306,7 +306,7 @@ export class Compare extends React.Component {
               value={this.state.form.qname1}
             />
           </div>
-          <button type="submit" className="waves-effect waves-light btn">
+          <button type="submit" className="btn" id="compare-btn">
             Compare
           </button>
           <div className="input-field col s6">
