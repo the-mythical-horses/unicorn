@@ -99,3 +99,106 @@ button {
 .gh-button {
   margin: 10px;
 }
+
+#elisCards {
+  display: flex;
+  flex-direction: row;
+}
+.elisCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px black solid;
+  padding: 15px;
+  margin: 20px;
+  background-color: #f8f9fa;
+}
+.smallCards {
+  width: 24%;
+}
+.smallTitle {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background: #b50001;
+  color: white;
+}
+.smallSubTitle {
+  margin: 5px;
+  text-align: center;
+}
+img {
+  margin-left: 10px;
+}
+.smallPictureDescription {
+  text-align: center;
+}
+.smallMain {
+}
+.smallInfo {
+}
+.smallInfoTitle {
+  text-align: center;
+  font-weight: bold;
+  background: #b50001;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.smallInfoInfo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+}
+.theSmalls {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+  justify-content: space-between;
+}
+.smallInfoH {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80px;
+  justify-content: flex-start;
+  font-weight: bold;
+}
+.smallInfoD {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  max-width: 80px;
+}
+.bigCards {
+  width: 48%;
+}
+.bigTitle {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background: #b50001;
+  color: white;
+}
+.levelHeader {
+  text-align: center;
+  font-weight: bold;
+  background: rgb(2, 150, 137);
+  color: white;
+  margin-top: 5px;
+}
+
+#compareForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  margin-top: 35px;
+  /* padding: 20px;
+  padding-top: 35px;
+  margin-top: 30px;
+  border: 5px black solid;
+  border-bottom: none;
+  border-left: none;
+  border-right: none; */
+}
