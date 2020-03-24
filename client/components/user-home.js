@@ -31,9 +31,11 @@ export class UserHome extends React.Component {
           <div className="row">
             <div className="col s12 m7">
               <div className="card medium">
-                <div className="card-image">
-                  <img src="./undraw_sync_files_xb3r.svg" />
-                  <span className="card-title blue-text">Research</span>
+                <div className="card-image" id="ci1">
+                  <img src="./unicorn-2947687_1920.png" />
+                  <span className="card-title" id="ci1t">
+                    Research
+                  </span>
                 </div>
                 <div className="card-content">
                   <p>
@@ -46,9 +48,11 @@ export class UserHome extends React.Component {
           <div className="row">
             <div className="col s12 m7">
               <div className="card medium">
-                <div className="card-image">
-                  <img src="./undraw_lost_online_wqob.svg" />
-                  <span className="card-title blue-text">Awareness</span>
+                <div className="card-image" id="ci2">
+                  <img src="./unicorn-2947687_1920.png" />
+                  <span className="card-title" id="ci2t">
+                    Awareness
+                  </span>
                 </div>
                 <div className="card-content">
                   <p>Discover the connection between everything.</p>
@@ -59,9 +63,11 @@ export class UserHome extends React.Component {
           <div className="row">
             <div className="col s12 m7">
               <div className="card medium">
-                <div className="card-image">
-                  <img src="./undraw_data_extraction_ih3n (1).svg" />
-                  <span className="card-title blue-text">Data Extraction</span>
+                <div className="card-image" id="ci3">
+                  <img src="./unicorn-2947687_1920.png" />
+                  <span className="card-title" id="ci3t">
+                    Data Extraction
+                  </span>
                 </div>
                 <div className="card-content">
                   <p>Create extensive, meaningful data sets.</p>
@@ -80,7 +86,8 @@ export class UserHome extends React.Component {
           </p>
           <div>
             <button
-              className="waves-effect waves-light btn"
+              className="btn"
+              id="try-it-btn"
               onClick={() => history.push('/Compare')}
             >
               Try it out
