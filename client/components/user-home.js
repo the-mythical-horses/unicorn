@@ -64,7 +64,7 @@ export class UserHome extends React.Component {
                   <span className="card-title blue-text">Data Extraction</span>
                 </div>
                 <div className="card-content">
-                  <p>Discover the connection between everything.</p>
+                  <p>Create extensive, meaningful data sets.</p>
                 </div>
               </div>
             </div>
