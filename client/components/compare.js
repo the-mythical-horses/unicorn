@@ -50,7 +50,7 @@ export class Compare extends React.Component {
     });
   }
 
-  async compareTwo(entities, q1, q2) {
+  compareTwo(entities, q1, q2) {
     const same = {};
     const ids = new Set();
     const q1claims = Object.keys(entities[q1].claims);
@@ -154,7 +154,7 @@ export class Compare extends React.Component {
       this.setState({rightImage, rightImageDesc});
     }
 
-    const [results, l1ids] = await this.compareTwo(entities, q1, q2);
+    const [results, l1ids] = this.compareTwo(entities, q1, q2);
     l1ids.forEach(id => ids.add(id));
 
     this.setState({results});
@@ -237,14 +237,25 @@ export class Compare extends React.Component {
       level2entities = {...level2entities, ...l2entitiesSimplified};
     }
     for (let property in q1Different) {
-      const [results, l2ids] = await this.compareTwo(
-        level2entities,
-        q1Different[property][0],
-        q2Different[property][0]
-      );
-      l2ids.forEach(id => ids.add(id));
-      this.setState({
-        l2results: {...this.state.l2results, [property]: results}
+      q1Different[property].forEach(v1 => {
+        q2Different[property].forEach(v2 => {
+          if (v1 === v2) {
+            return;
+          }
+          const [results, l2ids] = this.compareTwo(level2entities, v1, v2);
+          l2ids.forEach(id => ids.add(id));
+          const keyName = [property, v1, v2];
+          if (Object.keys(results).length > 0) {
+            ids.add(v1);
+            ids.add(v2);
+            this.setState({
+              l2results: {
+                ...this.state.l2results,
+                [keyName]: {key: keyName, results}
+              }
+            });
+          }
+        });
       });
     }
     Object.keys(q1Different).forEach(id => ids.add(id));
@@ -376,11 +387,17 @@ export class Compare extends React.Component {
             <ol>
               {Object.keys(this.state.l2results).map(p => (
                 <li key={p}>
-                  {`${this.getLabel(p)}: `}
+                  {`${this.getLabel(
+                    this.state.l2results[p].key[0]
+                  )} (${this.getLabel(
+                    this.state.l2results[p].key[1]
+                  )}, ${this.getLabel(this.state.l2results[p].key[2])}): `}
                   <ol>
-                    {Object.keys(this.state.l2results[p]).map(p2 => (
+                    {Object.keys(this.state.l2results[p].results).map(p2 => (
                       <li key={p2}>
-                        {`${this.getLabel(p2)}: ${this.state.l2results[p][p2]
+                        {`${this.getLabel(p2)}: ${this.state.l2results[
+                          p
+                        ].results[p2]
                           .map(q => this.getLabel(q))
                           .join(', ')}`}
                       </li>
