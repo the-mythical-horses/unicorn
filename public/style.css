@@ -243,7 +243,8 @@ button {
   color: var(--color3);
   margin-left: 15px;
   margin-bottom: 7px;
-  font-family: fantasy;
+  font-family: fantasy, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
 }
 #compare-btn {
   background-color: var(--color3);
