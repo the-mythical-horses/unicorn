@@ -46,7 +46,7 @@ export class Compare extends React.Component {
   }
 
   async onChange(evt) {
-    this.setState({
+    await this.setState({
       form: {
         ...this.state.form,
         [evt.target.name]: evt.target.value
@@ -54,21 +54,25 @@ export class Compare extends React.Component {
       leftQSearch: '',
       rightQSearch: ''
     });
-    const q1Search = await axios.get(
-      wdk.searchEntities(this.state.form.qname1)
-    );
-    if (q1Search.data.search) {
-      this.setState({
-        leftSearch: q1Search.data.search.slice(0, 6)
-      });
+    if (this.state.form.qname1.length > 0) {
+      const q1Search = await axios.get(
+        wdk.searchEntities(this.state.form.qname1)
+      );
+      if (q1Search.data.search) {
+        this.setState({
+          leftSearch: q1Search.data.search.slice(0, 6)
+        });
+      }
     }
-    const q2Search = await axios.get(
-      wdk.searchEntities(this.state.form.qname2)
-    );
-    if (q2Search.data.search) {
-      this.setState({
-        rightSearch: q2Search.data.search.slice(0, 6)
-      });
+    if (this.state.form.qname2.length > 0) {
+      const q2Search = await axios.get(
+        wdk.searchEntities(this.state.form.qname2)
+      );
+      if (q2Search.data.search) {
+        this.setState({
+          rightSearch: q2Search.data.search.slice(0, 6)
+        });
+      }
     }
   }
 
