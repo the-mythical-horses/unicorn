@@ -36,7 +36,9 @@ export class Compare extends React.Component {
         qname2: ''
       }
     };
-    this.onChange = this.onChange.bind(this);
+    this.onChangeLeft = this.onChangeLeft.bind(this);
+    this.onChangeRight = this.onChangeRight.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
     this.getLabel = this.getLabel.bind(this);
     this.compareTwo = this.compareTwo.bind(this);
@@ -46,14 +48,13 @@ export class Compare extends React.Component {
     M.AutoInit();
   }
 
-  async onChange(evt) {
+  async onChangeLeft(evt) {
     await this.setState({
       form: {
         ...this.state.form,
         [evt.target.name]: evt.target.value
       },
-      leftQSearch: '',
-      rightQSearch: ''
+      leftQSearch: ''
     });
     if (this.state.form.qname1.length > 0) {
       const q1Search = await axios.get(
@@ -65,6 +66,16 @@ export class Compare extends React.Component {
         });
       }
     }
+  }
+
+  async onChangeRight(evt) {
+    await this.setState({
+      form: {
+        ...this.state.form,
+        [evt.target.name]: evt.target.value
+      },
+      rightQSearch: ''
+    });
     if (this.state.form.qname2.length > 0) {
       const q2Search = await axios.get(
         wdk.searchEntities(this.state.form.qname2)
@@ -153,7 +164,9 @@ export class Compare extends React.Component {
     evt.preventDefault();
     this.setState({
       results: {},
-      l2results: {}
+      l2results: {},
+      leftSearch: [],
+      rightSearch: []
     });
     const ids = new Set();
     const q1name2obj = await axios.get(
@@ -371,7 +384,7 @@ export class Compare extends React.Component {
               <input
                 type="text"
                 name="qname1"
-                onChange={this.onChange}
+                onChange={this.onChangeLeft}
                 value={this.state.form.qname1}
               />
             </div>
@@ -411,7 +424,7 @@ export class Compare extends React.Component {
               <input
                 type="text"
                 name="qname2"
-                onChange={this.onChange}
+                onChange={this.onChangeRight}
                 value={this.state.form.qname2}
               />
               <div className="drop-container2">
