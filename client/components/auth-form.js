@@ -16,27 +16,43 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div className="input-field col s6">
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input className="validate" name="email" type="text" />
-        </div>
-        <div className="input-field col s6">
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input className="validate" name="password" type="password" />
-        </div>
-        <div>
-          <button className="btn waves-effect waves-light" type="submit">
-            {displayName}
-          </button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <img src="/img/leftUnicorn.png" id="signup-img" />
+      <div id="signup-form-main">
+        <form onSubmit={handleSubmit} name={name} id="signup-form-sub">
+          <div className="input-field col s6">
+            <label htmlFor="email" id="email">
+              Email
+            </label>
+            <input
+              className="validate"
+              name="email"
+              type="text"
+              id="email-input"
+            />
+          </div>
+          <div className="input-field col s6">
+            <label htmlFor="password" id="password">
+              Password
+            </label>
+            <input
+              className="validate"
+              name="password"
+              type="password"
+              id="password-input"
+            />
+          </div>
+          <div>
+            <button className="btn" id="signup-btn" type="submit">
+              {displayName}
+            </button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+        <div id="or">or</div>
+        <a id="signup-google" href="/auth/google">
+          {displayName} with Google
+        </a>
+      </div>
     </div>
   );
 };

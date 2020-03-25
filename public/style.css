@@ -302,3 +302,65 @@ button {
   margin: 0px;
   padding: 0px;
 }
+
+#signup-form-main {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 200px;
+  left: 500px;
+  border: 3px solid var(--color3);
+  margin: 30px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  /* background-color: grey; */
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+#signup-form-sub {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  margin-top: 60px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+#signup-img {
+  width: 1100px;
+  height: 950px;
+  margin-top: 75px;
+  margin-left: 100px;
+  opacity: 0.2;
+}
+#signup-google {
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  background-color: rgb(7, 7, 100);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+#signup-btn {
+  background-color: var(--color3);
+}
+#or {
+  text-align: center;
+  font-size: 125%;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#email {
+  color: var(--color3);
+}
+#email-input {
+  border-color: var(--color3);
+}
+#password {
+  color: var(--color3);
+}
+#password-input {
+  border-color: var(--color3);
+}
