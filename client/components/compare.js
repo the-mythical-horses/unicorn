@@ -342,15 +342,15 @@ export class Compare extends React.Component {
         languages: ['en'],
         props: ['labels']
       });
-      urls.forEach(async url => {
-        const namesResp = await axios.get(url);
+      for (let i = 0; i < urls.length; i++) {
+        const namesResp = await axios.get(urls[i]);
         const namesEntities = namesResp.data.entities;
         const names = wdk.simplify.entities(namesEntities);
         this.setState({
           names: {...this.state.names, ...names},
           complexNames: {...this.state.complexNames, ...namesEntities}
         });
-      });
+      }
     }
   }
 
