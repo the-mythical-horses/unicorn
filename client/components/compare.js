@@ -18,8 +18,10 @@ export class Compare extends React.Component {
     this.state = {
       left: {},
       leftSearch: [],
+      leftQSearch: '',
       right: {},
       rightSearch: [],
+      rightQSearch: '',
       results: {},
       l2results: {},
       names: {},
@@ -44,27 +46,33 @@ export class Compare extends React.Component {
   }
 
   async onChange(evt) {
-    this.setState({
+    await this.setState({
       form: {
         ...this.state.form,
         [evt.target.name]: evt.target.value
-      }
+      },
+      leftQSearch: '',
+      rightQSearch: ''
     });
-    const q1Search = await axios.get(
-      wdk.searchEntities(this.state.form.qname1)
-    );
-    if (q1Search.data.search) {
-      this.setState({
-        leftSearch: q1Search.data.search.slice(0, 6)
-      });
+    if (this.state.form.qname1.length > 0) {
+      const q1Search = await axios.get(
+        wdk.searchEntities(this.state.form.qname1)
+      );
+      if (q1Search.data.search) {
+        this.setState({
+          leftSearch: q1Search.data.search.slice(0, 6)
+        });
+      }
     }
-    const q2Search = await axios.get(
-      wdk.searchEntities(this.state.form.qname2)
-    );
-    if (q2Search.data.search) {
-      this.setState({
-        rightSearch: q2Search.data.search.slice(0, 6)
-      });
+    if (this.state.form.qname2.length > 0) {
+      const q2Search = await axios.get(
+        wdk.searchEntities(this.state.form.qname2)
+      );
+      if (q2Search.data.search) {
+        this.setState({
+          rightSearch: q2Search.data.search.slice(0, 6)
+        });
+      }
     }
   }
 
@@ -148,11 +156,17 @@ export class Compare extends React.Component {
     });
     const ids = new Set();
     const q1name2obj = await axios.get(
-      wdk.searchEntities(this.state.form.qname1)
+      wdk.searchEntities(
+        this.state.leftQSearch ? this.state.leftQSearch : this.state.form.qname1
+      )
     );
     const q1 = q1name2obj.data.search[0].id;
     const q2name2obj = await axios.get(
-      wdk.searchEntities(this.state.form.qname2)
+      wdk.searchEntities(
+        this.state.rightQSearch
+          ? this.state.rightQSearch
+          : this.state.form.qname2
+      )
     );
     const q2 = q2name2obj.data.search[0].id;
 
@@ -360,7 +374,18 @@ export class Compare extends React.Component {
             />
             <ul>
               {this.state.leftSearch.map(s => (
-                <li key={s.id}>
+                <li
+                  onClick={() =>
+                    this.setState({
+                      leftQSearch: s.id,
+                      form: {
+                        ...this.state.form,
+                        qname1: s.label
+                      }
+                    })
+                  }
+                  key={s.id}
+                >
                   <div>{s.label}</div>
                   <div>
                     <i>{s.description}</i>
@@ -382,7 +407,18 @@ export class Compare extends React.Component {
             />
             <ul>
               {this.state.rightSearch.map(s => (
-                <li key={s.id}>
+                <li
+                  onClick={() =>
+                    this.setState({
+                      rightQSearch: s.id,
+                      form: {
+                        ...this.state.form,
+                        qname2: s.label
+                      }
+                    })
+                  }
+                  key={s.id}
+                >
                   <div>{s.label}</div>
                   <div>
                     <i>{s.description}</i>
