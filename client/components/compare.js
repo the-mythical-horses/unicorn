@@ -17,7 +17,9 @@ export class Compare extends React.Component {
     super(props);
     this.state = {
       left: {},
+      leftSearch: [],
       right: {},
+      rightSearch: [],
       results: {},
       l2results: {},
       names: {},
@@ -41,13 +43,29 @@ export class Compare extends React.Component {
     M.AutoInit();
   }
 
-  onChange(evt) {
+  async onChange(evt) {
     this.setState({
       form: {
         ...this.state.form,
         [evt.target.name]: evt.target.value
       }
     });
+    const q1Search = await axios.get(
+      wdk.searchEntities(this.state.form.qname1)
+    );
+    if (q1Search.data.search) {
+      this.setState({
+        leftSearch: q1Search.data.search.slice(0, 6)
+      });
+    }
+    const q2Search = await axios.get(
+      wdk.searchEntities(this.state.form.qname2)
+    );
+    if (q2Search.data.search) {
+      this.setState({
+        rightSearch: q2Search.data.search.slice(0, 6)
+      });
+    }
   }
 
   compareTwo(entities, q1, q2) {
@@ -340,6 +358,16 @@ export class Compare extends React.Component {
               onChange={this.onChange}
               value={this.state.form.qname1}
             />
+            <ul>
+              {this.state.leftSearch.map(s => (
+                <li key={s.id}>
+                  <div>{s.label}</div>
+                  <div>
+                    <i>{s.description}</i>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
           <button type="submit" className="btn" id="compare-btn">
             Compare
@@ -352,6 +380,16 @@ export class Compare extends React.Component {
               onChange={this.onChange}
               value={this.state.form.qname2}
             />
+            <ul>
+              {this.state.rightSearch.map(s => (
+                <li key={s.id}>
+                  <div>{s.label}</div>
+                  <div>
+                    <i>{s.description}</i>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </form>
 
