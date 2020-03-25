@@ -249,3 +249,56 @@ button {
 #compare-btn {
   background-color: var(--color3);
 }
+
+.in-drop {
+  display: flex;
+  flex-direction: column;
+}
+.drop-container1 {
+  display: flex;
+  position: absolute;
+  top: 160px;
+  width: 320px;
+  background-color: white;
+}
+.drop-container2 {
+  display: flex;
+  position: absolute;
+  top: 34px;
+  width: 320px;
+  background-color: white;
+}
+.drop-list {
+  display: flex;
+  flex-direction: column;
+}
+.drop-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 500px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-top-width: 0px;
+  padding: 2px;
+}
+.drop-item:hover {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 500px;
+  border-style: solid;
+  border-width: 0.5px;
+  padding: 2px;
+  background-color: var(--color3);
+  color: white;
+}
+.drop-label {
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+.drop-description {
+  margin: 0px;
+  padding: 0px;
+}

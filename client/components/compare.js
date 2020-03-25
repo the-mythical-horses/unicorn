@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-statements */
 /* eslint-disable guard-for-in */
 import React from 'react';
@@ -364,68 +365,79 @@ export class Compare extends React.Component {
     return (
       <div>
         <form id="compareForm" onSubmit={this.onSubmit}>
-          <div className="input-field col s6">
-            <label htmlFor="qname1">Object 1</label>
-            <input
-              type="text"
-              name="qname1"
-              onChange={this.onChange}
-              value={this.state.form.qname1}
-            />
-            <ul>
-              {this.state.leftSearch.map(s => (
-                <li
-                  onClick={() =>
-                    this.setState({
-                      leftQSearch: s.id,
-                      form: {
-                        ...this.state.form,
-                        qname1: s.label
-                      }
-                    })
-                  }
-                  key={s.id}
-                >
-                  <div>{s.label}</div>
-                  <div>
-                    <i>{s.description}</i>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          <div className="in-drop">
+            <div className="input-field col s6">
+              <label htmlFor="qname1">Object 1</label>
+              <input
+                type="text"
+                name="qname1"
+                onChange={this.onChange}
+                value={this.state.form.qname1}
+              />
+            </div>
+
+            <div className="drop-container1">
+              <ul className="drop-list">
+                {this.state.leftSearch.map(s => (
+                  <li
+                    className="drop-item"
+                    onClick={() =>
+                      this.setState({
+                        leftSearch: [],
+                        leftQSearch: s.id,
+                        form: {
+                          ...this.state.form,
+                          qname1: s.label
+                        }
+                      })
+                    }
+                    key={s.id}
+                  >
+                    <div className="drop-label">{s.label}</div>
+                    <div className="drop-description">{s.description}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+
           <button type="submit" className="btn" id="compare-btn">
             Compare
           </button>
-          <div className="input-field col s6">
-            <label htmlFor="qname2">Object 2</label>
-            <input
-              type="text"
-              name="qname2"
-              onChange={this.onChange}
-              value={this.state.form.qname2}
-            />
-            <ul>
-              {this.state.rightSearch.map(s => (
-                <li
-                  onClick={() =>
-                    this.setState({
-                      rightQSearch: s.id,
-                      form: {
-                        ...this.state.form,
-                        qname2: s.label
+
+          <div className="in-drop">
+            <div className="input-field col s6">
+              <label htmlFor="qname2">Object 2</label>
+              <input
+                type="text"
+                name="qname2"
+                onChange={this.onChange}
+                value={this.state.form.qname2}
+              />
+              <div className="drop-container2">
+                <ul className="drop-list">
+                  {this.state.rightSearch.map(s => (
+                    <li
+                      className="drop-item"
+                      onClick={() =>
+                        this.setState({
+                          rightSearch: [],
+                          rightQSearch: s.id,
+                          form: {
+                            ...this.state.form,
+                            qname2: s.label
+                          }
+                        })
                       }
-                    })
-                  }
-                  key={s.id}
-                >
-                  <div>{s.label}</div>
-                  <div>
-                    <i>{s.description}</i>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                      key={s.id}
+                    >
+                      <div className="drop-label">{s.label}</div>
+                      <div className="drop-description">{s.description} </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </form>
 
