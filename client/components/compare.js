@@ -18,8 +18,10 @@ export class Compare extends React.Component {
     this.state = {
       left: {},
       leftSearch: [],
+      leftQSearch: '',
       right: {},
       rightSearch: [],
+      rightQSearch: '',
       results: {},
       l2results: {},
       names: {},
@@ -48,7 +50,9 @@ export class Compare extends React.Component {
       form: {
         ...this.state.form,
         [evt.target.name]: evt.target.value
-      }
+      },
+      leftQSearch: '',
+      rightQSearch: ''
     });
     const q1Search = await axios.get(
       wdk.searchEntities(this.state.form.qname1)
@@ -148,11 +152,17 @@ export class Compare extends React.Component {
     });
     const ids = new Set();
     const q1name2obj = await axios.get(
-      wdk.searchEntities(this.state.form.qname1)
+      wdk.searchEntities(
+        this.state.leftQSearch ? this.state.leftQSearch : this.state.form.qname1
+      )
     );
     const q1 = q1name2obj.data.search[0].id;
     const q2name2obj = await axios.get(
-      wdk.searchEntities(this.state.form.qname2)
+      wdk.searchEntities(
+        this.state.rightQSearch
+          ? this.state.rightQSearch
+          : this.state.form.qname2
+      )
     );
     const q2 = q2name2obj.data.search[0].id;
 
@@ -360,7 +370,18 @@ export class Compare extends React.Component {
             />
             <ul>
               {this.state.leftSearch.map(s => (
-                <li key={s.id}>
+                <li
+                  onClick={() =>
+                    this.setState({
+                      leftQSearch: s.id,
+                      form: {
+                        ...this.state.form,
+                        qname1: s.label
+                      }
+                    })
+                  }
+                  key={s.id}
+                >
                   <div>{s.label}</div>
                   <div>
                     <i>{s.description}</i>
@@ -382,7 +403,18 @@ export class Compare extends React.Component {
             />
             <ul>
               {this.state.rightSearch.map(s => (
-                <li key={s.id}>
+                <li
+                  onClick={() =>
+                    this.setState({
+                      rightQSearch: s.id,
+                      form: {
+                        ...this.state.form,
+                        qname2: s.label
+                      }
+                    })
+                  }
+                  key={s.id}
+                >
                   <div>{s.label}</div>
                   <div>
                     <i>{s.description}</i>
