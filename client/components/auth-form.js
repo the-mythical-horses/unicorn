@@ -50,7 +50,8 @@ const AuthForm = props => {
         </form>
         <div id="or">or</div>
         <a id="signup-google" href="/auth/google">
-          {displayName} with Google
+          <img id="google-icon" src="/img/googleIcon.png" />{' '}
+          <div id="google-text">{displayName} with Google</div>
         </a>
       </div>
     </div>
