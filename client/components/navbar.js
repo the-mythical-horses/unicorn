@@ -31,6 +31,9 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 <Link to="/compare">Compare</Link>
               </li>
               <li>
+                <Link to="/profile">Your Profile</Link>
+              </li>
+              <li>
                 <a href="#" onClick={handleClick}>
                   Logout
                 </a>
