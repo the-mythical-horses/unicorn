@@ -386,6 +386,7 @@ export class Compare extends React.Component {
                 name="qname1"
                 onChange={this.onChangeLeft}
                 value={this.state.form.qname1}
+                autoComplete="off"
               />
             </div>
 
@@ -426,6 +427,7 @@ export class Compare extends React.Component {
                 name="qname2"
                 onChange={this.onChangeRight}
                 value={this.state.form.qname2}
+                autoComplete="off"
               />
               <div className="drop-container2">
                 <ul className="drop-list">

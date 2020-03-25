@@ -243,8 +243,7 @@ button {
   color: var(--color3);
   margin-left: 15px;
   margin-bottom: 7px;
-  font-family: fantasy, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-    sans-serif;
+  font-family: sans-serif;
 }
 #compare-btn {
   background-color: var(--color3);
@@ -297,10 +296,12 @@ button {
   font-weight: bold;
   margin: 0px;
   padding: 0px;
+  padding-left: 1px;
 }
 .drop-description {
   margin: 0px;
   padding: 0px;
+  padding-left: 1px;
 }
 
 #signup-form-main {
@@ -333,13 +334,28 @@ button {
   opacity: 0.2;
 }
 #signup-google {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(7, 7, 100);
+  border-radius: 5px;
+}
+#google-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-left: 2px;
+  padding: 5px;
+  background-color: white;
+}
+#google-text {
   color: white;
   font-family: sans-serif;
   font-weight: bold;
-  background-color: rgb(7, 7, 100);
-  padding: 10px;
-  border-radius: 5px;
+  margin: 10px;
   text-align: center;
+  margin-left: 30px;
 }
 #signup-btn {
   background-color: var(--color3);
@@ -363,4 +379,10 @@ button {
 }
 #password-input {
   border-color: var(--color3);
+}
+#git-logo {
+  margin-top: 20px;
+  margin-right: 10px;
+  height: 60px;
+  width: 60px;
 }
