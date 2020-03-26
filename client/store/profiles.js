@@ -6,13 +6,13 @@ const initialState = {
 };
 
 // Action Types:
-const GOT_PROFILE_BY_ID = 'GOT_PROFILE_BY_ID';
+const GOT_PROFILE = 'GOT_PROFILE';
 const ADD_PROFILE = 'ADD_PROFILE';
 
 // Actions:
 const setProfileById = profile => {
   return {
-    type: GOT_PROFILE_BY_ID,
+    type: GOT_PROFILE,
     profile
   };
 };
@@ -35,9 +35,9 @@ export const addProfileThunk = profile => async dispatch => {
   }
 };
 
-export const getProfileByIdThunk = id => async dispatch => {
+export const getProfileByIdThunk = () => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/profiles/${id}`);
+    const {data} = await axios.get(`/api/profiles`);
     dispatch(setProfileById(data));
   } catch (error) {
     console.log(error);
@@ -47,7 +47,7 @@ export const getProfileByIdThunk = id => async dispatch => {
 // Reducer:
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GOT_PROFILE_BY_ID:
+    case GOT_PROFILE:
       return {
         ...state,
         profile: action.profile

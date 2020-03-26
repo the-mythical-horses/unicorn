@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const Profile = require('../db/models/profile');
+const {Profile} = require('../db/models');
+const {User} = require('../db/models');
 module.exports = router;
 
-router.get('/:id', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    let profileId = req.params.id;
+    let userId = req.user.id;
 
     let entities = {
       PROFILE: {
@@ -21,7 +22,14 @@ router.get('/:id', async (req, res, next) => {
       }
     };
 
-    let profile = await Profile.findByPk(profileId, {raw: true});
+    let user = await User.findByPk(userId, {
+      include: [{model: Profile}]
+    });
+    res.json(user);
+    if (!user.profile) {
+      res.sendStatus(500);
+    }
+    const profile = user.profile;
     Object.keys(profile).forEach(keyName => {
       if (
         !profile[keyName] ||
