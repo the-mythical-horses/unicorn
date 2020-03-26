@@ -49,8 +49,9 @@ export class Compare extends React.Component {
     this.compareTwo = this.compareTwo.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     M.AutoInit();
+    await this.props.getProfileById(1); // FIXME get associated user profile not just #1
   }
 
   async onChangeLeft(evt) {
@@ -174,12 +175,19 @@ export class Compare extends React.Component {
       rightSearch: []
     });
     const ids = new Set();
-    const q1name2obj = await axios.get(
-      wdk.searchEntities(
-        this.state.leftQSearch ? this.state.leftQSearch : this.state.form.qname1
-      )
-    );
-    const q1 = q1name2obj.data.search[0].id;
+    let q1;
+    if (this.state.leftQSearch !== 'PROFILE') {
+      const q1name2obj = await axios.get(
+        wdk.searchEntities(
+          this.state.leftQSearch
+            ? this.state.leftQSearch
+            : this.state.form.qname1
+        )
+      );
+      q1 = q1name2obj.data.search[0].id;
+    } else {
+      q1 = 'PROFILE';
+    }
     const q2name2obj = await axios.get(
       wdk.searchEntities(
         this.state.rightQSearch
@@ -188,18 +196,34 @@ export class Compare extends React.Component {
       )
     );
     const q2 = q2name2obj.data.search[0].id;
-
-    const entitiesResp = await axios.get(
-      wdk.getEntities({
-        ids: [q1, q2],
-        languages: ['en'],
-        props: ['info', 'claims', 'labels', 'descriptions']
-      })
-    );
-    const entities = wdk.simplify.entities(entitiesResp.data.entities, {
-      keepTypes: true,
-      addUrl: true
-    });
+    let entities;
+    let entitiesResp;
+    if (this.state.leftQSearch !== 'PROFILE') {
+      entitiesResp = await axios.get(
+        wdk.getEntities({
+          ids: [q1, q2],
+          languages: ['en'],
+          props: ['info', 'claims', 'labels', 'descriptions']
+        })
+      );
+      entities = wdk.simplify.entities(entitiesResp.data.entities, {
+        keepTypes: true,
+        addUrl: true
+      });
+    } else {
+      entitiesResp = await axios.get(
+        wdk.getEntities({
+          ids: [q2],
+          languages: ['en'],
+          props: ['info', 'claims', 'labels', 'descriptions']
+        })
+      );
+      entities = wdk.simplify.entities(entitiesResp.data.entities, {
+        keepTypes: true,
+        addUrl: true
+      });
+      entities.PROFILE = this.props.profile.PROFILE;
+    }
     this.setState({
       left: entities[q1],
       right: entities[q2]
@@ -383,7 +407,19 @@ export class Compare extends React.Component {
     return (
       <div>
         <form id="compareForm" onSubmit={this.onSubmit}>
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn"
+            onClick={() =>
+              this.setState({
+                leftQSearch: 'PROFILE',
+                form: {
+                  ...this.state.form,
+                  qname1: 'My Profile'
+                }
+              })
+            }
+          >
             Insert My Profile
           </button>
           <div className="in-drop">
@@ -576,8 +612,14 @@ export class Compare extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setProfileById: profileId => dispatch(getProfileByIdThunk(profileId))
+    getProfileById: profileId => dispatch(getProfileByIdThunk(profileId))
   };
 };
 
-export default connect(null, mapDispatchToProps)(Compare);
+const mapState = state => {
+  return {
+    profile: state.profiles.profile
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(Compare);
