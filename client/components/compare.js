@@ -526,7 +526,6 @@ export class Compare extends React.Component {
                 </li>
               ))}
             </ol>
-            <div className="levelHeader">Level 3</div>
           </div>
           <div className="elisCard smallCards">
             <div className="smallTitle">
