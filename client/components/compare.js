@@ -27,7 +27,7 @@ export class Compare extends React.Component {
       l2results: {},
       names: {},
       complexNames: {},
-      leftImage: '/img/pink-unicorn.png',
+      leftImage: '/img/smoke-uni.png',
       leftImageDesc: '',
       rightImage: '/img/fun-uni.png',
       rightImageDesc: '',
