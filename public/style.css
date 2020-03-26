@@ -284,6 +284,7 @@ button {
   border-width: 0.5px;
   border-top-width: 0px;
   padding: 2px;
+  width: 320px;
 }
 .drop-item:hover {
   display: flex;
