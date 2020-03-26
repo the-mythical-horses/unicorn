@@ -52,11 +52,19 @@ router.get('/', async (req, res, next) => {
             entities.PROFILE.claims[pid] = [valObj];
           }
         });
-      } else {
+      } else if (typeof profile[keyName] == 'number') {
         entities.PROFILE.claims[pid] = [
           {
             value: profile[keyName],
             type: 'quantity'
+          }
+        ];
+      } else {
+        // assume date/time
+        entities.PROFILE.claims[pid] = [
+          {
+            value: profile[keyName],
+            type: 'time'
           }
         ];
       }
