@@ -409,7 +409,7 @@ export class Compare extends React.Component {
         <form id="compareForm" onSubmit={this.onSubmit}>
           <button
             type="button"
-            className="btn"
+            id="insert-btn"
             onClick={() =>
               this.setState({
                 leftQSearch: 'PROFILE',
@@ -422,10 +422,12 @@ export class Compare extends React.Component {
           >
             Insert My Profile
           </button>
+
           <div className="in-drop">
-            <div className="input-field col s6">
+            <div className="col s6">
               <label htmlFor="qname1">Object 1</label>
               <input
+                id="input1"
                 type="text"
                 name="qname1"
                 onChange={this.onChangeLeft}
@@ -464,9 +466,10 @@ export class Compare extends React.Component {
           </button>
 
           <div className="in-drop">
-            <div className="input-field col s6">
+            <div className="col s6">
               <label htmlFor="qname2">Object 2</label>
               <input
+                id="input2"
                 type="text"
                 name="qname2"
                 onChange={this.onChangeRight}
