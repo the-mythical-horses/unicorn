@@ -4,6 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {
+  setProfileByIdThunk,
+  getProfileById,
+  getProfileByIdThunk
+} from '../store/profiles';
 import wdk from 'wikidata-sdk';
 import sparqljs from 'sparqljs';
 import axios from 'axios';
@@ -568,4 +573,11 @@ export class Compare extends React.Component {
     );
   }
 }
-export default Compare;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setProfileById: profileId => dispatch(getProfileByIdThunk(profileId))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Compare);
