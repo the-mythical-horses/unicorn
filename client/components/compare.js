@@ -378,6 +378,9 @@ export class Compare extends React.Component {
     return (
       <div>
         <form id="compareForm" onSubmit={this.onSubmit}>
+          <button type="button" className="btn">
+            Insert My Profile
+          </button>
           <div className="in-drop">
             <div className="input-field col s6">
               <label htmlFor="qname1">Object 1</label>
