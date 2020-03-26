@@ -27,9 +27,9 @@ export class Compare extends React.Component {
       l2results: {},
       names: {},
       complexNames: {},
-      leftImage: '/img/leftUnicorn.png',
+      leftImage: '/img/smoke-uni-left-chain.png',
       leftImageDesc: '',
-      rightImage: '/img/rightUnicorn.png',
+      rightImage: '/img/smoke-uni.png',
       rightImageDesc: '',
       form: {
         qname1: '',
@@ -526,7 +526,6 @@ export class Compare extends React.Component {
                 </li>
               ))}
             </ol>
-            <div className="levelHeader">Level 3</div>
           </div>
           <div className="elisCard smallCards">
             <div className="smallTitle">
