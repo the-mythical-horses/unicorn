@@ -22,19 +22,25 @@ const Navbar = ({handleClick, isLoggedIn}) => {
 
         {isLoggedIn ? (
           <div>
-            <ul className="right hide-on-med-and-down">
+            <ul className="right hide-on-med-and-down" id="nav-ul">
               {/* The navbar will show these links after you log in */}
               <li>
-                <Link to="/home">Home</Link>
+                <Link className="link" to="/home">
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/compare">Compare</Link>
+                <Link className="link" to="/compare">
+                  Compare
+                </Link>
               </li>
               <li>
-                <Link to="/profile">Your Profile</Link>
+                <Link className="link" to="/profile">
+                  Your Profile
+                </Link>
               </li>
               <li>
-                <a href="#" onClick={handleClick}>
+                <a className="link" href="#" onClick={handleClick}>
                   Logout
                 </a>
               </li>

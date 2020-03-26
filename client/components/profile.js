@@ -95,6 +95,7 @@ class Profile extends React.Component {
                     type="text"
                     name={key}
                     value={this.state.form[key]}
+                    autoComplete="off"
                   ></input>
 
                   <label htmlFor="key">
