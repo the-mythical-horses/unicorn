@@ -6,6 +6,9 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     let userId = req.user.id;
+    let user = await User.findByPk(userId, {
+      include: [{model: Profile}]
+    });
 
     let entities = {
       PROFILE: {
@@ -22,18 +25,16 @@ router.get('/', async (req, res, next) => {
       }
     };
 
-    let user = await User.findByPk(userId, {
-      include: [{model: Profile}]
-    });
-    res.json(user);
     if (!user.profile) {
       res.sendStatus(500);
     }
-    const profile = user.profile;
+    const profile = user.profile.dataValues;
+    // console.log('prrrrrooooooofffffillllleeee', profile)
     Object.keys(profile).forEach(keyName => {
+      console.log('keyName', keyName, typeof keyName);
       if (
         !profile[keyName] ||
-        ['id', 'createdAt', 'updatedAt'].includes(keyName)
+        ['id', 'createdAt', 'updatedAt', 'userId'].includes(keyName)
       ) {
         return;
       }
@@ -61,6 +62,7 @@ router.get('/', async (req, res, next) => {
         ];
       }
     });
+
     res.json(entities);
   } catch (error) {
     next(error);
@@ -69,8 +71,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('REQ>BODY', req.body);
+    console.log('REQ>BODY', req.user.id);
+
     let newProfile = await Profile.create(req.body);
+    newProfile.userId = req.user.id;
+    newProfile.save();
+
     res.status(201).send(newProfile);
   } catch (error) {
     next(error);

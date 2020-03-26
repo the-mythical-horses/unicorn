@@ -55,7 +55,7 @@ export default function(state = initialState, action) {
     case ADD_PROFILE:
       return {
         ...state,
-        profiles: [...state.products, action.product]
+        profiles: [...state.profiles, action.profile]
       };
     default:
       return state;

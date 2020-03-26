@@ -51,7 +51,7 @@ export class Compare extends React.Component {
 
   async componentDidMount() {
     M.AutoInit();
-    await this.props.getProfileById(1); // FIXME get associated user profile not just #1
+    await this.props.getProfileById();
   }
 
   async onChangeLeft(evt) {
@@ -95,6 +95,7 @@ export class Compare extends React.Component {
   }
 
   compareTwo(entities, q1, q2) {
+    console.log('entities!!!', entities);
     const same = {};
     const ids = new Set();
     const q1claims = Object.keys(entities[q1].claims);
@@ -223,6 +224,7 @@ export class Compare extends React.Component {
         addUrl: true
       });
       entities.PROFILE = this.props.profile.PROFILE;
+      console.log('!!!!!!!!!???????????!!!!!!!!', this.props.profile);
     }
     this.setState({
       left: entities[q1],
@@ -615,7 +617,7 @@ export class Compare extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProfileById: profileId => dispatch(getProfileByIdThunk(profileId))
+    getProfileById: () => dispatch(getProfileByIdThunk())
   };
 };
 
