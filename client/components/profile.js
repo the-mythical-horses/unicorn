@@ -59,36 +59,9 @@ class Profile extends React.Component {
         delete profile[key];
       }
     }
-    console.log('profile', profile);
     this.setState({form: profile});
-    console.log('form', this.state.form);
-    // let claimsObject = this.props.profile.PROFILE.claims;
-    // let claimsKeyArray = Object.keys(claimsObject)
-
-    // Object.keys(this.state.form).forEach( key => {
-    //     let pNumber = ''
-    //     for (let i = 0; i < key.length; i++) {
-    //       if (key[i] === '_')  break
-    //        pNumber += key[i]
-    //     }
-    //     let pLabel = key.split('_')[1].replace(/([A-Z])/g, ' $1')
-
-    //     for(let i = 0; i < claimsKeyArray.length; i++) {
-    //       if (pNumber === claimsKeyArray[i]) {
-    //         console.log('key', key, 'claimsObject[claimsKeyArray[i]', claimsObject[claimsKeyArray[i]])
-    //         this.setState({
-    //           form: {
-    //             ...this.state.form,
-    //             [key]: claimsObject[claimsKeyArray[i]].value
-    //           }
-    //         })
-    //       }
-    //     }
-    //   }
-    // )
-
-    console.log('data', this.props.profile.PROFILE.claims);
   }
+
   async handleChange(evt) {
     evt.persist();
     await this.setState({

@@ -42,7 +42,6 @@ router.get('/', async (req, res, next) => {
       res.sendStatus(500);
     }
     const profile = user.profile.dataValues;
-    // console.log('prrrrrooooooofffffillllleeee', profile)
     Object.keys(profile).forEach(keyName => {
       console.log('keyName', keyName, typeof keyName);
       if (
@@ -89,7 +88,6 @@ router.put('/', async (req, res, next) => {
         userId: req.user.id
       }
     });
-
     profile.update(req.body);
     res.status(201).send(profile);
   } catch (error) {
