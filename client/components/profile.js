@@ -17,29 +17,7 @@ class Profile extends React.Component {
     this.state = {
       qSearches: {},
       searches: {},
-      form: {
-        P1477_birthName: '',
-        P735_givenName: '',
-        P734_familyName: '',
-        P569_dateOfBirth: '',
-        P19_placeOfBirth: '',
-        P1412_languagesSpokenWrittenOrSigned: '',
-        P106_occupation: '',
-        P69_educatedAt: '',
-        P551_residence: '',
-        P172_ethnicGroup: '',
-        P140_religion: '',
-        P2048_height: '',
-        P27_countryOfCitizenship: '',
-        P108_employer: '',
-        P463_memberOf: '',
-        P552_handedness: '',
-        P101_fieldOfWork: '',
-        P102_memberOfPoliticalParty: '',
-        P1340_eyeColor: '',
-        P1884_hairColor: '',
-        P2067_mass: ''
-      },
+      form: {},
       data: {}
     };
   }
@@ -67,6 +45,8 @@ class Profile extends React.Component {
       }
     }
 
+    this.setState({form: profile});
+
     let labels = await axios.get(
       wdk.getEntities({
         ids: ourIds,
@@ -77,8 +57,6 @@ class Profile extends React.Component {
     let entities = wdk.simplify.entities(labels.data.entities);
     let entitiesKeyArray = Object.keys(entities);
 
-    console.log('label', entities);
-    this.setState({form: profile});
     Object.keys(this.state.form).forEach(key => {
       let q1 = this.state.form[key];
       for (let i = 0; i < entitiesKeyArray.length; i++) {
