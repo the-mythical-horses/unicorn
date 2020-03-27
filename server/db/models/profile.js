@@ -3,11 +3,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Profile = db.define('profile', {
-  P1477_birthName: {
-    type: Sequelize.STRING
-  },
-
-  P735_givenName: {
+  P735_firstName: {
     type: Sequelize.STRING
   },
 
@@ -17,6 +13,10 @@ const Profile = db.define('profile', {
 
   P569_dateOfBirth: {
     type: Sequelize.DATE
+  },
+
+  P21_sexOrGender: {
+    type: Sequelize.STRING
   },
 
   P19_placeOfBirth: {
@@ -45,6 +45,14 @@ const Profile = db.define('profile', {
 
   P140_religion: {
     type: Sequelize.STRING
+  },
+
+  P410_militaryRank: {
+    type: Sequelize.STRING
+  },
+
+  P1971_numberOfChildren: {
+    type: Sequelize.INTEGER
   },
 
   P2048_height: {
