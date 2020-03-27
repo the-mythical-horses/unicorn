@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable camelcase */
 import React from 'react';
@@ -48,6 +49,11 @@ class Profile extends React.Component {
 
     this.setState({form: profile, qSearches: profile});
     console.log('profile', profile);
+    for (let key in this.state.qSearches) {
+      if (this.state.qSearches[key] && this.state.qSearches[key][0] !== 'Q') {
+        delete this.state.qSearches[key];
+      }
+    }
 
     let labels = await axios.get(
       wdk.getEntities({
@@ -103,10 +109,7 @@ class Profile extends React.Component {
         !isNaN(this.state.form[key]) &&
         this.state.form[key] !== ''
       ) {
-        console.log(this.state.form[key]);
-        console.log(formCopy);
         formCopy[key] = +this.state.form[key];
-        console.log(formCopy);
       }
     });
     this.props.addProfileThunk(formCopy);
