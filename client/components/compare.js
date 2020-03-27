@@ -412,23 +412,22 @@ export class Compare extends React.Component {
     const {email} = this.props;
     return (
       <div>
+        <button
+          type="button"
+          id="insert-btn"
+          onClick={() =>
+            this.setState({
+              leftQSearch: 'PROFILE',
+              form: {
+                ...this.state.form,
+                qname1: 'My Profile'
+              }
+            })
+          }
+        >
+          Insert Profile as Object 1
+        </button>
         <form id="compareForm" onSubmit={this.onSubmit}>
-          <button
-            type="button"
-            id="insert-btn"
-            onClick={() =>
-              this.setState({
-                leftQSearch: 'PROFILE',
-                form: {
-                  ...this.state.form,
-                  qname1: 'My Profile'
-                }
-              })
-            }
-          >
-            Insert My Profile
-          </button>
-
           <div className="in-drop">
             <div className="col s6">
               <label htmlFor="qname1">Object 1</label>
@@ -510,7 +509,7 @@ export class Compare extends React.Component {
         </form>
 
         <div id="elisCards">
-          <div className="elisCard smallCards">
+          <div className="elisCard smallCards" id="leftCard">
             <div className="smallTitleLeft">
               {this.state.left.labels ? this.state.left.labels.en : ''}
             </div>
@@ -589,7 +588,7 @@ export class Compare extends React.Component {
               ))}
             </ol>
           </div>
-          <div className="elisCard smallCards">
+          <div className="elisCard smallCards" id="rightCard">
             <div className="smallTitleRight">
               {this.state.right.labels ? this.state.right.labels.en : ''}
             </div>

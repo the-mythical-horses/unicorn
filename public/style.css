@@ -18,7 +18,7 @@ body {
 
 :root {
   --color1: rgb(42, 44, 68);
-  --color2: rgb(15, 2, 129);
+  --color2: rgb(10, 5, 63);
   --color3: rgb(187, 108, 176);
   --colorLeft: darkgreen;
   --colorRight: brown;
@@ -100,12 +100,14 @@ button {
 
 #ourNav {
   /* background: #3a080b; */
-  background: var(--color1);
+  background: white;
+  filter: drop-shadow(0px 1px 1px var(--color2));
 }
 #nav-ul {
   margin-right: 50px;
 }
 .link {
+  color: black;
   margin: 0px;
   margin-left: 10px;
   font-family: 'Maven Pro', sans-serif;
@@ -216,6 +218,16 @@ button {
   margin: 20px;
   background-color: #f8f9fa;
 }
+#leftCard {
+  filter: drop-shadow(0px 1px 1px var(--colorLeft));
+  border-radius: 2px;
+  border-color: var(--colorLeft);
+}
+#rightCard {
+  filter: drop-shadow(0px 1px 1px var(--colorRight));
+  border-radius: 2px;
+  border-color: var(--colorRight);
+}
 .smallCards {
   width: 24%;
 }
@@ -302,6 +314,7 @@ button {
 }
 .bigCards {
   width: 48%;
+  border-radius: 2px;
 }
 .bigTitle {
   text-align: center;
@@ -330,6 +343,7 @@ button {
   margin: 20px;
   margin-top: 35px;
   margin-right: 150px;
+  margin-left: 145px;
 }
 
 #unicorn {
@@ -339,36 +353,44 @@ button {
   font-family: 'Maven Pro', sans-serif;
 }
 #compare-btn {
-  background-color: var(--color3);
+  background-color: var(--color2);
   height: 40px;
 }
 #compare-btn:hover {
-  background-color: rgb(65, 5, 52);
+  background-color: blue;
 }
 
 #input1 {
-  border: 1px solid rgb(34, 32, 51);
+  border: 1px solid var(--colorLeft);
   padding: 3px;
   height: 35px;
   width: 250px;
   border-radius: 3px;
+  background-color: whitesmoke;
+  filter: drop-shadow(0px 1px 1px var(--colorLeft));
+}
+#input2 {
+  border: 1px solid var(--colorRight);
+  padding: 3px;
+  height: 35px;
+  width: 250px;
+  border-radius: 3px;
+  background-color: whitesmoke;
+  filter: drop-shadow(0px 1px 1px var(--colorRight));
 }
 #insert-btn {
+  position: absolute;
+  left: 100px;
+  top: 190px;
   height: 30px;
   color: rgb(253, 251, 251);
-  background-color: rgb(28, 38, 97);
+  background-color: darkgreen;
   border-radius: 3px;
 }
 #insert-btn:hover {
-  background-color: rgb(29, 38, 175);
+  background-color: green;
 }
-#input2 {
-  border: 1px solid rgb(34, 32, 51);
-  padding: 3px;
-  height: 35px;
-  width: 250px;
-  border-radius: 3px;
-}
+
 #label1 {
 }
 
@@ -380,6 +402,7 @@ button {
   display: flex;
   position: absolute;
   top: 180px;
+  left: 360px;
   width: 320px;
   background-color: white;
 }
@@ -413,7 +436,7 @@ button {
   border-style: solid;
   border-width: 0.5px;
   padding: 2px;
-  background-color: var(--color3);
+  background-color: var(--color2);
   color: white;
 }
 .drop-label {
