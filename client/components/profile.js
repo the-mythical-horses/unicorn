@@ -98,8 +98,15 @@ class Profile extends React.Component {
     Object.keys(this.state.form).forEach(key => {
       if (this.state.qSearches[key]) {
         formCopy[key] = this.state.qSearches[key];
-      } else if (!isNaN(Number(this.state.form[key]))) {
+      } else if (
+        this.state.form[key] !== null &&
+        !isNaN(this.state.form[key]) &&
+        this.state.form[key] !== ''
+      ) {
+        console.log(this.state.form[key]);
+        console.log(formCopy);
         formCopy[key] = +this.state.form[key];
+        console.log(formCopy);
       }
     });
     this.props.addProfileThunk(formCopy);
