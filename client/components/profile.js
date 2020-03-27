@@ -31,7 +31,7 @@ class Profile extends React.Component {
     let rawProfile = await axios.get('/api/profiles/raw');
     let profile = rawProfile.data;
     let ourIds = [];
-
+    console.log('profile1', profile);
     // eslint-disable-next-line guard-for-in
     for (let key in profile) {
       if (
@@ -42,18 +42,15 @@ class Profile extends React.Component {
       ) {
         delete profile[key];
       }
-      if (profile[key]) {
+    }
+    this.setState({form: profile, qSearches: profile});
+    for (let key in profile) {
+      if (profile[key] && profile[key][0] === 'Q') {
         ourIds.push(profile[key]);
       }
     }
 
-    this.setState({form: profile, qSearches: profile});
     console.log('profile', profile);
-    for (let key in this.state.qSearches) {
-      if (this.state.qSearches[key] && this.state.qSearches[key][0] !== 'Q') {
-        delete this.state.qSearches[key];
-      }
-    }
 
     let labels = await axios.get(
       wdk.getEntities({
