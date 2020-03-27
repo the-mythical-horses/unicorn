@@ -1,6 +1,9 @@
-const router = require('express').Router()
-const {User} = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const {User} = require('../db/models');
+module.exports = router;
+
+const multer = require('multer');
+const upload = multer({dest: 'public/uploads'});
 
 router.get('/', async (req, res, next) => {
   try {
@@ -9,9 +12,16 @@ router.get('/', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ['id', 'email']
-    })
-    res.json(users)
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
+
+router.post('/upload', upload.single('avatar'), async (req, res, next) => {
+  const user = await User.findByPk(req.user.id);
+  user.avatar = '/uploads/' + req.file.filename;
+  await user.save();
+  res.sendStatus(200);
+});

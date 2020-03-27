@@ -14,13 +14,33 @@ class Profile extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fileSubmit = this.fileSubmit.bind(this);
+    this.fileChange = this.fileChange.bind(this);
 
     this.state = {
       qSearches: {},
       searches: {},
       form: {},
-      data: {}
+      data: {},
+      file: null
     };
+  }
+
+  async fileSubmit(evt) {
+    evt.preventDefault();
+    const formData = new FormData();
+    formData.append('avatar', this.state.file);
+    await axios.post('/api/users/upload', formData, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    });
+  }
+
+  async fileChange(evt) {
+    this.setState({
+      file: evt.target.files[0]
+    });
   }
 
   async componentDidMount() {
@@ -163,17 +183,11 @@ class Profile extends React.Component {
             </div>
           </div>
 
-          <button type="submit">Create Profile</button>
+          <button type="submit">Save Profile</button>
         </form>
-        <form
-          action="./upload.php"
-          mathode="POST"
-          encType="multipart/form-data"
-        >
-          <input type="file" name="file" />
-          <button type="submit" name="submit">
-            Upload
-          </button>
+        <form onSubmit={this.fileSubmit}>
+          <input type="file" name="avatar" onChange={this.fileChange} />
+          <button type="submit">Upload Avatar</button>
         </form>
       </div>
     );
