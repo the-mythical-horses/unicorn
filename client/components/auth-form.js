@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {auth} from '../store';
 import M from 'materialize-css';
 
@@ -16,8 +17,14 @@ const AuthForm = props => {
 
   return (
     <div>
-      <img src="/img/leftUnicorn.png" id="signup-img" />
+      <img
+        src="./white-abstract-technology-and-engineering-motion-background-with-plexus-elements-and-depth-of-field-settings-3d-rendering_hwc2faa_e_thumbnail-full03.png"
+        id="signup-img"
+      />
       <div id="signup-form-main">
+        <div>
+          <h4 className="login-header">Login</h4>
+        </div>
         <form onSubmit={handleSubmit} name={name} id="signup-form-sub">
           <div className="input-field col s6">
             <label htmlFor="email" id="email">
@@ -53,6 +60,14 @@ const AuthForm = props => {
           <img id="google-icon" src="/img/googleIcon.png" />{' '}
           <div id="google-text">{displayName} with Google</div>
         </a>
+        <div className="login-notmember">
+          <p className="notmember-p">Not a member?</p>
+          <button className="btn" id="notmember-btn" type="submit">
+            <Link to="/signup" className="notmember-signup-link">
+              Sign Up!
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   );

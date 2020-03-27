@@ -24,13 +24,18 @@ export class UserHome extends React.Component {
     const {email} = this.props;
     return (
       <div id="home">
+        <div>
+          <p className="intro-header">
+            A way to find the connections between <i id="anything">anything</i>.
+          </p>
+        </div>
         {/* <h3>Welcome, {email}</h3> */}
         <div className="cards">
           <div className="row">
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci1">
-                  <img src="./undraw_data_extraction_ih3n (1).svg" />
+                  <img src="./undraw_online_information_4ui6.svg" />
                   <span className="card-title" id="ci1t">
                     Research
                   </span>
@@ -47,7 +52,7 @@ export class UserHome extends React.Component {
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci2">
-                  <img src="./undraw_lost_online_wqob (1).svg" />
+                  <img src="./undraw_lost_online_wqob (2).svg" />
                   <span className="card-title" id="ci2t">
                     Awareness
                   </span>
@@ -62,7 +67,7 @@ export class UserHome extends React.Component {
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci3">
-                  <img src="./undraw_sync_files_xb3r.svg" />
+                  <img src="./undraw_sync_files_xb3r (2).svg" />
                   <span className="card-title" id="ci3t">
                     Data Extraction
                   </span>
@@ -75,9 +80,6 @@ export class UserHome extends React.Component {
           </div>
         </div>
         <div className="intro-content">
-          <p className="intro-header">
-            A way to find the connections between anything.
-          </p>
           <p>
             Unicorn is a fast, powerful search engine allowing anyone to find
             similarities between, well, anything.
