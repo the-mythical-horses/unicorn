@@ -431,7 +431,7 @@ button {
   height: 950px;
   margin-top: 75px;
   margin-left: 100px;
-  opacity: 0.1;
+  opacity: 0.3;
 }
 #signup-google {
   display: flex;

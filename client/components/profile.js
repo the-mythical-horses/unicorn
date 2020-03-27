@@ -96,9 +96,6 @@ class Profile extends React.Component {
           </p>
         </div>
         <div className="profile-input">
-          <div className="avatar">
-            <Avatar googleId="118096717852922241760" size="100" round={true} />
-          </div>
           <form onSubmit={this.handleSubmit} className="col s12">
             <div>
               <div className="input-field">
