@@ -36,6 +36,36 @@ nav a {
   display: inline-block;
   margin: 1em;
 }
+#home {
+  display: flex;
+  flex-direction: row;
+}
+#section1 {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  height: 1000px;
+}
+#welcome {
+  height: 150px;
+  width: 860px;
+  margin: 15px;
+  background-color: rgb(34, 207, 43);
+}
+#featComp {
+  height: 860px;
+  width: 860px;
+  margin: 15px;
+  background-color: rgb(129, 29, 133);
+}
+#section2 {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(126, 158, 158);
+  width: 500px;
+  height: 1000px;
+  margin: 15px;
+}
 
 .brand-logo {
   margin: 10px;
@@ -138,11 +168,6 @@ button {
   background-color: var(--color1);
   margin-top: 50px;
 }
-
-#home {
-  /* position: absolute; */
-}
-
 .card-image {
   object-fit: contain;
   opacity: 0.9;

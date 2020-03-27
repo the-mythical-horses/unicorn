@@ -26,7 +26,18 @@ export class UserHome extends React.Component {
     const {email} = this.props;
     return (
       <div id="home">
-        <h1>Here is where featured articles/comparisons should go</h1>
+        <div id="section1">
+          <div id="welcome">
+            <h1>welcome to unicorn...</h1>
+          </div>
+          <div id="featComp">
+            <h1>Todays featured comparison:...</h1>
+          </div>
+        </div>
+
+        <div id="section2">
+          <h1>did you know? or some other spacefiller</h1>
+        </div>
       </div>
     );
   }
