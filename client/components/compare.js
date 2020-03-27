@@ -51,7 +51,9 @@ export class Compare extends React.Component {
 
   async componentDidMount() {
     M.AutoInit();
-    await this.props.getProfileById();
+    if (this.state.user) {
+      await this.props.getProfileById();
+    }
   }
 
   async onChangeLeft(evt) {
@@ -123,6 +125,11 @@ export class Compare extends React.Component {
   }
 
   async getImage(entities, q) {
+    if (q === 'PROFILE') {
+      if (this.props.user.avatar) {
+        return [this.props.user.avatar, ''];
+      }
+    }
     let picClaim = null;
     if (entities[q].claims.P18) {
       picClaim = entities[q].claims.P18;
@@ -224,13 +231,11 @@ export class Compare extends React.Component {
         addUrl: true
       });
       entities.PROFILE = this.props.profile.PROFILE;
-      console.log('!!!!!!!!!???????????!!!!!!!!', this.props.profile);
     }
     this.setState({
       left: entities[q1],
       right: entities[q2]
     });
-    console.log(entities);
 
     const [leftImage, leftImageDesc] = await this.getImage(entities, q1);
     if (leftImage) {
@@ -507,7 +512,7 @@ export class Compare extends React.Component {
 
         <div id="elisCards">
           <div className="elisCard smallCards">
-            <div className="smallTitle">
+            <div className="smallTitleLeft">
               {this.state.left.labels ? this.state.left.labels.en : ''}
             </div>
             <div className="smallSubTitle">
@@ -521,7 +526,7 @@ export class Compare extends React.Component {
               dangerouslySetInnerHTML={{__html: this.state.leftImageDesc}}
             ></div>
             <div className="smallInfo">
-              <div className="smallInfoTitle">Information</div>
+              <div className="smallInfoTitleLeft">Information</div>
               <div className="smallInfoMain">
                 {this.state.left.claims &&
                   Object.keys(this.state.left.claims)
@@ -546,7 +551,8 @@ export class Compare extends React.Component {
             <ol>
               {Object.keys(this.state.results).map(p => (
                 <li key={p}>
-                  {`${this.getLabel(p)}: ${this.state.results[p]
+                  <span className="twoProp">{`${this.getLabel(p)}: `}</span>
+                  {`${this.state.results[p]
                     .map(q => this.getLabel(q))
                     .join(', ')}`}
                 </li>
@@ -556,11 +562,19 @@ export class Compare extends React.Component {
             <ol>
               {Object.keys(this.state.l2results).map(p => (
                 <li key={p}>
-                  {`${this.getLabel(
-                    this.state.l2results[p].key[0]
-                  )} (${this.getLabel(
-                    this.state.l2results[p].key[1]
-                  )}, ${this.getLabel(this.state.l2results[p].key[2])}): `}
+                  <span className="twoProp">
+                    <span>
+                      {`${this.getLabel(this.state.l2results[p].key[0])} (`}
+                    </span>
+                    <span className="leftLabel">
+                      {`${this.getLabel(this.state.l2results[p].key[1])}`}
+                    </span>
+                    {`, `}
+                    <span className="rightLabel">
+                      {`${this.getLabel(this.state.l2results[p].key[2])}`}
+                    </span>
+                    {`): `}
+                  </span>
                   <ol>
                     {Object.keys(this.state.l2results[p].results).map(p2 => (
                       <li key={p2}>
@@ -577,7 +591,7 @@ export class Compare extends React.Component {
             </ol>
           </div>
           <div className="elisCard smallCards">
-            <div className="smallTitle">
+            <div className="smallTitleRight">
               {this.state.right.labels ? this.state.right.labels.en : ''}
             </div>
             <div className="smallSubTitle">
@@ -591,7 +605,7 @@ export class Compare extends React.Component {
               dangerouslySetInnerHTML={{__html: this.state.rightImageDesc}}
             ></div>
             <div className="smallInfo">
-              <div className="smallInfoTitle">Information</div>
+              <div className="smallInfoTitleRight">Information</div>
               <div className="smallInfoMain">
                 {this.state.right.claims &&
                   Object.keys(this.state.right.claims)
@@ -623,7 +637,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapState = state => {
   return {
-    profile: state.profiles.profile
+    profile: state.profiles.profile,
+    user: state.user
   };
 };
 
