@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-const initialState = {
-  profile: {},
-  profiles: []
-};
+const initialState = {};
 
 // Action Types:
 const GOT_PROFILE = 'GOT_PROFILE';
@@ -48,15 +45,9 @@ export const getProfileByIdThunk = () => async dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_PROFILE:
-      return {
-        ...state,
-        profile: action.profile
-      };
+      return action.profile;
     case ADD_PROFILE:
-      return {
-        ...state,
-        profiles: [...state.profiles, action.profile]
-      };
+      return action.profile;
     default:
       return state;
   }

@@ -51,9 +51,8 @@ export class Compare extends React.Component {
 
   async componentDidMount() {
     M.AutoInit();
-    if (this.state.user) {
-      await this.props.getProfileById();
-    }
+
+    await this.props.getProfileById();
   }
 
   async onChangeLeft(evt) {
@@ -637,7 +636,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapState = state => {
   return {
-    profile: state.profiles.profile,
+    profile: state.profile,
     user: state.user
   };
 };

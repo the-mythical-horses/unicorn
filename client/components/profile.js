@@ -201,7 +201,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapState = state => {
   return {
-    profile: state.profiles.profile
+    profile: state.profile
   };
 };
 export default connect(mapState, mapDispatchToProps)(Profile);
