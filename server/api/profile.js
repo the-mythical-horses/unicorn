@@ -3,6 +3,19 @@ const {Profile} = require('../db/models');
 const {User} = require('../db/models');
 module.exports = router;
 
+router.get('/raw', async (req, res, next) => {
+  try {
+    let profile = await Profile.findOne({
+      where: {
+        userId: req.user.id
+      }
+    });
+    res.json(profile);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/', async (req, res, next) => {
   try {
     let userId = req.user.id;
@@ -69,15 +82,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    console.log('REQ>BODY', req.user.id);
+    let profile = await Profile.findOne({
+      where: {
+        userId: req.user.id
+      }
+    });
 
-    let newProfile = await Profile.create(req.body);
-    newProfile.userId = req.user.id;
-    newProfile.save();
-
-    res.status(201).send(newProfile);
+    profile.update(req.body);
+    res.status(201).send(profile);
   } catch (error) {
     next(error);
   }

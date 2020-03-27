@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-state */
 /* eslint-disable camelcase */
 import React from 'react';
-import {addProfileThunk} from '../store/profiles';
+import {addProfileThunk, getProfileByIdThunk} from '../store/profiles';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 import axios from 'axios';
@@ -39,12 +39,55 @@ class Profile extends React.Component {
         P1340_eyeColor: '',
         P1884_hairColor: '',
         P2067_mass: ''
-      }
+      },
+      data: {}
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     M.AutoInit();
+    await this.props.getProfileById();
+    let rawProfile = await axios.get('/api/profiles/raw');
+    let profile = rawProfile.data;
+    for (let key in profile) {
+      if (
+        key === 'id' ||
+        key === 'userId' ||
+        key === 'createdAt' ||
+        key === 'updatedAt'
+      ) {
+        delete profile[key];
+      }
+    }
+    console.log('profile', profile);
+    this.setState({form: profile});
+    console.log('form', this.state.form);
+    // let claimsObject = this.props.profile.PROFILE.claims;
+    // let claimsKeyArray = Object.keys(claimsObject)
+
+    // Object.keys(this.state.form).forEach( key => {
+    //     let pNumber = ''
+    //     for (let i = 0; i < key.length; i++) {
+    //       if (key[i] === '_')  break
+    //        pNumber += key[i]
+    //     }
+    //     let pLabel = key.split('_')[1].replace(/([A-Z])/g, ' $1')
+
+    //     for(let i = 0; i < claimsKeyArray.length; i++) {
+    //       if (pNumber === claimsKeyArray[i]) {
+    //         console.log('key', key, 'claimsObject[claimsKeyArray[i]', claimsObject[claimsKeyArray[i]])
+    //         this.setState({
+    //           form: {
+    //             ...this.state.form,
+    //             [key]: claimsObject[claimsKeyArray[i]].value
+    //           }
+    //         })
+    //       }
+    //     }
+    //   }
+    // )
+
+    console.log('data', this.props.profile.PROFILE.claims);
   }
   async handleChange(evt) {
     evt.persist();
@@ -83,6 +126,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    console.log('ererfe', this.state.form);
     return (
       <div className="row">
         <form onSubmit={this.handleSubmit} className="col s12">
@@ -141,7 +185,13 @@ class Profile extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addProfileThunk: profile => dispatch(addProfileThunk(profile))
+  addProfileThunk: profile => dispatch(addProfileThunk(profile)),
+  getProfileById: () => dispatch(getProfileByIdThunk())
 });
 
-export default connect(null, mapDispatchToProps)(Profile);
+const mapState = state => {
+  return {
+    profile: state.profiles.profile
+  };
+};
+export default connect(mapState, mapDispatchToProps)(Profile);

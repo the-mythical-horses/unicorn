@@ -28,7 +28,7 @@ const addProfile = profile => {
 export const addProfileThunk = profile => async dispatch => {
   console.log('PROFILE SUBMIT ', profile);
   try {
-    const {data} = await axios.post('api/profiles', profile);
+    const {data} = await axios.put('api/profiles', profile);
     dispatch(addProfile(data));
   } catch (error) {
     console.log(error);
