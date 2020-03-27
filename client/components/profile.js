@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unused-state */
 /* eslint-disable camelcase */
 import React from 'react';
-import {addProfileThunk} from '../store/profiles';
+import {addProfileThunk, getProfileByIdThunk} from '../store/profiles';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 import axios from 'axios';
@@ -17,35 +17,63 @@ class Profile extends React.Component {
     this.state = {
       qSearches: {},
       searches: {},
-      form: {
-        P1477_birthName: '',
-        P735_givenName: '',
-        P734_familyName: '',
-        P569_dateOfBirth: '',
-        P19_placeOfBirth: '',
-        P1412_languagesSpokenWrittenOrSigned: '',
-        P106_occupation: '',
-        P69_educatedAt: '',
-        P551_residence: '',
-        P172_ethnicGroup: '',
-        P140_religion: '',
-        P2048_height: '',
-        P27_countryOfCitizenship: '',
-        P108_employer: '',
-        P463_memberOf: '',
-        P552_handedness: '',
-        P101_fieldOfWork: '',
-        P102_memberOfPoliticalParty: '',
-        P1340_eyeColor: '',
-        P1884_hairColor: '',
-        P2067_mass: ''
-      }
+      form: {},
+      data: {}
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     M.AutoInit();
+
+    await this.props.getProfileById();
+    let rawProfile = await axios.get('/api/profiles/raw');
+    let profile = rawProfile.data;
+    let ourIds = [];
+
+    // eslint-disable-next-line guard-for-in
+    for (let key in profile) {
+      if (
+        key === 'id' ||
+        key === 'userId' ||
+        key === 'createdAt' ||
+        key === 'updatedAt'
+      ) {
+        delete profile[key];
+      }
+      if (profile[key]) {
+        ourIds.push(profile[key]);
+      }
+    }
+
+    this.setState({form: profile});
+
+    let labels = await axios.get(
+      wdk.getEntities({
+        ids: ourIds,
+        languages: ['en'],
+        props: ['labels']
+      })
+    );
+    let entities = wdk.simplify.entities(labels.data.entities);
+    let entitiesKeyArray = Object.keys(entities);
+
+    Object.keys(this.state.form).forEach(key => {
+      let q1 = this.state.form[key];
+      for (let i = 0; i < entitiesKeyArray.length; i++) {
+        let q2 = entities[entitiesKeyArray[i]].id;
+        console.log('the qs', q1, q2);
+        if (q1 === q2) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              [key]: entities[entitiesKeyArray[i]].labels.en
+            }
+          });
+        }
+      }
+    });
   }
+
   async handleChange(evt) {
     evt.persist();
     await this.setState({
@@ -141,7 +169,13 @@ class Profile extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addProfileThunk: profile => dispatch(addProfileThunk(profile))
+  addProfileThunk: profile => dispatch(addProfileThunk(profile)),
+  getProfileById: () => dispatch(getProfileByIdThunk())
 });
 
-export default connect(null, mapDispatchToProps)(Profile);
+const mapState = state => {
+  return {
+    profile: state.profiles.profile
+  };
+};
+export default connect(mapState, mapDispatchToProps)(Profile);

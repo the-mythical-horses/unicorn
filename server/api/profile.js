@@ -3,9 +3,25 @@ const {Profile} = require('../db/models');
 const {User} = require('../db/models');
 module.exports = router;
 
+router.get('/raw', async (req, res, next) => {
+  try {
+    let profile = await Profile.findOne({
+      where: {
+        userId: req.user.id
+      }
+    });
+    res.json(profile);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/', async (req, res, next) => {
   try {
     let userId = req.user.id;
+    let user = await User.findByPk(userId, {
+      include: [{model: Profile}]
+    });
 
     let entities = {
       PROFILE: {
@@ -22,18 +38,15 @@ router.get('/', async (req, res, next) => {
       }
     };
 
-    let user = await User.findByPk(userId, {
-      include: [{model: Profile}]
-    });
-    res.json(user);
     if (!user.profile) {
       res.sendStatus(500);
     }
-    const profile = user.profile;
+    const profile = user.profile.dataValues;
     Object.keys(profile).forEach(keyName => {
+      console.log('keyName', keyName, typeof keyName);
       if (
         !profile[keyName] ||
-        ['id', 'createdAt', 'updatedAt'].includes(keyName)
+        ['id', 'createdAt', 'updatedAt', 'userId'].includes(keyName)
       ) {
         return;
       }
@@ -69,17 +82,22 @@ router.get('/', async (req, res, next) => {
         ];
       }
     });
+
     res.json(entities);
   } catch (error) {
     next(error);
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    console.log('REQ>BODY', req.body);
-    let newProfile = await Profile.create(req.body);
-    res.status(201).send(newProfile);
+    let profile = await Profile.findOne({
+      where: {
+        userId: req.user.id
+      }
+    });
+    profile.update(req.body);
+    res.status(201).send(profile);
   } catch (error) {
     next(error);
   }
