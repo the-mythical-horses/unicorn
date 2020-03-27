@@ -17,7 +17,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
       <div className="nav-wrapper">
         {/* <FontAwesomeIcon className="icon" icon={faProjectDiagram} /> */}
         <Link to="/" className="brand-logo" id="unicorn">
-          unicorn
+          Unicorn
         </Link>
 
         {isLoggedIn ? (
@@ -51,10 +51,14 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             <ul className="right hide-on-med-and-down">
               {/* The navbar will show these links before you log in */}
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login" className="link">
+                  Login
+                </Link>
               </li>
               <li>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup" className="link">
+                  Sign Up
+                </Link>
               </li>
             </ul>
           </div>

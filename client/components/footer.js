@@ -11,7 +11,7 @@ const Footer = () => {
       <footer className="footer">
         <div className="gh-button">
           <a href="https://github.com/the-mythical-horses/unicorn">
-            <img id="git-logo" src="./git-logo.png" />
+            <img id="git-logo" src="./iconfinder_github_1390302.png" />
           </a>
         </div>
       </footer>
