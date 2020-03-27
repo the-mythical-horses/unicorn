@@ -101,11 +101,12 @@ class Profile extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const formCopy = {...this.state.form};
-    Object.keys(formCopy).forEach(key => {
-      if (!formCopy[key]) delete formCopy[key];
+    const formCopy = {};
+    Object.keys(this.state.form).forEach(key => {
       if (this.state.qSearches[key]) {
         formCopy[key] = this.state.qSearches[key];
+      } else if (!isNaN(Number(this.state.form[key]))) {
+        formCopy[key] = +this.state.form[key];
       }
     });
     this.props.addProfileThunk(formCopy);
