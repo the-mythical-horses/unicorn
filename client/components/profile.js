@@ -46,9 +46,13 @@ class Profile extends React.Component {
 
   async componentDidMount() {
     M.AutoInit();
+
     await this.props.getProfileById();
     let rawProfile = await axios.get('/api/profiles/raw');
     let profile = rawProfile.data;
+    let ourIds = [];
+
+    // eslint-disable-next-line guard-for-in
     for (let key in profile) {
       if (
         key === 'id' ||
@@ -58,8 +62,38 @@ class Profile extends React.Component {
       ) {
         delete profile[key];
       }
+      if (profile[key]) {
+        ourIds.push(profile[key]);
+      }
     }
+
+    let labels = await axios.get(
+      wdk.getEntities({
+        ids: ourIds,
+        languages: ['en'],
+        props: ['labels']
+      })
+    );
+    let entities = wdk.simplify.entities(labels.data.entities);
+    let entitiesKeyArray = Object.keys(entities);
+
+    console.log('label', entities);
     this.setState({form: profile});
+    Object.keys(this.state.form).forEach(key => {
+      let q1 = this.state.form[key];
+      for (let i = 0; i < entitiesKeyArray.length; i++) {
+        let q2 = entities[entitiesKeyArray[i]].id;
+        console.log('the qs', q1, q2);
+        if (q1 === q2) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              [key]: entities[entitiesKeyArray[i]].labels.en
+            }
+          });
+        }
+      }
+    });
   }
 
   async handleChange(evt) {
@@ -99,7 +133,6 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log('ererfe', this.state.form);
     return (
       <div className="row">
         <form onSubmit={this.handleSubmit} className="col s12">
