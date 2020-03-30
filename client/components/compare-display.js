@@ -31,6 +31,9 @@ class CompareDisplay extends React.Component {
     this.compareTwo = this.compareTwo.bind(this);
     this.getLabel = this.getLabel.bind(this);
   }
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
 
   async componentDidUpdate() {
     let left = {};
