@@ -39,7 +39,9 @@ export class Compare extends React.Component {
       form: {
         qname1: '',
         qname2: ''
-      }
+      },
+      levelOneInfo: false,
+      levlTwoInfo: false
     };
     this.onChangeLeft = this.onChangeLeft.bind(this);
     this.onChangeRight = this.onChangeRight.bind(this);
@@ -410,25 +412,26 @@ export class Compare extends React.Component {
 
   render() {
     const {email} = this.props;
+    let levelOneInfo = false;
+    let levelTwoInfo = false;
     return (
       <div>
+        <button
+          type="button"
+          id="insert-btn"
+          onClick={() =>
+            this.setState({
+              leftQSearch: 'PROFILE',
+              form: {
+                ...this.state.form,
+                qname1: 'My Profile'
+              }
+            })
+          }
+        >
+          Insert Profile as Object 1
+        </button>
         <form id="compareForm" onSubmit={this.onSubmit}>
-          <button
-            type="button"
-            id="insert-btn"
-            onClick={() =>
-              this.setState({
-                leftQSearch: 'PROFILE',
-                form: {
-                  ...this.state.form,
-                  qname1: 'My Profile'
-                }
-              })
-            }
-          >
-            Insert My Profile
-          </button>
-
           <div className="in-drop">
             <div className="col s6">
               <label htmlFor="qname1">Object 1</label>
@@ -440,6 +443,11 @@ export class Compare extends React.Component {
                 value={this.state.form.qname1}
                 autoComplete="off"
               />
+              {this.state.form.qname1 === 'My Profile' ? (
+                <div id="my-profile">My Profile</div>
+              ) : (
+                <div className="empty-div"></div>
+              )}
             </div>
 
             <div className="drop-container1">
@@ -510,7 +518,7 @@ export class Compare extends React.Component {
         </form>
 
         <div id="elisCards">
-          <div className="elisCard smallCards">
+          <div className="elisCard smallCards" id="leftCard">
             <div className="smallTitleLeft">
               {this.state.left.labels ? this.state.left.labels.en : ''}
             </div>
@@ -546,7 +554,29 @@ export class Compare extends React.Component {
 
           <div className="elisCard bigCards">
             <div className="bigTitle">How They Compare:</div>
-            <div className="levelHeader">Level 1</div>
+            <div className="levelHeader">
+              <div className="levelHeader-text">Level 1</div>
+              <button
+                className="levelHeader-btn"
+                id="level-1-info-btn"
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    levelOneInfo: !this.state.levelOneInfo
+                  });
+                }}
+              >
+                ?
+              </button>
+              {this.state.levelOneInfo ? (
+                <div className="level-info">
+                  here goes a message explaining the definition oflevel 1
+                  results
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
             <ol>
               {Object.keys(this.state.results).map(p => (
                 <li key={p}>
@@ -557,7 +587,30 @@ export class Compare extends React.Component {
                 </li>
               ))}
             </ol>
-            <div className="levelHeader">Level 2</div>
+            <div className="levelHeader">
+              <div className="levelHeader-text">Level 2</div>
+
+              <button
+                className="levelHeader-btn"
+                id="level-2-info-btn"
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    levelTwoInfo: !this.state.levelTwoInfo
+                  });
+                }}
+              >
+                ?
+              </button>
+              {this.state.levelTwoInfo ? (
+                <div className="level-info">
+                  here goes a message explaining the definition of level 2
+                  results
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
             <ol>
               {Object.keys(this.state.l2results).map(p => (
                 <li key={p}>
@@ -589,7 +642,7 @@ export class Compare extends React.Component {
               ))}
             </ol>
           </div>
-          <div className="elisCard smallCards">
+          <div className="elisCard smallCards" id="rightCard">
             <div className="smallTitleRight">
               {this.state.right.labels ? this.state.right.labels.en : ''}
             </div>
