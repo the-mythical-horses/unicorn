@@ -14,6 +14,7 @@ import sparqljs from 'sparqljs';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import M from 'materialize-css';
+import CompareDisplay from './compareDisplay';
 
 /**
  * COMPONENT
@@ -57,6 +58,34 @@ export class Compare extends React.Component {
     await this.props.getProfileById();
   }
 
+  compareTwo(entities, q1, q2) {
+    console.log('entities!!!', entities);
+    const same = {};
+    const ids = new Set();
+    const q1claims = Object.keys(entities[q1].claims);
+    q1claims.forEach(c => {
+      if (entities[q2].claims[c]) {
+        entities[q1].claims[c].forEach(v => {
+          const entitiesQ2ClaimsCValues = entities[q2].claims[c].map(
+            v => v.value
+          );
+          if (entitiesQ2ClaimsCValues.includes(v.value)) {
+            if (v.type === 'wikibase-item') {
+              ids.add(v.value);
+            }
+            ids.add(c);
+            if (same[c]) {
+              same[c].push(v.value);
+            } else {
+              same[c] = [v.value];
+            }
+          }
+        });
+      }
+    });
+    return [same, Array.from(ids)];
+  }
+
   async onChangeLeft(evt) {
     await this.setState({
       form: {
@@ -95,34 +124,6 @@ export class Compare extends React.Component {
         });
       }
     }
-  }
-
-  compareTwo(entities, q1, q2) {
-    console.log('entities!!!', entities);
-    const same = {};
-    const ids = new Set();
-    const q1claims = Object.keys(entities[q1].claims);
-    q1claims.forEach(c => {
-      if (entities[q2].claims[c]) {
-        entities[q1].claims[c].forEach(v => {
-          const entitiesQ2ClaimsCValues = entities[q2].claims[c].map(
-            v => v.value
-          );
-          if (entitiesQ2ClaimsCValues.includes(v.value)) {
-            if (v.type === 'wikibase-item') {
-              ids.add(v.value);
-            }
-            ids.add(c);
-            if (same[c]) {
-              same[c].push(v.value);
-            } else {
-              same[c] = [v.value];
-            }
-          }
-        });
-      }
-    });
-    return [same, Array.from(ids)];
   }
 
   async getImage(entities, q) {
@@ -516,166 +517,20 @@ export class Compare extends React.Component {
             </div>
           </div>
         </form>
-
-        <div id="elisCards">
-          <div className="elisCard smallCards" id="leftCard">
-            <div className="smallTitleLeft">
-              {this.state.left.labels ? this.state.left.labels.en : ''}
-            </div>
-            <div className="smallSubTitle">
-              {this.state.left.descriptions
-                ? this.state.left.descriptions.en
-                : ''}
-            </div>
-            <img className="compare-img" src={this.state.leftImage} />
-            <div
-              className="smallPictureDescription"
-              dangerouslySetInnerHTML={{__html: this.state.leftImageDesc}}
-            ></div>
-            <div className="smallInfo">
-              <div className="smallInfoTitleLeft">Information</div>
-              <div className="smallInfoMain">
-                {this.state.left.claims &&
-                  Object.keys(this.state.left.claims)
-                    .slice(0, 5)
-                    .map(c => (
-                      <div className="theSmalls" key={c}>
-                        <div className="smallInfoH">{this.getLabel(c)}</div>
-                        <div className="smallInfoD">
-                          {this.state.left.claims[c]
-                            .map(v => this.getLabel(v.value))
-                            .join(', ')}
-                        </div>
-                      </div>
-                    ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="elisCard bigCards">
-            <div className="bigTitle">How They Compare:</div>
-            <div className="levelHeader">
-              <div className="levelHeader-text">Level 1</div>
-              <button
-                className="levelHeader-btn"
-                id="level-1-info-btn"
-                type="button"
-                onClick={() => {
-                  this.setState({
-                    levelOneInfo: !this.state.levelOneInfo
-                  });
-                }}
-              >
-                ?
-              </button>
-              {this.state.levelOneInfo ? (
-                <div className="level-info">
-                  here goes a message explaining the definition oflevel 1
-                  results
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </div>
-            <ol>
-              {Object.keys(this.state.results).map(p => (
-                <li key={p}>
-                  <span className="twoProp">{`${this.getLabel(p)}: `}</span>
-                  {`${this.state.results[p]
-                    .map(q => this.getLabel(q))
-                    .join(', ')}`}
-                </li>
-              ))}
-            </ol>
-            <div className="levelHeader">
-              <div className="levelHeader-text">Level 2</div>
-
-              <button
-                className="levelHeader-btn"
-                id="level-2-info-btn"
-                type="button"
-                onClick={() => {
-                  this.setState({
-                    levelTwoInfo: !this.state.levelTwoInfo
-                  });
-                }}
-              >
-                ?
-              </button>
-              {this.state.levelTwoInfo ? (
-                <div className="level-info">
-                  here goes a message explaining the definition of level 2
-                  results
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </div>
-            <ol>
-              {Object.keys(this.state.l2results).map(p => (
-                <li key={p}>
-                  <span className="twoProp">
-                    <span>
-                      {`${this.getLabel(this.state.l2results[p].key[0])} (`}
-                    </span>
-                    <span className="leftLabel">
-                      {`${this.getLabel(this.state.l2results[p].key[1])}`}
-                    </span>
-                    {`, `}
-                    <span className="rightLabel">
-                      {`${this.getLabel(this.state.l2results[p].key[2])}`}
-                    </span>
-                    {`): `}
-                  </span>
-                  <ol>
-                    {Object.keys(this.state.l2results[p].results).map(p2 => (
-                      <li key={p2}>
-                        {`${this.getLabel(p2)}: ${this.state.l2results[
-                          p
-                        ].results[p2]
-                          .map(q => this.getLabel(q))
-                          .join(', ')}`}
-                      </li>
-                    ))}
-                  </ol>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div className="elisCard smallCards" id="rightCard">
-            <div className="smallTitleRight">
-              {this.state.right.labels ? this.state.right.labels.en : ''}
-            </div>
-            <div className="smallSubTitle">
-              {this.state.right.descriptions
-                ? this.state.right.descriptions.en
-                : ''}
-            </div>
-            <img className="compare-img" src={this.state.rightImage} />
-            <div
-              className="smallPictureDescription"
-              dangerouslySetInnerHTML={{__html: this.state.rightImageDesc}}
-            ></div>
-            <div className="smallInfo">
-              <div className="smallInfoTitleRight">Information</div>
-              <div className="smallInfoMain">
-                {this.state.right.claims &&
-                  Object.keys(this.state.right.claims)
-                    .slice(0, 5)
-                    .map(c => (
-                      <div className="theSmalls" key={c}>
-                        <div className="smallInfoH">{this.getLabel(c)}</div>
-                        <div className="smallInfoD">
-                          {this.state.right.claims[c]
-                            .map(v => this.getLabel(v.value))
-                            .join(', ')}
-                        </div>
-                      </div>
-                    ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <CompareDisplay
+          qname1={this.state.form.qName1}
+          qname2={this.state.form.qName2}
+          left={this.state.left}
+          right={this.state.right}
+          leftQSearch={this.state.leftQSearch}
+          rightQSearch={this.state.rightQSearch}
+          leftImage={this.state.leftImage}
+          rightImage={this.state.rightImage}
+          leftImageDesc={this.state.leftImageDesc}
+          results={this.state.results}
+          l2results={this.state.l2results}
+          getLabel={this.getLabel}
+        />
       </div>
     );
   }
