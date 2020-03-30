@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable max-statements */
 /* eslint-disable complexity */
 import React from 'react';
 import wdk from 'wikidata-sdk';
@@ -190,15 +192,15 @@ class CompareDisplay extends React.Component {
           if (v1 === v2) {
             return;
           }
-          const [results, l2ids] = this.compareTwo(level2entities, v1, v2);
+          const [l2SubResults, l2ids] = this.compareTwo(level2entities, v1, v2);
           l2ids.forEach(id => ids.add(id));
           const keyName = [property, v1, v2];
-          if (Object.keys(results).length > 0) {
+          if (Object.keys(l2SubResults.length > 0)) {
             ids.add(v1);
             ids.add(v2);
             l2results[keyName] = {
               key: keyName,
-              results
+              results: l2SubResults
             };
           }
         });
@@ -241,7 +243,8 @@ class CompareDisplay extends React.Component {
       leftImage,
       leftImageDesc,
       rightImage,
-      rightImageDesc
+      rightImageDesc,
+      results
     });
   }
 
