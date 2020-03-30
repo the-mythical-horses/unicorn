@@ -135,20 +135,21 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="row">
-        <form onSubmit={this.handleSubmit} className="col s12">
+        <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="input-field">
+            <div id="input-container">
               {Object.keys(this.state.form).map(key => (
-                <div key={key}>
+                <div key={key} className="input-fields">
                   <input
                     onChange={this.handleChange}
                     type="text"
                     name={key}
+                    id="input"
                     value={this.state.form[key] || ''}
                     autoComplete="off"
                   ></input>
 
-                  <label htmlFor="key">
+                  <label htmlFor="key" id="profile-labels">
                     {key.split('_')[1].replace(/([A-Z])/g, ' $1')}
                   </label>
 
@@ -185,10 +186,22 @@ class Profile extends React.Component {
 
           <button type="submit">Save Profile</button>
         </form>
-        <form onSubmit={this.fileSubmit}>
-          <input type="file" name="avatar" onChange={this.fileChange} />
-          <button type="submit">Upload Avatar</button>
-        </form>
+        <div className="row">
+          <div className="col s12 m4 offset-m4">
+            <div className="card">
+              <div className="card-action">
+                <h3>Avatar</h3>
+              </div>
+
+              <div className="card-content">
+                <form onSubmit={this.fileSubmit}>
+                  <input type="file" name="avatar" onChange={this.fileChange} />
+                  <button type="submit">Upload Avatar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -26,7 +26,7 @@ export class UserHome extends React.Component {
       <div id="home">
         <div>
           <p className="intro-header">
-            A way to find the connections between <i id="anything">anything</i>.
+            A way to find connections between <i id="anything">anything</i>.
           </p>
         </div>
         {/* <h3>Welcome, {email}</h3> */}
