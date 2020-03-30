@@ -5,19 +5,20 @@
 2. general
 3. nav bar
 4. footer
-5. home page
+5. intro page
 6. featured page
-7. login/signup page
-8. compare page
-9. profile page
+7. profile page
+8. compare input
+9. compare display
+10. login/signup page
 */
 
 body {
   font-family: sans-serif;
   position: relative;
-  /* background-color: rgb(248, 242, 242); */
 }
 
+/* **************************************** general */
 :root {
   --color1: rgb(42, 44, 68);
   --color2: rgb(10, 5, 63);
@@ -25,175 +26,41 @@ body {
   --colorLeft: darkgreen;
   --colorRight: brown;
 }
-
 a {
   text-decoration: none;
 }
-
 label {
   display: block;
 }
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-#home {
-  display: flex;
-  flex-direction: column;
-}
-
-#featured {
-  display: flex;
-  flex-direction: column;
-}
-#section1 {
-  display: flex;
-  flex-direction: row;
-  width: 1390px;
-  height: 150px;
-  margin: 5px;
-  margin-top: 15px;
-  margin-left: 20px;
-}
-#welcome {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  padding: 10px;
-  background-color: whitesmoke;
-  height: 150px;
-  width: 1400px;
-  border: 1px solid gray;
-}
-#welcome-text1 {
-  width: 300px;
-  text-align: center;
-}
-#welcome-text2 {
-  width: 450px;
-  text-align: center;
-}
-#did-you-know {
-  margin-left: 20px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(252, 229, 229);
-  width: 1390px;
-  height: 300px;
-  border: 1px solid gray;
-}
-#did-you-know-header {
-  background-color: rgb(247, 169, 159);
-  border: 1px solid rgb(112, 30, 30);
-  padding-left: 6px;
-  font-weight: bolder;
-}
-#section2 {
-  margin-left: 20px;
-}
-#featComp {
-  margin-top: 5px;
-  padding: 10px;
-  background-color: rgb(248, 255, 244);
-  width: 1390px;
-  border: 1px solid gray;
-}
-#featComp-header {
-  background-color: rgb(198, 223, 183);
-  border: 1px solid rgb(129, 180, 150);
-  padding-left: 6px;
-  font-weight: bolder;
-}
-
 .brand-logo {
   margin: 10px;
   font-family: 'Lobster', cursive;
 }
-
 form div {
   margin: 1em;
   display: inline-block;
 }
-
 button {
   margin-left: 10px;
 }
-
 .material-icons {
   margin: 10px;
 }
-
-.intro-header {
-  text-align: center;
-  font-family: 'Maven Pro', sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-
-  animation-fill-mode: forwards;
+#anything {
+  text-decoration: underline var(--color3);
+}
+.waves-effect {
+  margin-bottom: 20px;
+}
+.gh-button {
+  margin: 10px;
 }
 
-.profile-header {
-  text-align: center;
-  font-family: 'Maven Pro', sans-serif;
+/* **************************************** nav bar */
+nav a {
+  display: inline-block;
+  margin: 1em;
 }
-
-.profile-p1 {
-  font-size: 30px;
-}
-
-.profile-p2 {
-  font-size: 20px;
-}
-
-.profile-input {
-  /* display: flex;
-  flex-direction: column; */
-}
-
-.input-fields {
-  width: 200px;
-  margin: 50px;
-  text-align: center;
-}
-
-#input {
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: white;
-  padding-left: 8px;
-}
-
-#profile-labels {
-  color: black;
-}
-
-#input-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: whitesmoke;
-  margin-left: 150px;
-  margin-right: 150px;
-  border-radius: 10px;
-  padding: 20px;
-  filter: drop-shadow(0px 0px 2px);
-}
-
-.avatar {
-  margin-bottom: 30px;
-}
-
-.intro-content {
-  text-align: center;
-  font-family: 'Maven Pro', sans-serif;
-  font-size: 20px;
-  animation-fill-mode: forwards;
-}
-
 #ourNav {
   background: whitesmoke;
   border-bottom: 1px solid black;
@@ -208,19 +75,20 @@ button {
   margin-left: 10px;
   font-family: 'Maven Pro', sans-serif;
 }
-
 .link:hover {
-  color: rgb(209, 48, 214);
+  color: rgb(44, 25, 216);
+}
+#unicorn {
+  color: rgb(94, 142, 247);
+  margin-left: 15px;
+  margin-bottom: 7px;
+  font-family: 'Maven Pro', sans-serif;
 }
 
-#anything {
-  text-decoration: underline var(--color3);
-}
-
+/* *********************************************************** footer */
 .footer-container {
   position: relative;
 }
-
 .footer {
   position: absolute;
   display: flex;
@@ -234,22 +102,36 @@ button {
   background-color: var(--color1);
   margin-top: 50px;
 }
+#git-logo {
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+/* *********************************************************** intro page */
+.intro-header {
+  text-align: center;
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  animation-fill-mode: forwards;
+}
+.intro-content {
+  text-align: center;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 20px;
+  animation-fill-mode: forwards;
+}
 .card-image {
   object-fit: contain;
   opacity: 0.9;
 }
-
 .card {
   height: 550px;
   width: 300px;
 }
-
 .cards {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
-  /* text-align: center; */
-  /* margin-top: 80px; */
   margin-top: 75px;
   margin-left: 235px;
   max-width: 850px;
@@ -262,21 +144,13 @@ button {
 #try-it-btn:hover {
   background-color: rgb(46, 6, 56);
 }
-
-#ci1 {
-}
 #ci1t {
   color: black;
   font-weight: bold;
 }
-
-#ci2 {
-}
 #ci2t {
   color: white;
   font-weight: bold;
-}
-#ci3 {
 }
 #ci3t {
   color: black;
@@ -286,171 +160,104 @@ button {
   text-align: center;
 }
 
-.waves-effect {
-  margin-bottom: 20px;
-}
-
-.gh-button {
-  margin: 10px;
-}
-
-#elisCards {
-  display: flex;
-  flex-direction: row;
-}
-
-.elisCard {
+/* ********************************************************** home page */
+#featured {
   display: flex;
   flex-direction: column;
-  border: 1px black solid;
-  padding: 15px;
-  margin: 20px;
-  background-color: #f8f9fa;
 }
-#leftCard {
-  border-width: 1px;
-  border-style: groove;
-  border-radius: 2px;
-  border-color: var(--colorLeft);
+.featured-divs {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+  padding: 10px;
+  width: 1400px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px);
 }
-#rightCard {
-  border-width: 1px;
-  border-style: groove;
-  border-radius: 2px;
-  border-color: var(--colorRight);
-}
-.smallCards {
-  width: 24%;
-}
-.smallTitleLeft {
-  text-align: center;
-  font-size: 125%;
-  font-weight: bold;
-  background: var(--colorLeft);
-  color: white;
-}
-.smallTitleRight {
-  text-align: center;
-  font-size: 125%;
-  font-weight: bold;
-  background: var(--colorRight);
-  color: white;
-}
-
-.smallSubTitle {
-  margin: 5px;
-  text-align: center;
-}
-.compare-img {
-  margin-left: 10px;
-  height: 350px;
-}
-.smallPictureDescription {
-  text-align: center;
-}
-.smallInfoTitleLeft {
-  text-align: center;
-  font-weight: bold;
-  background: var(--colorLeft);
-  color: white;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-.smallInfoTitleRight {
-  text-align: center;
-  font-weight: bold;
-  background: var(--colorRight);
-  color: white;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.leftLabel {
-  color: var(--colorLeft);
-}
-
-.rightLabel {
-  color: var(--colorRight);
-}
-
-.twoProp {
-  font-weight: bold;
-}
-
-.smallInfoInfo {
+#welcome {
   display: flex;
   flex-direction: row;
-  margin-top: 7px;
-}
-.theSmalls {
-  display: flex;
-  flex-direction: row;
-  margin-top: 7px;
   justify-content: space-between;
-}
-.smallInfoH {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 80px;
-  justify-content: flex-start;
-  font-weight: bold;
-}
-.smallInfoD {
-  display: flex;
-  flex-direction: row;
-  text-align: end;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  max-width: 80px;
-}
-.bigCards {
-  width: 48%;
-  border-radius: 2px;
-}
-.bigTitle {
-  text-align: center;
-  font-size: 125%;
-  font-weight: bold;
-  background: var(--color2);
-  color: white;
-}
-
-.levelHeader {
-  display: flex;
-  flex-direction: row;
-  font-weight: bold;
-  justify-content: flex-end;
-  /* background: var(--color3); */
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--color3);
-  color: var(--color2);
-  margin-top: 5px;
-}
-.levelHeader-text {
-  display: flex;
-  flex-direction: row;
-  margin-right: 260px;
-}
-.levelHeader-btn {
-  text-align: center;
-  width: 21px;
-  height: 21px;
-  margin: 2px;
-  background-color: rgb(18, 18, 128);
-  color: white;
-  border-radius: 1px;
-}
-.level-info {
-  display: flex;
-  max-width: 500px;
-  position: absolute;
+  background-color: whitesmoke;
+  height: 150px;
   margin-top: 20px;
-  border: 1px solid rgb(63, 61, 61);
-  padding: 2px;
-  background-color: aliceblue;
+}
+#welcome-text1 {
+  width: 300px;
+  text-align: center;
+}
+#welcome-text2 {
+  width: 450px;
+  text-align: center;
+}
+#did-you-know {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(252, 229, 229);
+  height: 300px;
+  filter: drop-shadow(0px 0px 1px rgb(238, 13, 13));
+}
+#did-you-know-header {
+  background-color: rgb(247, 169, 159);
+  border: 1px solid rgb(112, 30, 30);
+  padding-left: 6px;
+  font-weight: bolder;
+}
+#featured-comparison {
+  background-color: rgb(248, 255, 244);
+  margin-bottom: 15px;
+  filter: drop-shadow(0px 0px 1px rgb(92, 224, 15));
+}
+#featComp-header {
+  background-color: rgb(198, 223, 183);
+  border: 1px solid rgb(129, 180, 150);
+  padding-left: 6px;
+  font-weight: bolder;
 }
 
+/* ********************************************************** profile page */
+.profile-header {
+  text-align: center;
+  font-family: 'Maven Pro', sans-serif;
+}
+.profile-p1 {
+  font-size: 30px;
+}
+.profile-p2 {
+  font-size: 20px;
+}
+.input-fields {
+  width: 200px;
+  margin: 50px;
+  text-align: center;
+}
+#input {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  padding-left: 8px;
+}
+#profile-labels {
+  color: black;
+}
+#input-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: whitesmoke;
+  margin-left: 150px;
+  margin-right: 150px;
+  border-radius: 10px;
+  padding: 20px;
+  filter: drop-shadow(0px 0px 2px);
+}
+.avatar {
+  margin-bottom: 30px;
+}
+
+/* ********************************************************** compare input */
 #compareForm {
   display: flex;
   flex-direction: row;
@@ -461,13 +268,6 @@ button {
   margin-right: 150px;
   margin-left: 145px;
 }
-
-#unicorn {
-  color: var(--color3);
-  margin-left: 15px;
-  margin-bottom: 7px;
-  font-family: 'Maven Pro', sans-serif;
-}
 #compare-btn {
   background-color: var(--color2);
   height: 40px;
@@ -475,16 +275,13 @@ button {
 #compare-btn:hover {
   background-color: blue;
 }
-
 #input1 {
-  /* border: 1px solid var(--colorLeft); */
   border: 1px solid var(--colorLeft);
   padding: 3px;
   height: 35px;
   width: 250px;
   border-radius: 3px;
   background-color: rgb(204, 231, 204);
-  /* filter: drop-shadow(0px 1px 1px black); */
 }
 #input2 {
   border: 1px solid var(--colorRight);
@@ -493,7 +290,6 @@ button {
   width: 250px;
   border-radius: 3px;
   background-color: rgb(240, 206, 206);
-  /* filter: drop-shadow(0px 1px 1px black); */
 }
 #insert-btn {
   position: absolute;
@@ -522,9 +318,6 @@ button {
 .empty-div {
   position: absolute;
 }
-#label1 {
-}
-
 .in-drop {
   display: flex;
   flex-direction: column;
@@ -582,27 +375,178 @@ button {
   padding-left: 1px;
 }
 
+/* ********************************************************** compare display */
+#elisCards {
+  display: flex;
+  flex-direction: row;
+}
+.elisCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px black solid;
+  padding: 15px;
+  margin: 20px;
+  background-color: #f8f9fa;
+}
+#leftCard {
+  border-width: 1px;
+  border-style: groove;
+  border-radius: 2px;
+  border-color: var(--colorLeft);
+}
+#rightCard {
+  border-width: 1px;
+  border-style: groove;
+  border-radius: 2px;
+  border-color: var(--colorRight);
+}
+.smallCards {
+  width: 24%;
+}
+.smallTitleLeft {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background: var(--colorLeft);
+  color: white;
+}
+.smallTitleRight {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background: var(--colorRight);
+  color: white;
+}
+.smallSubTitle {
+  margin: 5px;
+  text-align: center;
+}
+.compare-img {
+  margin-left: 10px;
+  height: 350px;
+}
+.smallPictureDescription {
+  text-align: center;
+}
+.smallInfoTitleLeft {
+  text-align: center;
+  font-weight: bold;
+  background: var(--colorLeft);
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.smallInfoTitleRight {
+  text-align: center;
+  font-weight: bold;
+  background: var(--colorRight);
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.leftLabel {
+  color: var(--colorLeft);
+}
+.rightLabel {
+  color: var(--colorRight);
+}
+.twoProp {
+  font-weight: bold;
+}
+.smallInfoInfo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+}
+.theSmalls {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+  justify-content: space-between;
+}
+.smallInfoH {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80px;
+  justify-content: flex-start;
+  font-weight: bold;
+}
+.smallInfoD {
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  max-width: 80px;
+}
+.bigCards {
+  width: 48%;
+  border-radius: 2px;
+}
+.bigTitle {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background: var(--color2);
+  color: white;
+}
+.levelHeader {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  justify-content: flex-end;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(3, 3, 48);
+  color: var(--color2);
+  margin-top: 5px;
+}
+.levelHeader-text {
+  display: flex;
+  flex-direction: row;
+  margin-right: 260px;
+}
+.levelHeader-btn {
+  text-align: center;
+  width: 21px;
+  height: 21px;
+  margin: 2px;
+  background-color: rgb(18, 18, 128);
+  color: white;
+  border-radius: 1px;
+}
+.level-info {
+  display: flex;
+  max-width: 500px;
+  position: absolute;
+  margin-top: 20px;
+  border: 1px solid rgb(63, 61, 61);
+  padding: 2px;
+  background-color: aliceblue;
+}
+
+/* ********************************************************** signup/login */
 #signup-form-main {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: #e6e0e4;
+  background-color: rgb(248, 229, 247);
   top: 200px;
   left: 500px;
-  border: 3px solid var(--color3);
+  border: 2px solid var(--color3);
   margin: 30px;
   margin-top: 20px;
   margin-bottom: 60px;
-  /* background-color: grey; */
-  padding: 20px;
-  backdrop-filter: blur(2px);
+  padding: 30px;
+  padding-bottom: 15px;
+  backdrop-filter: blur(3px);
+  filter: drop-shadow(0px 0px 1px);
 }
 .login-header {
   font-family: 'Maven Pro', sans-serif;
   text-align: center;
   text-decoration: underline var(--color3);
 }
-
 #signup-form-sub {
   display: flex;
   flex-direction: column;
@@ -612,10 +556,8 @@ button {
   align-items: center;
 }
 #signup-img {
-  width: 1100px;
+  width: 1400px;
   height: 950px;
-  margin-top: 75px;
-  margin-left: 100px;
   opacity: 0.3;
 }
 #signup-google {
@@ -650,7 +592,7 @@ button {
   font-size: 125%;
   font-family: sans-serif;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 #email {
@@ -665,32 +607,15 @@ button {
 #password-input {
   border-color: var(--color3);
 }
-#git-logo {
-  margin-top: 8px;
-  margin-right: 10px;
-}
-
 .backgroundImage {
-  /* width: 100%;
-  height: 100vh; */
   z-index: -1;
 }
-
 .login-notmember {
   display: flex;
   flex-direction: row;
   margin: 20px;
+  justify-content: center;
 }
-
 .notmember-p {
   font-family: 'Maven Pro', sans-serif;
-  margin-right: 10px;
-}
-
-#notmember-btn {
-  background-color: var(--color3);
-}
-
-.notmember-signup-link {
-  color: white;
 }

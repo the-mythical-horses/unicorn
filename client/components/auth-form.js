@@ -61,12 +61,10 @@ const AuthForm = props => {
           <div id="google-text">{displayName} with Google</div>
         </a>
         <div className="login-notmember">
-          <p className="notmember-p">Not a member?</p>
-          <button className="btn" id="notmember-btn" type="submit">
-            <Link to="/signup" className="notmember-signup-link">
-              Sign Up!
-            </Link>
-          </button>
+          <p className="notmember-p">
+            Not a member?
+            <Link to="/signup">Sign Up!</Link>
+          </p>
         </div>
       </div>
     </div>
