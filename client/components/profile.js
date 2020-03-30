@@ -135,7 +135,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="row">
-        <form onSubmit={this.handleSubmit} className="col s12">
+        <form onSubmit={this.handleSubmit} className="col s6 offset-12">
           <div className="row">
             <div className="input-field">
               {Object.keys(this.state.form).map(key => (
@@ -185,10 +185,22 @@ class Profile extends React.Component {
 
           <button type="submit">Save Profile</button>
         </form>
-        <form onSubmit={this.fileSubmit}>
-          <input type="file" name="avatar" onChange={this.fileChange} />
-          <button type="submit">Upload Avatar</button>
-        </form>
+        <div className="row">
+          <div className="col s12 m4 offset-m4">
+            <div className="card">
+              <div className="card-action">
+                <h3>Avatar</h3>
+              </div>
+
+              <div className="card-content">
+                <form onSubmit={this.fileSubmit}>
+                  <input type="file" name="avatar" onChange={this.fileChange} />
+                  <button type="submit">Upload Avatar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
