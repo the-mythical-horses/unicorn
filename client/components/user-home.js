@@ -40,36 +40,36 @@ export class UserHome extends React.Component {
                 welcomed)
               </h6>
             </div>
-            <div id="welcome-text2">
-              Im not sure what to put here, maybe an extended description?
-            </div>
-          </div>
-
-          <div id="featComp">
-            <div id="featComp-header">
-              <h6>
-                <b>Today's featured comparison</b>
-                <CompareDisplay
-                  submitted={{
-                    qname1: 'SpongeBob SquarePants',
-                    qname2: 'Sandy Cheeks',
-                    leftQSearch: 'Q935079',
-                    rightQSearch: 'Q1189756'
-                  }}
-                />
-              </h6>
-            </div>
-            <div id="featComp-content"></div>
           </div>
         </div>
 
-        <div id="section2">
-          <div id="section2-header">
+        <div id="did-you-know">
+          <div id="did-you-know-header">
             <h6>
               <b>Did you know...</b>
             </h6>
           </div>
           <div id="section2-content"></div>
+        </div>
+
+        <div id="section2">
+          <div id="featComp">
+            <div id="featComp-header">
+              <h6>
+                <b>Today's featured comparison</b>
+              </h6>
+            </div>
+            <div id="featComp-content">
+              <CompareDisplay
+                submitted={{
+                  qname1: 'SpongeBob SquarePants',
+                  qname2: 'Sandy Cheeks',
+                  leftQSearch: 'Q935079',
+                  rightQSearch: 'Q1189756'
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
