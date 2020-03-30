@@ -135,20 +135,21 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="row">
-        <form onSubmit={this.handleSubmit} className="col s6 offset-12">
+        <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="input-field">
+            <div id="input-container">
               {Object.keys(this.state.form).map(key => (
-                <div key={key}>
+                <div key={key} className="input-fields">
                   <input
                     onChange={this.handleChange}
                     type="text"
                     name={key}
+                    id="input"
                     value={this.state.form[key] || ''}
                     autoComplete="off"
                   ></input>
 
-                  <label htmlFor="key">
+                  <label htmlFor="key" id="profile-labels">
                     {key.split('_')[1].replace(/([A-Z])/g, ' $1')}
                   </label>
 
