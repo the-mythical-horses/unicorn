@@ -8,6 +8,7 @@ import wdk from 'wikidata-sdk';
 import sparqljs from 'sparqljs';
 import axios from 'axios';
 import M from 'materialize-css';
+import {CompareDisplay} from './index.js';
 
 /**
  * COMPONENT
@@ -48,6 +49,14 @@ export class UserHome extends React.Component {
             <div id="featComp-header">
               <h6>
                 <b>Today's featured comparison</b>
+                <CompareDisplay
+                  submitted={{
+                    qname1: 'SpongeBob SquarePants',
+                    qname2: 'Sandy Cheeks',
+                    leftQSearch: 'Q935079',
+                    rightQSearch: 'Q1189756'
+                  }}
+                />
               </h6>
             </div>
             <div id="featComp-content"></div>

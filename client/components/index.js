@@ -10,3 +10,4 @@ export {default as Profile} from './profile';
 export {default as Search} from './search';
 export {default as Compare} from './compare';
 export {default as Home} from './home';
+export {default as CompareDisplay} from './compare-display';
