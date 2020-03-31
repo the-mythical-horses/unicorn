@@ -23,7 +23,7 @@ const AuthForm = props => {
       />
       <div id="signup-form-main">
         <div>
-          <h4 className="login-header">Login</h4>
+          <h4 className="login-header">{displayName}</h4>
         </div>
         <form onSubmit={handleSubmit} name={name} id="signup-form-sub">
           <div className="input-field col s6">

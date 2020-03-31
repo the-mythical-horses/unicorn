@@ -35,7 +35,7 @@ export class UserHome extends React.Component {
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci1">
-                  <img src="./undraw_online_information_4ui6.svg" />
+                  <img src="./undraw_online_information_4ui6 (1).svg" />
                   <span className="card-title" id="ci1t">
                     Research
                   </span>
@@ -52,7 +52,7 @@ export class UserHome extends React.Component {
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci2">
-                  <img src="./undraw_lost_online_wqob (2).svg" />
+                  <img src="./undraw_lost_online_wqob (3).svg" />
                   <span className="card-title" id="ci2t">
                     Awareness
                   </span>
@@ -67,7 +67,7 @@ export class UserHome extends React.Component {
             <div className="col s12 m7">
               <div className="card medium">
                 <div className="card-image" id="ci3">
-                  <img src="./undraw_sync_files_xb3r (2).svg" />
+                  <img src="./undraw_sync_files_xb3r (3).svg" />
                   <span className="card-title" id="ci3t">
                     Data Extraction
                   </span>

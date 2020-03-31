@@ -22,7 +22,7 @@ body {
 :root {
   --color1: rgb(42, 44, 68);
   --color2: rgb(10, 5, 63);
-  --color3: rgb(187, 108, 176);
+  --color3: #6e8ef6;
   --colorLeft: darkgreen;
   --colorRight: brown;
 }
@@ -252,7 +252,7 @@ nav a {
   margin-right: 150px;
   border-radius: 10px;
   padding: 20px;
-  filter: drop-shadow(0px 0px 2px);
+  filter: drop-shadow(0px 0px 2px var(--color3));
 }
 .avatar {
   margin-bottom: 30px;
@@ -267,7 +267,7 @@ nav a {
   margin-right: 150px;
   border-radius: 10px;
   padding: 20px;
-  filter: drop-shadow(0px 0px 2px);
+  filter: drop-shadow(0px 0px 2px var(--color3));
 }
 #pro-container {
   display: flex;
@@ -573,7 +573,7 @@ nav a {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: rgb(248, 229, 247);
+  background-color: whitesmoke;
   top: 200px;
   left: 500px;
   border: 2px solid var(--color3);
