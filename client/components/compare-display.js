@@ -5,6 +5,7 @@ import React from 'react';
 import wdk from 'wikidata-sdk';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {Comments} from './index';
 
 class CompareDisplay extends React.Component {
   constructor(props) {
@@ -354,178 +355,189 @@ class CompareDisplay extends React.Component {
     let rightImageDesc = this.state.rightImageDesc;
 
     return (
-      <div id="elisCards">
-        <div className="elisCard smallCards" id="leftCard">
-          <div className="smallTitleLeft">
-            {left.labels ? left.labels.en : ''}
-          </div>
-          <div className="smallSubTitle">
-            {left.descriptions ? left.descriptions.en : ''}
-          </div>
-          <img className="compare-img" src={leftImage} />
-          <div
-            className="smallPictureDescription"
-            dangerouslySetInnerHTML={{__html: leftImageDesc}}
-          ></div>
-          <div className="smallInfo">
-            <div className="smallInfoTitleLeft">Information</div>
-            <div className="smallInfoMain">
-              {left.claims &&
-                Object.keys(left.claims)
-                  .slice(0, 5)
-                  .map(c => (
-                    <div className="theSmalls" key={c}>
-                      <div className="smallInfoH">
-                        {this.getLabel(c, names, complexNames)}
+      <div>
+        <div id="elisCards">
+          <div className="elisCard smallCards" id="leftCard">
+            <div className="smallTitleLeft">
+              {left.labels ? left.labels.en : ''}
+            </div>
+            <div className="smallSubTitle">
+              {left.descriptions ? left.descriptions.en : ''}
+            </div>
+            <img className="compare-img" src={leftImage} />
+            <div
+              className="smallPictureDescription"
+              dangerouslySetInnerHTML={{__html: leftImageDesc}}
+            ></div>
+            <div className="smallInfo">
+              <div className="smallInfoTitleLeft">Information</div>
+              <div className="smallInfoMain">
+                {left.claims &&
+                  Object.keys(left.claims)
+                    .slice(0, 5)
+                    .map(c => (
+                      <div className="theSmalls" key={c}>
+                        <div className="smallInfoH">
+                          {this.getLabel(c, names, complexNames)}
+                        </div>
+                        <div className="smallInfoD">
+                          {left.claims[c]
+                            .map(v =>
+                              this.getLabel(v.value, names, complexNames)
+                            )
+                            .join(', ')}
+                        </div>
                       </div>
-                      <div className="smallInfoD">
-                        {left.claims[c]
-                          .map(v => this.getLabel(v.value, names, complexNames))
-                          .join(', ')}
+                    ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="elisCard bigCards">
+            <div className="bigTitle">How They Compare:</div>
+            <div className="levelHeader">
+              <div className="levelHeader-text">Level 1</div>
+              <button
+                className="levelHeader-btn"
+                id="level-1-info-btn"
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    levelOneInfo: !this.state.levelOneInfo
+                  });
+                }}
+              >
+                ?
+              </button>
+              {this.state.levelOneInfo ? (
+                <div className="level-info">
+                  here goes a message explaining the definition oflevel 1
+                  results
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <ol>
+              {Object.keys(results).map(p => (
+                <li key={p}>
+                  <span className="twoProp">{`${this.getLabel(
+                    p,
+                    names,
+                    complexNames
+                  )}: `}</span>
+                  {`${results[p]
+                    .map(q => this.getLabel(q, names, complexNames))
+                    .join(', ')}`}
+                </li>
+              ))}
+            </ol>
+            <div className="levelHeader">
+              <div className="levelHeader-text">Level 2</div>
+              <button
+                className="levelHeader-btn"
+                id="level-2-info-btn"
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    levelTwoInfo: !this.state.levelTwoInfo
+                  });
+                }}
+              >
+                ?
+              </button>
+              {this.state.levelTwoInfo ? (
+                <div className="level-info">
+                  here goes a message explaining the definition of level 2
+                  results
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <ol>
+              {Object.keys(l2results).map(p => (
+                <li key={p}>
+                  <span className="twoProp">
+                    <span>
+                      {`${this.getLabel(
+                        l2results[p].key[0],
+                        names,
+                        complexNames
+                      )} (`}
+                    </span>
+                    <span className="leftLabel">
+                      {`${this.getLabel(
+                        l2results[p].key[1],
+                        names,
+                        complexNames
+                      )}`}
+                    </span>
+                    {`, `}
+                    <span className="rightLabel">
+                      {`${this.getLabel(
+                        l2results[p].key[2],
+                        names,
+                        complexNames
+                      )}`}
+                    </span>
+                    {`): `}
+                  </span>
+                  <ol>
+                    {Object.keys(l2results[p].results).map(p2 => (
+                      <li key={p2}>
+                        {`${this.getLabel(
+                          p2,
+                          names,
+                          complexNames
+                        )}: ${l2results[p].results[p2]
+                          .map(q => this.getLabel(q, names, complexNames))
+                          .join(', ')}`}
+                      </li>
+                    ))}
+                  </ol>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="elisCard smallCards" id="rightCard">
+            <div className="smallTitleRight">
+              {right.labels ? right.labels.en : ''}
+            </div>
+            <div className="smallSubTitle">
+              {right.descriptions ? right.descriptions.en : ''}
+            </div>
+            <img className="compare-img" src={rightImage} />
+            <div
+              className="smallPictureDescription"
+              dangerouslySetInnerHTML={{__html: rightImageDesc}}
+            ></div>
+            <div className="smallInfo">
+              <div className="smallInfoTitleRight">Information</div>
+              <div className="smallInfoMain">
+                {right.claims &&
+                  Object.keys(right.claims)
+                    .slice(0, 5)
+                    .map(c => (
+                      <div className="theSmalls" key={c}>
+                        <div className="smallInfoH">
+                          {this.getLabel(c, names, complexNames)}
+                        </div>
+                        <div className="smallInfoD">
+                          {right.claims[c]
+                            .map(v =>
+                              this.getLabel(v.value, names, complexNames)
+                            )
+                            .join(', ')}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="elisCard bigCards">
-          <div className="bigTitle">How They Compare:</div>
-          <div className="levelHeader">
-            <div className="levelHeader-text">Level 1</div>
-            <button
-              className="levelHeader-btn"
-              id="level-1-info-btn"
-              type="button"
-              onClick={() => {
-                this.setState({
-                  levelOneInfo: !this.state.levelOneInfo
-                });
-              }}
-            >
-              ?
-            </button>
-            {this.state.levelOneInfo ? (
-              <div className="level-info">
-                here goes a message explaining the definition oflevel 1 results
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
-          <ol>
-            {Object.keys(results).map(p => (
-              <li key={p}>
-                <span className="twoProp">{`${this.getLabel(
-                  p,
-                  names,
-                  complexNames
-                )}: `}</span>
-                {`${results[p]
-                  .map(q => this.getLabel(q, names, complexNames))
-                  .join(', ')}`}
-              </li>
-            ))}
-          </ol>
-          <div className="levelHeader">
-            <div className="levelHeader-text">Level 2</div>
-            <button
-              className="levelHeader-btn"
-              id="level-2-info-btn"
-              type="button"
-              onClick={() => {
-                this.setState({
-                  levelTwoInfo: !this.state.levelTwoInfo
-                });
-              }}
-            >
-              ?
-            </button>
-            {this.state.levelTwoInfo ? (
-              <div className="level-info">
-                here goes a message explaining the definition of level 2 results
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
-          <ol>
-            {Object.keys(l2results).map(p => (
-              <li key={p}>
-                <span className="twoProp">
-                  <span>
-                    {`${this.getLabel(
-                      l2results[p].key[0],
-                      names,
-                      complexNames
-                    )} (`}
-                  </span>
-                  <span className="leftLabel">
-                    {`${this.getLabel(
-                      l2results[p].key[1],
-                      names,
-                      complexNames
-                    )}`}
-                  </span>
-                  {`, `}
-                  <span className="rightLabel">
-                    {`${this.getLabel(
-                      l2results[p].key[2],
-                      names,
-                      complexNames
-                    )}`}
-                  </span>
-                  {`): `}
-                </span>
-                <ol>
-                  {Object.keys(l2results[p].results).map(p2 => (
-                    <li key={p2}>
-                      {`${this.getLabel(p2, names, complexNames)}: ${l2results[
-                        p
-                      ].results[p2]
-                        .map(q => this.getLabel(q, names, complexNames))
-                        .join(', ')}`}
-                    </li>
-                  ))}
-                </ol>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="elisCard smallCards" id="rightCard">
-          <div className="smallTitleRight">
-            {right.labels ? right.labels.en : ''}
-          </div>
-          <div className="smallSubTitle">
-            {right.descriptions ? right.descriptions.en : ''}
-          </div>
-          <img className="compare-img" src={rightImage} />
-          <div
-            className="smallPictureDescription"
-            dangerouslySetInnerHTML={{__html: rightImageDesc}}
-          ></div>
-          <div className="smallInfo">
-            <div className="smallInfoTitleRight">Information</div>
-            <div className="smallInfoMain">
-              {right.claims &&
-                Object.keys(right.claims)
-                  .slice(0, 5)
-                  .map(c => (
-                    <div className="theSmalls" key={c}>
-                      <div className="smallInfoH">
-                        {this.getLabel(c, names, complexNames)}
-                      </div>
-                      <div className="smallInfoD">
-                        {right.claims[c]
-                          .map(v => this.getLabel(v.value, names, complexNames))
-                          .join(', ')}
-                      </div>
-                    </div>
-                  ))}
-            </div>
-          </div>
-        </div>
+        <Comments q1={this.state.left.id} q2={this.state.right.id} />
       </div>
     );
   }
