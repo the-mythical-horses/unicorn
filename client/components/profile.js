@@ -133,11 +133,17 @@ class Profile extends React.Component {
       <div className="row">
         <div id="propic-container">
           <div id="pro-message">
-            <h3>My Profile</h3>
+            <h4>
+              Here you can create a profile to compare yourself with anything.
+            </h4>
+            <h4>Feel free to enter as much or as little info as you like.</h4>
+            <h4>
+              The more info provided, the more intersting the comparisons!
+            </h4>
           </div>
 
           <div id="pro-container">
-            <img id="propic-pic" src={this.props.user.avatar} />
+            <img id="propic-pic" src={this.props.avatar} />
             <form id="propic-form" onSubmit={this.fileSubmit}>
               <input type="file" name="avatar" onChange={this.fileChange} />
               <button type="submit" id="propic-btn">
@@ -196,7 +202,9 @@ class Profile extends React.Component {
             </div>
           </div>
 
-          <button type="submit">Save Profile</button>
+          <button type="submit" id="save-profile-btn">
+            Save Profile
+          </button>
         </form>
       </div>
     );
@@ -212,7 +220,8 @@ const mapDispatchToProps = dispatch => ({
 const mapState = state => {
   return {
     profile: state.profile,
-    user: state.user
+    user: state.user,
+    avatar: state.user.avatar
   };
 };
 export default connect(mapState, mapDispatchToProps)(Profile);

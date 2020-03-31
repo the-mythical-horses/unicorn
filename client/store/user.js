@@ -17,7 +17,7 @@ const defaultUser = {};
  */
 const getUser = user => ({type: GET_USER, user});
 const removeUser = () => ({type: REMOVE_USER});
-const updatedAvatar = () => ({type: UPDATED_AVATAR, url});
+const updatedAvatar = url => ({type: UPDATED_AVATAR, url});
 
 /**
  * THUNK CREATORS
@@ -66,7 +66,7 @@ export const updateAvatar = file => async dispatch => {
         'content-type': 'multipart/form-data'
       }
     });
-    dispatch(updatedAvatar(picUrl));
+    dispatch(updatedAvatar(picUrl.data));
   } catch (err) {
     console.error(err);
   }
