@@ -28,7 +28,12 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   avatar: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://i.ya-webdesign.com/images/default-image-png-1.png' ||
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSja2JU4PpfqjoRch7apTWA034JKkPygpK0SxDnPWKaVV7nfbJT&usqp=CAU' ||
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS5JMbxq6i5s51LTvg6c8WCqNsmZWzntJyHqErR8-OV2OK3JbB5&usqp=CAU' ||
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSxc7PWMDF33ay5i3rU3KS8wU3cxOAeiGi24u2-3igTIehJvJ73&usqp=CAU'
   }
 });
 
