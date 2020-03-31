@@ -106,7 +106,7 @@ export class Compare extends React.Component {
 
   render() {
     return (
-      <div>
+      <div onClick={() => this.setState({leftSearch: [], rightSearch: []})}>
         <button
           type="button"
           id="insert-btn"
