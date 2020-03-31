@@ -51,7 +51,7 @@ class Profile extends React.Component {
     let rawProfile = await axios.get('/api/profiles/raw');
     let profile = rawProfile.data;
     let ourIds = [];
-    console.log('profile1', profile);
+
     // eslint-disable-next-line guard-for-in
     for (let key in profile) {
       if (
@@ -70,8 +70,6 @@ class Profile extends React.Component {
       }
     }
 
-    console.log('profile', profile);
-
     let labels = await axios.get(
       wdk.getEntities({
         ids: ourIds,
@@ -85,7 +83,10 @@ class Profile extends React.Component {
       let q1 = this.state.form[key];
       if (q1) {
         this.setState({
-          form: {...this.state.form, [key]: entities[q1].labels.en}
+          form: {
+            ...this.state.form,
+            [key]: entities[q1] ? entities[q1].labels.en : q1
+          }
         });
       }
     });
