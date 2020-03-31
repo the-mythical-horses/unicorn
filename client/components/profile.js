@@ -2,11 +2,12 @@
 /* eslint-disable react/no-unused-state */
 /* eslint-disable camelcase */
 import React from 'react';
-import {addProfileThunk, getProfileByIdThunk} from '../store/profiles';
+import {addProfileThunk, getProfileByIdThunk, updateAvatar} from '../store';
 import {connect} from 'react-redux';
 import M from 'materialize-css';
 import axios from 'axios';
 import wdk from 'wikidata-sdk';
+import user from '../store/user';
 
 class Profile extends React.Component {
   constructor() {
@@ -28,13 +29,7 @@ class Profile extends React.Component {
 
   async fileSubmit(evt) {
     evt.preventDefault();
-    const formData = new FormData();
-    formData.append('avatar', this.state.file);
-    await axios.post('/api/users/upload', formData, {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    });
+    this.props.updateAvatar(this.state.file);
   }
 
   async fileChange(evt) {
@@ -51,7 +46,7 @@ class Profile extends React.Component {
     let rawProfile = await axios.get('/api/profiles/raw');
     let profile = rawProfile.data;
     let ourIds = [];
-    console.log('profile1', profile);
+
     // eslint-disable-next-line guard-for-in
     for (let key in profile) {
       if (
@@ -70,8 +65,6 @@ class Profile extends React.Component {
       }
     }
 
-    console.log('profile', profile);
-
     let labels = await axios.get(
       wdk.getEntities({
         ids: ourIds,
@@ -85,7 +78,10 @@ class Profile extends React.Component {
       let q1 = this.state.form[key];
       if (q1) {
         this.setState({
-          form: {...this.state.form, [key]: entities[q1].labels.en}
+          form: {
+            ...this.state.form,
+            [key]: entities[q1] ? entities[q1].labels.en : q1
+          }
         });
       }
     });
@@ -135,6 +131,22 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="row">
+        <div id="propic-container">
+          <div id="pro-message">
+            <h3>My Profile</h3>
+          </div>
+
+          <div id="pro-container">
+            <img id="propic-pic" src={this.props.user.avatar} />
+            <form id="propic-form" onSubmit={this.fileSubmit}>
+              <input type="file" name="avatar" onChange={this.fileChange} />
+              <button type="submit" id="propic-btn">
+                Upload Image
+              </button>
+            </form>
+          </div>
+        </div>
+
         <form onSubmit={this.handleSubmit}>
           <div className="row">
             <div id="input-container">
@@ -186,22 +198,6 @@ class Profile extends React.Component {
 
           <button type="submit">Save Profile</button>
         </form>
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-action">
-                <h3>Avatar</h3>
-              </div>
-
-              <div className="card-content">
-                <form onSubmit={this.fileSubmit}>
-                  <input type="file" name="avatar" onChange={this.fileChange} />
-                  <button type="submit">Upload Avatar</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
@@ -209,12 +205,14 @@ class Profile extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   addProfileThunk: profile => dispatch(addProfileThunk(profile)),
-  getProfileById: () => dispatch(getProfileByIdThunk())
+  getProfileById: () => dispatch(getProfileByIdThunk()),
+  updateAvatar: file => dispatch(updateAvatar(file))
 });
 
 const mapState = state => {
   return {
-    profile: state.profile
+    profile: state.profile,
+    user: state.user
   };
 };
 export default connect(mapState, mapDispatchToProps)(Profile);

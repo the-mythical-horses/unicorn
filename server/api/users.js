@@ -23,5 +23,5 @@ router.post('/upload', upload.single('avatar'), async (req, res, next) => {
   const user = await User.findByPk(req.user.id);
   user.avatar = '/uploads/' + req.file.filename;
   await user.save();
-  res.sendStatus(200);
+  res.json(user.avatar);
 });
