@@ -153,7 +153,7 @@ class Profile extends React.Component {
                     {key.split('_')[1].replace(/([A-Z])/g, ' $1')}
                   </label>
 
-                  <div className="drop-containerX">
+                  <div className="drop-container">
                     <ul className="drop-list">
                       {this.state.searches[key] &&
                         this.state.searches[key].map(s => (
