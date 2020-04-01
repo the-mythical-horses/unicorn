@@ -31,17 +31,7 @@ class Comments extends React.Component {
   render() {
     if (this.props.q1 && this.props.q2) {
       return (
-        <div>
-          <div>
-            {this.props.comments.map(comment => (
-              <p key={comment.id}>
-                <b>
-                  {comment.user.email} ({comment.date}):{' '}
-                </b>
-                {comment.comment}
-              </p>
-            ))}
-          </div>
+        <div id="comments-div">
           <div className="row">
             {this.props.user.id && (
               <form onSubmit={this.onSubmit} className="col s12">
@@ -59,6 +49,19 @@ class Comments extends React.Component {
                 </div>
               </form>
             )}
+          </div>
+          <div>
+            {this.props.comments.map(comment => (
+              <div key={comment.id} className="comment">
+                <div className="comment-user">
+                  <div>
+                    <b>{comment.user.email}</b>
+                  </div>
+                  <div>{comment.date}</div>
+                </div>
+                <div className="comment-comment">{comment.comment}</div>
+              </div>
+            ))}
           </div>
         </div>
       );
