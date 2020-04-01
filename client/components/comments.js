@@ -32,6 +32,7 @@ class Comments extends React.Component {
     if (this.props.q1 && this.props.q2) {
       return (
         <div id="comments-div">
+          <h5 id="comments-title">Comments</h5>
           <div className="row">
             {this.props.user.id && (
               <form onSubmit={this.onSubmit} className="col s12">

@@ -590,6 +590,11 @@ nav a {
   background-color: rgb(245, 239, 229);
   border-radius: 5px;
 }
+
+#comments-title {
+  font-family: 'Maven Pro', sans-serif;
+}
+
 .comment {
   display: flex;
   flex-direction: column;
