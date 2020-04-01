@@ -8,6 +8,7 @@ import M from 'materialize-css';
 import axios from 'axios';
 import wdk from 'wikidata-sdk';
 import user from '../store/user';
+import {toast} from 'react-toastify';
 
 class Profile extends React.Component {
   constructor() {
@@ -147,7 +148,7 @@ class Profile extends React.Component {
             <form id="propic-form" onSubmit={this.fileSubmit}>
               <input type="file" name="avatar" onChange={this.fileChange} />
               <button type="submit" id="propic-btn">
-                Upload Image
+                Save File
               </button>
             </form>
           </div>

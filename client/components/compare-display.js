@@ -411,8 +411,9 @@ class CompareDisplay extends React.Component {
               </button>
               {this.state.levelOneInfo ? (
                 <div className="level-info">
-                  here goes a message explaining the definition oflevel 1
-                  results
+                  Level 1 output is the result of searching through all the
+                  shared properties of the two objects and returning the all the
+                  shared values
                 </div>
               ) : (
                 <div></div>
@@ -448,8 +449,17 @@ class CompareDisplay extends React.Component {
               </button>
               {this.state.levelTwoInfo ? (
                 <div className="level-info">
-                  here goes a message explaining the definition of level 2
-                  results
+                  Level 2 output is the result of a 2 step proccess. First we
+                  compile a list of shared properties with unshared values (e.g.
+                  they may both have a birthplace, but their not the same
+                  places). Then, we find all the shared properties of those
+                  values and return the ones that have shared values. For
+                  example, suppose we were object1's birthplace was America and
+                  object2's birthplace was Armenia. Since the values of the
+                  birthplace property are different it would not show up on
+                  level 1. But both of theses countries have a property called
+                  'hasQuality', and by both that property has the value of 'free
+                  country' so this would be under the level 2 results.
                 </div>
               ) : (
                 <div></div>
