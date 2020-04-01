@@ -298,7 +298,7 @@ nav a {
 }
 #save-profile-btn {
   position: fixed;
-  top: 680px;
+  bottom: 110px;
   left: 70px;
   height: 50px;
   width: 200px;
@@ -381,6 +381,8 @@ nav a {
   margin-top: 80px;
   width: 320px;
   background-color: white;
+  /* box-shadow: 0px 0px 2px; */
+  /* filter: drop-shadow(0px 0px 2px black); */
 }
 .drop-container2 {
   display: flex;
@@ -577,6 +579,30 @@ nav a {
   padding: 5px;
   background-color: rgb(250, 252, 253);
   box-shadow: 0px 0px 2px black;
+}
+
+/* ********************************************************** comments */
+#comments-div {
+  margin: 15px;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 100px;
+  background-color: rgb(245, 239, 229);
+  border-radius: 5px;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgb(245, 243, 241);
+}
+.comment-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.comment-comment {
 }
 
 /* ********************************************************** signup/login */
