@@ -276,15 +276,11 @@ nav a {
 #propic-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-left: 10px;
 }
 #propic-btn {
-  background-color: whitesmoke;
-  border-radius: 3px;
-  border: 2px solid black;
-  width: 250px;
-  height: 50px;
-  margin-top: 5px;
+  margin-top: 3px;
+  width: 96px;
 }
 #propic-pic {
   border: 1px solid grey;
@@ -299,6 +295,19 @@ nav a {
   width: 500px;
   text-align: center;
   font-family: 'Maven Pro', sans-serif;
+}
+#save-profile-btn {
+  position: fixed;
+  top: 680px;
+  left: 70px;
+  height: 50px;
+  width: 200px;
+  border-radius: 5px;
+  background-color: rgb(14, 14, 168);
+  color: white;
+}
+#save-profile-btn:hover {
+  background-color: blue;
 }
 
 /* ********************************************************** compare input */
@@ -565,8 +574,9 @@ nav a {
   position: absolute;
   margin-top: 20px;
   border: 1px solid rgb(63, 61, 61);
-  padding: 2px;
-  background-color: aliceblue;
+  padding: 5px;
+  background-color: rgb(250, 252, 253);
+  box-shadow: 0px 0px 2px black;
 }
 
 /* ********************************************************** signup/login */
