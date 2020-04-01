@@ -216,6 +216,10 @@ nav a {
   padding-left: 6px;
   font-weight: bolder;
 }
+#featComp-content-boxes {
+  display: flex;
+  flex-direction: row;
+}
 
 /* ********************************************************** profile page */
 .profile-header {
@@ -381,8 +385,6 @@ nav a {
   margin-top: 80px;
   width: 320px;
   background-color: white;
-  /* box-shadow: 0px 0px 2px; */
-  /* filter: drop-shadow(0px 0px 2px black); */
 }
 .drop-container2 {
   display: flex;
@@ -431,6 +433,10 @@ nav a {
 }
 
 /* ********************************************************** compare display */
+#compare-dis {
+  display: flex;
+  flex-direction: row;
+}
 #elisCards {
   display: flex;
   flex-direction: row;
@@ -606,8 +612,6 @@ nav a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.comment-comment {
 }
 
 /* ********************************************************** signup/login */
