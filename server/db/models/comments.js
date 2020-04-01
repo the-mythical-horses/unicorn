@@ -10,7 +10,7 @@ const Comment = db.define('comment', {
     type: Sequelize.STRING
   },
 
-  body: {
+  comment: {
     type: Sequelize.TEXT
   },
 
