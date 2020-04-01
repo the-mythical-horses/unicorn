@@ -158,6 +158,11 @@ class Profile extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="row">
             <div id="input-container">
+              <h6>
+                Note: all data input must be by the means of selecting an item
+                from the dropdown lists, otherwise, the data will NOT be
+                recorded!
+              </h6>
               {Object.keys(this.state.form).map(key => (
                 <div key={key} className="input-fields">
                   <input

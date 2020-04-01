@@ -93,6 +93,130 @@ const Profile = db.define('profile', {
 
   P2067_mass: {
     type: Sequelize.INTEGER
+  },
+
+  P22_father: {
+    type: Sequelize.STRING
+  },
+
+  P25_mother: {
+    type: Sequelize.STRING
+  },
+
+  P26_spouse: {
+    type: Sequelize.STRING
+  },
+
+  P40_child: {
+    type: Sequelize.STRING
+  },
+
+  P451_unmarriedPartner: {
+    type: Sequelize.STRING
+  },
+
+  P1038_relative: {
+    type: Sequelize.STRING
+  },
+
+  P1290_godparent: {
+    type: Sequelize.STRING
+  },
+
+  P3373_sibling: {
+    type: Sequelize.STRING
+  },
+
+  P413_positionPlayedOnTeam: {
+    type: Sequelize.STRING
+  },
+
+  P741_playingHand: {
+    type: Sequelize.STRING
+  },
+
+  P39_positionHeld: {
+    type: Sequelize.STRING
+  },
+
+  P53_family: {
+    type: Sequelize.STRING
+  },
+
+  P66_ancestralHome: {
+    type: Sequelize.STRING
+  },
+
+  P91_sexualOrientation: {
+    type: Sequelize.STRING
+  },
+
+  P103_nativeLanguage: {
+    type: Sequelize.STRING
+  },
+
+  P412_voiceType: {
+    type: Sequelize.STRING
+  },
+
+  P511_honorificPrefix: {
+    type: Sequelize.STRING
+  },
+
+  P512_academicDegree: {
+    type: Sequelize.STRING
+  },
+
+  P641_sport: {
+    type: Sequelize.STRING
+  },
+
+  P737_influencedBy: {
+    type: Sequelize.STRING
+  },
+
+  P941_inspiredBy: {
+    type: Sequelize.STRING
+  },
+
+  P937_workLocation: {
+    type: Sequelize.STRING
+  },
+
+  P1344_participantOf: {
+    type: Sequelize.STRING
+  },
+
+  P1399_convictedOf: {
+    type: Sequelize.STRING
+  },
+
+  P1411_nominatedFor: {
+    type: Sequelize.STRING
+  },
+
+  P1416_affiliation: {
+    type: Sequelize.STRING
+  },
+
+  P742_pseudonym: {
+    type: Sequelize.STRING
+  },
+
+  P1853_bloodType: {
+    type: Sequelize.STRING
+  },
+
+  P2650_interestedIn: {
+    type: Sequelize.STRING
+  },
+
+  P3438_vehicleNormallyUsed: {
+    type: Sequelize.STRING
+  },
+
+  P2218_netWorth: {
+    type: Sequelize.STRING
   }
 });
 

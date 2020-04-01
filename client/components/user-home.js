@@ -57,7 +57,7 @@ export class UserHome extends React.Component {
             </h6>
           </div>
           <div id="featComp-content">
-            <div>
+            <div id="featComp-content-boxes">
               <div className="elisCard smallCards" id="leftCard">
                 <div className="smallTitleLeft">Tom Hanks</div>
                 <div className="smallSubTitle">American actor and producer</div>
