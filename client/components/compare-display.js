@@ -6,6 +6,7 @@ import wdk from 'wikidata-sdk';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {Comments} from './index';
+import {getComments} from '../store';
 
 class CompareDisplay extends React.Component {
   constructor(props) {
@@ -247,6 +248,7 @@ class CompareDisplay extends React.Component {
       rightImageDesc,
       results
     });
+    this.props.getComments(left.id, right.id);
   }
 
   compareTwo(entities, q1, q2) {
@@ -560,4 +562,10 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState, null)(CompareDisplay);
+const mapDispatchToProps = dispatch => {
+  return {
+    getComments: (q1, q2) => dispatch(getComments(q1, q2))
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(CompareDisplay);

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {getComments, addComment} from '../store';
+import {addComment} from '../store';
 
 class Comments extends React.Component {
   constructor(props) {
@@ -18,25 +18,20 @@ class Comments extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidUpdate() {
     if (
       this.props.q1 !== undefined &&
       this.props.q2 !== undefined
       //   this.props.q1 !== this.state.q1) ||
       // this.props.q2 !== this.state.q2
     ) {
-      const {data} = await axios.get(
-        `/api/comments/${this.props.q1}/${this.props.q2}`
-      );
-      this.setState({
-        comments: data,
-        q1: this.props.q1,
-        q2: this.props.q2
-      });
+      // this.setState({
+      //   comments: data,
+      //   q1: this.props.q1,
+      //   q2: this.props.q2
+      // });
     }
   }
-
-  componentDidUpdate() {}
 
   onChange(evt) {
     this.setState({body: evt.target.value});
@@ -100,9 +95,7 @@ const mapState = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getComments: (q1, q2) => dispatch(getComments(q1, q2)),
     addComment: (q1, q2, comment) => {
-      console.log('HERE IS Q1 Q2', q1, q2);
       return dispatch(addComment(q1, q2, comment));
     }
   };
