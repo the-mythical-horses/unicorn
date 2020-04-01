@@ -6,6 +6,7 @@ import history from './history';
 import store from './store';
 import App from './app';
 import 'materialize-css/dist/css/materialize.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // establishes socket connection
 import './socket';

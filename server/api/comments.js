@@ -28,10 +28,11 @@ router.post('/', async (req, res, next) => {
       res.sendStatus(500);
       return;
     }
+    console.log('REQ.BODY: ', req.body);
     const newComment = await Comment.create({
       q1: req.body.q1,
       q2: req.body.q2,
-      body: req.body.body,
+      body: req.body.comment,
       date: new Date()
     });
     const user = await User.findByPk(req.user.id);

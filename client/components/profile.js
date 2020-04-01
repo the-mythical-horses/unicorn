@@ -127,6 +127,7 @@ class Profile extends React.Component {
       }
     });
     this.props.addProfileThunk(formCopy);
+    toast.info('Profile saved!');
   }
 
   render() {
