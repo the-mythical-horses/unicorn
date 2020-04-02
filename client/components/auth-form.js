@@ -18,7 +18,7 @@ const AuthForm = props => {
   return (
     <div>
       <img
-        src="./white-abstract-technology-and-engineering-motion-background-with-plexus-elements-and-depth-of-field-settings-3d-rendering_hwc2faa_e_thumbnail-full03.png"
+        src="/white-abstract-technology-and-engineering-motion-background-with-plexus-elements-and-depth-of-field-settings-3d-rendering_hwc2faa_e_thumbnail-full03.png"
         id="signup-img"
       />
       <div id="signup-form-main">
