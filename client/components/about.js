@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const about = () => {
   return (
@@ -6,7 +7,37 @@ const about = () => {
       <div id="about-content">
         <div className="about-box">
           <h3 className="about-header">ABOUT OUR WEBSITE</h3>
-          <div id="about-website">content</div>
+          <div id="about-website">
+            <p>
+              Unicorn is a comparative engine designed to help us all better
+              understand our complicated world and all of its inhabitants.
+              Choose anything to compare &mdash; your two favorite celebrities,
+              planets in the solar system, cartoon characters, DNA strands, or
+              stars in the sky. Take a look at our{' '}
+              <Link href="/home">featured page</Link> for some inspiration. And
+              once you're done playing with objects you know, feel free to build
+              up <Link href="/profile">your profile</Link> and see what you
+              yourself may have in common with your idols, enemies, and
+              everything in between.
+            </p>
+
+            <p>
+              We make use of{' '}
+              <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">
+                Wikidata's dataset
+              </a>{' '}
+              for the majority of our queries, giving us access to over
+              85,000,000 real-world items in the public domain. We use{' '}
+              <a href="https://commons.wikimedia.org/wiki/Main_Page">
+                Wikimedia Commons
+              </a>{' '}
+              to source freely-licensed images for our subjects used in
+              comparisons. Our algorithm makes dozens of requests to these APIs
+              on every comparison based on several factors to determine
+              similarity and find as many points of commonality as possible. We
+              hope you enjoy comparing with Unicorn!
+            </p>
+          </div>
         </div>
 
         <div className="about-box">
