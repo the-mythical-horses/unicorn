@@ -803,3 +803,7 @@ nav a {
 #eli-content {
   /* background-color: rgb(168, 224, 241); */
 }
+#elis-image {
+  width: 300px;
+  height: 250px;
+}
