@@ -80,7 +80,8 @@ export class UserHome extends React.Component {
                   <a href="https://www.wikidata.org/wiki/Q12379">Mario</a> and{' '}
                   <a href="https://www.wikidata.org/wiki/Q210593">Luigi</a>{' '}
                   (fictional characters from the popular video game) share the
-                  same last name: "Mario"?
+                  same last name:{' '}
+                  <a href="https://www.wikidata.org/wiki/Q3362622">"Mario"</a>?
                 </li>
 
                 <li className="dyn-li">
@@ -104,7 +105,7 @@ export class UserHome extends React.Component {
                     Danyang–Kunshan Grand Bridge
                   </a>{' '}
                   (Beijing–Shanghai High-Speed Railway) is 24,000 feet longer
-                  than the worlds second logest bridge, the{' '}
+                  than the worlds second longest bridge, the{' '}
                   <a href="https://www.wikidata.org/wiki/Q30160840">
                     Changhua–Kaohsiung Viaduct
                   </a>{' '}
