@@ -40,6 +40,7 @@ export class UserHome extends React.Component {
             </div>
           </div>
         </div>
+
         <div id="did-you-know" className="featured-divs">
           <div id="did-you-know-header">
             <h6>
@@ -49,12 +50,12 @@ export class UserHome extends React.Component {
           <div id="section2-content">
             <div id="dyn-column1">
               <ul>
-                <li>
-                  • ...that{' '}
+                <li className="dyn-li">
+                  ● ...that{' '}
                   <a href="https://www.wikidata.org/wiki/Q1929542">
                     Gary the Snail
                   </a>{' '}
-                  (from{' '}
+                  (fictional character from{' '}
                   <a href="https://www.wikidata.org/wiki/Q83279">
                     Sponge Bob Square Pants
                   </a>
@@ -65,33 +66,50 @@ export class UserHome extends React.Component {
                   </a>
                   ?
                 </li>
-                <li>
-                  • ...here goes a did you knowhere goes a did you know. here
-                  goes a did you know. here goes a did you know. here goes a did
-                  you know?
+                <li className="dyn-li">
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q2263">Tom Hanks</a>{' '}
+                  (american actor) and his spouse,{' '}
+                  <a href="https://www.wikidata.org/wiki/Q234144">
+                    Rita Wilson
+                  </a>{' '}
+                  (american actress), have both been diagnosed with COVID-19?
                 </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know?
+                <li className="dyn-li">
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q12379">Mario</a> and{' '}
+                  <a href="https://www.wikidata.org/wiki/Q210593">Luigi</a>{' '}
+                  (fictional characters from the popular video game) share the
+                  same last name:{' '}
+                  <a href="https://www.wikidata.org/wiki/Q3362622">"Mario"</a>?
                 </li>
-              </ul>
-            </div>
-            <div id="dyn-column2">
-              <ul>
-                <li>
-                  • ...that here goes a did you know. here goes a did you know.
-                  here goes a did you know. here goes a did you know?
+
+                <li className="dyn-li">
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q8685">
+                    JFK International Airport
+                  </a>{' '}
+                  and{' '}
+                  <a href="https://www.wikidata.org/wiki/Q11245">
+                    One World Trade Center
+                  </a>{' '}
+                  were both designed by architect{' '}
+                  <a href="https://www.wikidata.org/wiki/Q1173984">
+                    David Childs
+                  </a>
+                  .
                 </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know.
-                </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know.
+                <li className="dyn-li">
+                  ● ...that the worlds longest bridge,{' '}
+                  <a href="https://www.wikidata.org/wiki/Q595768">
+                    Danyang–Kunshan Grand Bridge
+                  </a>{' '}
+                  (Beijing–Shanghai High-Speed Railway) is 24,000 feet longer
+                  than the worlds second longest bridge, the{' '}
+                  <a href="https://www.wikidata.org/wiki/Q30160840">
+                    Changhua–Kaohsiung Viaduct
+                  </a>{' '}
+                  (Taiwan High Speed Rail)?
                 </li>
               </ul>
             </div>
@@ -168,13 +186,6 @@ export class UserHome extends React.Component {
                 <div className="bigTitle">How They Compare:</div>
                 <div className="levelHeader">
                   <div className="levelHeader-text">Level 1</div>
-                  <button
-                    className="levelHeader-btn"
-                    id="level-1-info-btn"
-                    type="button"
-                  >
-                    ?
-                  </button>
                   <div />
                 </div>
                 <ol>
@@ -213,13 +224,6 @@ export class UserHome extends React.Component {
                 </ol>
                 <div className="levelHeader">
                   <div className="levelHeader-text">Level 2</div>
-                  <button
-                    className="levelHeader-btn"
-                    id="level-2-info-btn"
-                    type="button"
-                  >
-                    ?
-                  </button>
                   <div />
                 </div>
                 <ol>
