@@ -99,7 +99,7 @@ nav a {
   height: 100px;
   width: 100%;
   background-color: rgb(204, 203, 203);
-  margin-top: 50px;
+  margin-top: 0px;
   font-family: 'Maven Pro', sans-serif;
 }
 #git-logo {
@@ -769,9 +769,9 @@ nav a {
   width: 1380;
   padding: 20px;
   padding-top: 0px;
-  margin: 30px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background-color: whitesmoke;
   border-radius: 10px;
 }
@@ -785,6 +785,8 @@ nav a {
   border: 2px solid black;
   border-radius: 5px;
   padding: 3px;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 .about-us {
   display: flex;
@@ -792,18 +794,12 @@ nav a {
   justify-content: center;
 }
 #about-card {
-  width: 30%;
-}
-#harry-content {
-  /* background-color: rgb(205, 224, 222); */
-}
-#peter-content {
-  /* background-color: rgb(191, 191, 226); */
-}
-#eli-content {
-  /* background-color: rgb(168, 224, 241); */
-}
-#elis-image {
   width: 300px;
-  height: 250px;
+}
+#about-card-headers {
+  background-color: rgb(23, 23, 77);
+}
+#about-par {
+  margin-right: 40px;
+  margin-left: 40px;
 }

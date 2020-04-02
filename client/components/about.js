@@ -6,9 +6,9 @@ const about = () => {
     <div id="about-page">
       <div id="about-content">
         <div className="about-box">
-          <h3 className="about-header">ABOUT OUR WEBSITE</h3>
+          <h3 className="about-header">About Our Website</h3>
           <div id="about-website">
-            <p>
+            <p id="about-par">
               Unicorn is a comparative engine designed to help us all better
               understand our complicated world and all of its inhabitants.
               Choose anything to compare &mdash; your two favorite celebrities,
@@ -21,7 +21,7 @@ const about = () => {
               everything in between.
             </p>
 
-            <p>
+            <p id="about-par">
               We make use of{' '}
               <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">
                 Wikidata's dataset
@@ -41,18 +41,22 @@ const about = () => {
         </div>
 
         <div className="about-box">
-          <h3 className="about-header">ABOUT OURSELVES</h3>
+          <h3 className="about-header">About Ourselves</h3>
 
           <div className="about-us">
             <div className="elisCard" id="leftCard about-card">
-              <div className="smallTitleLeft">Harry</div>
+              <div className="smallTitleLeft" id="about-card-headers">
+                Harry
+              </div>
               <div className="smallSubTitle">Software engineer</div>
               <img className="compare-img" src="/img/harry_400.jpg" />
               <div className="smallPictureDescription">
                 Passionate about data
               </div>
               <div className="smallInfo">
-                <div className="smallInfoTitleLeft">Information</div>
+                <div className="smallInfoTitleLeft" id="about-card-headers">
+                  Information
+                </div>
                 <div className="smallInfoMain">
                   <div className="theSmalls">
                     <div className="smallInfoH">operating system used</div>
@@ -86,14 +90,18 @@ const about = () => {
             </div>
 
             <div className="elisCard" id="leftCard about-card">
-              <div className="smallTitleLeft">Peter</div>
+              <div className="smallTitleLeft" id="about-card-headers">
+                Peter
+              </div>
               <div className="smallSubTitle">Software engineer</div>
               <img className="compare-img" src="/img/Pete_Photo.jpg" />
               <div className="smallPictureDescription">
                 Developer | Veteran | Coffee enthusiast
               </div>
               <div className="smallInfo">
-                <div className="smallInfoTitleLeft">Information</div>
+                <div className="smallInfoTitleLeft" id="about-card-headers">
+                  Information
+                </div>
                 <div className="smallInfoMain">
                   <div className="theSmalls">
                     <div className="smallInfoH">operating system used</div>
@@ -129,14 +137,18 @@ const about = () => {
             </div>
 
             <div className="elisCard" id="leftCard about-card">
-              <div className="smallTitleLeft">Eli</div>
+              <div className="smallTitleLeft" id="about-card-headers">
+                Eli
+              </div>
               <div className="smallSubTitle">Software Engineer</div>
               <img className="compare-img" id="elis-image" src="/img/eli.jpg" />
               <div className="smallPictureDescription">
                 Eli Plutchok smiles for the camera.
               </div>
               <div className="smallInfo">
-                <div className="smallInfoTitleLeft">Information</div>
+                <div className="smallInfoTitleLeft" id="about-card-headers">
+                  Information
+                </div>
                 <div className="smallInfoMain">
                   <div className="theSmalls">
                     <div className="smallInfoH">Birthplace</div>
@@ -148,14 +160,17 @@ const about = () => {
                   </div>
                   <div className="theSmalls">
                     <div className="smallInfoH">Languages spoken</div>
-                    <div className="smallInfoD">English, Hebrew</div>
+                    <div className="smallInfoD">
+                      <a href="https://www.wikidata.org/wiki/Q1860">English</a>,{' '}
+                      <a href="https://www.wikidata.org/wiki/Q9288">Hebrew</a>
+                    </div>
                   </div>
                   <div className="theSmalls">
-                    <div className="smallInfoH">Occupation</div>
-                    <div className="smallInfoD">Unemployed</div>
+                    <div className="smallInfoH">Favorite Food</div>
+                    <div className="smallInfoD">Pizza</div>
                   </div>
                   <div className="theSmalls">
-                    <div className="smallInfoH">country of citizenship</div>
+                    <div className="smallInfoH">Country of citizenship</div>
                     <div className="smallInfoD">United States of America</div>
                   </div>
                 </div>
