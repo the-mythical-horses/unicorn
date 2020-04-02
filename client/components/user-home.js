@@ -50,42 +50,48 @@ export class UserHome extends React.Component {
             <div id="dyn-column1">
               <ul>
                 <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  knowhere goes a did you know. here goes a did you know. here
-                  goes a did you know. here goes a did you know.
+                  • ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q1929542">
+                    Gary the Snail
+                  </a>{' '}
+                  (from{' '}
+                  <a href="https://www.wikidata.org/wiki/Q83279">
+                    Sponge Bob Square Pants
+                  </a>
+                  ) is cousins with{' '}
+                  <a href="https://www.wikidata.org/wiki/Q1077456">
+                    {' '}
+                    Patrick Star
+                  </a>
+                  ?
                 </li>
                 <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  knowhere goes a did you know. here goes a did you know. here
-                  goes a did you know. here goes a did you know.
+                  • ...here goes a did you knowhere goes a did you know. here
+                  goes a did you know. here goes a did you know. here goes a did
+                  you know?
+                </li>
+                <li>
+                  • ...that here goes a did you knowhere goes a did you know.
+                  here goes a did you know. here goes a did you know. here goes
+                  a did you know?
                 </li>
               </ul>
             </div>
-            <div id="dyn-column1">
+            <div id="dyn-column2">
               <ul>
                 <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  know. here goes a did you know. here goes a did you know. here
-                  goes a did you know.{' '}
+                  • ...that here goes a did you know. here goes a did you know.
+                  here goes a did you know. here goes a did you know?
                 </li>
                 <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  knowhere goes a did you know. here goes a did you know. here
-                  goes a did you know. here goes a did you know.
-                </li>
-              </ul>
-            </div>
-            <div id="dyn-column1">
-              <ul>
-                <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  knowhere goes a did you know. here goes a did you know. here
-                  goes a did you know. here goes a did you know.
+                  • ...that here goes a did you knowhere goes a did you know.
+                  here goes a did you know. here goes a did you know. here goes
+                  a did you know.
                 </li>
                 <li>
-                  <span className="bullet-point">• </span>here goes a did you
-                  knowhere goes a did you know. here goes a did you know. here
-                  goes a did you know. here goes a did you know.
+                  • ...that here goes a did you knowhere goes a did you know.
+                  here goes a did you know. here goes a did you know. here goes
+                  a did you know.
                 </li>
               </ul>
             </div>

@@ -243,14 +243,7 @@ nav a {
 }
 #dyn-column2 {
   width: 400;
-}
-#dyn-column3 {
   margin-left: 15px;
-  width: 400;
-}
-.bullet-point {
-  text-align: end;
-  font-size: 20px;
 }
 #featured-comparison {
   background-color: rgb(248, 255, 244);
