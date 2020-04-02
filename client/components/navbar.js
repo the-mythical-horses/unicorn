@@ -40,6 +40,11 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 </Link>
               </li>
               <li>
+                <Link className="link" to="/about">
+                  About
+                </Link>
+              </li>
+              <li>
                 <a className="link" href="#" onClick={handleClick}>
                   Logout
                 </a>

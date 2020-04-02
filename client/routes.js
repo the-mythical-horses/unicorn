@@ -9,7 +9,8 @@ import {
   Search,
   Compare,
   Home,
-  Profile
+  Profile,
+  About
 } from './components';
 import {me} from './store';
 
@@ -38,6 +39,7 @@ class Routes extends Component {
             <Route path="/search" component={Search} />
             <Route path="/compare" component={Compare} />
             <Route path="/profile" component={Profile} />
+            <Route path="/about" component={About} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
