@@ -40,9 +40,9 @@ export class Compare extends React.Component {
       l2results: {},
       names: {},
       complexNames: {},
-      leftImage: '/img/smoke-uni-left-chain.png',
+      leftImage: '/img/leftUnicorn.png',
       leftImageDesc: '',
-      rightImage: '/img/smoke-uni.png',
+      rightImage: '/img/rightUnicorn.png',
       rightImageDesc: ''
     };
     this.onChangeLeft = this.onChangeLeft.bind(this);
