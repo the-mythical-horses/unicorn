@@ -49,8 +49,8 @@ export class UserHome extends React.Component {
           <div id="section2-content">
             <div id="dyn-column1">
               <ul>
-                <li>
-                  • ...that{' '}
+                <li className="dyn-li">
+                  ● ...that{' '}
                   <a href="https://www.wikidata.org/wiki/Q1929542">
                     Gary the Snail
                   </a>{' '}
@@ -65,31 +65,34 @@ export class UserHome extends React.Component {
                   </a>
                   ?
                 </li>
-                <li>
-                  • ...here goes a did you knowhere goes a did you know. here
-                  goes a did you know. here goes a did you know. here goes a did
-                  you know?
+                <li className="dyn-li">
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q2263">Tom Hanks</a>{' '}
+                  (american actor) and his spouse,{' '}
+                  <a href="https://www.wikidata.org/wiki/Q234144">
+                    Rita Wilson
+                  </a>{' '}
+                  (american actress), have both been diagnosed with COVID-19?
                 </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know?
+                <li className="dyn-li">
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q12379">Mario</a> and{' '}
+                  <a href="https://www.wikidata.org/wiki/Q210593">Luigi</a>{' '}
+                  (from the popular video game) share the same last name:
+                  "Mario"?
                 </li>
               </ul>
             </div>
             <div id="dyn-column2">
               <ul>
-                <li>
-                  • ...that here goes a did you know. here goes a did you know.
-                  here goes a did you know. here goes a did you know?
-                </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
+                <li className="dyn-li">● ...that ?</li>
+                <li className="dyn-li">
+                  ● ...that here goes a did you knowhere goes a did you know.
                   here goes a did you know. here goes a did you know. here goes
                   a did you know.
                 </li>
-                <li>
-                  • ...that here goes a did you knowhere goes a did you know.
+                <li className="dyn-li">
+                  ● ...that here goes a did you knowhere goes a did you know.
                   here goes a did you know. here goes a did you know. here goes
                   a did you know.
                 </li>
@@ -168,13 +171,6 @@ export class UserHome extends React.Component {
                 <div className="bigTitle">How They Compare:</div>
                 <div className="levelHeader">
                   <div className="levelHeader-text">Level 1</div>
-                  <button
-                    className="levelHeader-btn"
-                    id="level-1-info-btn"
-                    type="button"
-                  >
-                    ?
-                  </button>
                   <div />
                 </div>
                 <ol>
@@ -213,13 +209,6 @@ export class UserHome extends React.Component {
                 </ol>
                 <div className="levelHeader">
                   <div className="levelHeader-text">Level 2</div>
-                  <button
-                    className="levelHeader-btn"
-                    id="level-2-info-btn"
-                    type="button"
-                  >
-                    ?
-                  </button>
                   <div />
                 </div>
                 <ol>

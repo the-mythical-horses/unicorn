@@ -236,6 +236,7 @@ nav a {
   flex-direction: row;
   justify-content: space-between;
   margin: 15px;
+  font-size: 17px;
 }
 #dyn-column1 {
   margin-right: 15px;
@@ -244,6 +245,9 @@ nav a {
 #dyn-column2 {
   width: 400;
   margin-left: 15px;
+}
+.dyn-li {
+  margin-bottom: 10px;
 }
 #featured-comparison {
   background-color: rgb(248, 255, 244);
