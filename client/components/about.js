@@ -90,9 +90,11 @@ const about = () => {
             </div>
 
             <div className="elisCard" id="leftCard about-card">
+
               <div className="smallTitleLeft" id="about-card-headers">
-                Peter
+                Pete
               </div>
+
               <div className="smallSubTitle">Software engineer</div>
               <img className="compare-img" src="/img/Pete_Photo.jpg" />
               <div className="smallPictureDescription">
@@ -122,6 +124,12 @@ const about = () => {
                       <a href="https://www.wikidata.org/wiki/Q2414469">
                         FromSoftware
                       </a>
+                    </div>
+                  </div>
+                  <div className="theSmalls">
+                    <div className="smallInfoH">Twitter handle</div>
+                    <div className="smallInfoD">
+                      <a href="https://twitter.com/pjswebdev">@pjswebdev</a>
                     </div>
                   </div>
                   <div className="theSmalls">
