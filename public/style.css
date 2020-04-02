@@ -90,17 +90,16 @@ nav a {
   position: relative;
 }
 .footer {
-  position: absolute;
   display: flex;
-  justify-content: flex-end;
-  padding: '20px';
-  position: 'fixed';
-  left: '0';
-  bottom: '0';
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
   height: 100px;
   width: 100%;
-  background-color: var(--color1);
+  background-color: rgb(204, 203, 203);
   margin-top: 50px;
+  font-family: 'Maven Pro', sans-serif;
 }
 #git-logo {
   margin-top: 8px;
@@ -176,13 +175,39 @@ nav a {
   border-radius: 5px;
   filter: drop-shadow(0px 0px 1px);
 }
+#welcome-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/img/welcome.svg');
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+  padding: 10px;
+  width: 1400px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px);
+}
+
 #welcome {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  background-color: whitesmoke;
-  height: 150px;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 800px;
+  padding: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px);
+  background-color: whitesmoke;
+}
+#welcome-img {
 }
 #welcome-text1 {
   width: 300px;
@@ -204,6 +229,27 @@ nav a {
   border: 1px solid rgb(112, 30, 30);
   padding-left: 6px;
   font-weight: bolder;
+}
+#section2-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px;
+}
+#dyn-column1 {
+  margin-right: 15px;
+  width: 400;
+}
+#dyn-column2 {
+  width: 400;
+}
+#dyn-column3 {
+  margin-left: 15px;
+  width: 400;
+}
+.bullet-point {
+  text-align: end;
+  font-size: 20px;
 }
 #featured-comparison {
   background-color: rgb(248, 255, 244);

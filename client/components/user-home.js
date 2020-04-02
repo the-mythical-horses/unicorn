@@ -27,27 +27,69 @@ export class UserHome extends React.Component {
     const {email} = this.props;
     return (
       <div id="featured">
-        <div id="welcome" className="featured-divs">
-          <div id="welcome-text1">
-            <h5>
-              Welcome to <Link to="/">Unicorn</Link>
-            </h5>
-            <h6>
-              the free <Link to="/compare">comparator</Link> that anyone can use
-              for free (but{' '}
-              <a href="http://www.lileks.com/institute/">donations</a> are
-              welcomed)
-            </h6>
+        <div id="welcome-div">
+          <div id="welcome" className="welcome-div">
+            <div id="welcome-text1">
+              <h5>
+                Welcome to <Link to="/">Unicorn</Link>
+              </h5>
+              <h6>
+                the free <Link to="/compare">comparative</Link> engine that
+                anyone can use
+              </h6>
+            </div>
           </div>
         </div>
-
         <div id="did-you-know" className="featured-divs">
           <div id="did-you-know-header">
             <h6>
               <b>Did you know...</b>
             </h6>
           </div>
-          <div id="section2-content"></div>
+          <div id="section2-content">
+            <div id="dyn-column1">
+              <ul>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  knowhere goes a did you know. here goes a did you know. here
+                  goes a did you know. here goes a did you know.
+                </li>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  knowhere goes a did you know. here goes a did you know. here
+                  goes a did you know. here goes a did you know.
+                </li>
+              </ul>
+            </div>
+            <div id="dyn-column1">
+              <ul>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  know. here goes a did you know. here goes a did you know. here
+                  goes a did you know.{' '}
+                </li>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  knowhere goes a did you know. here goes a did you know. here
+                  goes a did you know. here goes a did you know.
+                </li>
+              </ul>
+            </div>
+            <div id="dyn-column1">
+              <ul>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  knowhere goes a did you know. here goes a did you know. here
+                  goes a did you know. here goes a did you know.
+                </li>
+                <li>
+                  <span className="bullet-point">• </span>here goes a did you
+                  knowhere goes a did you know. here goes a did you know. here
+                  goes a did you know. here goes a did you know.
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div id="featured-comparison" className="featured-divs">

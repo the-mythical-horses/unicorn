@@ -97,7 +97,18 @@ class CompareDisplay extends React.Component {
                   <span className="twoProp">{`${this.props.getLabel(
                     p
                   )}: `}</span>
-                  {`${results[p].map(q => this.props.getLabel(q)).join(', ')}`}
+                  {results[p].map((q, i) => (
+                    <span key={q}>
+                      <a href={`https://www.wikidata.org/wiki/${q}`}>
+                        {this.props.getLabel(q)}
+                      </a>
+                      {i !== results[p].length - 1 ? (
+                        <span>, </span>
+                      ) : (
+                        <span></span>
+                      )}
+                    </span>
+                  ))}
                 </li>
               ))}
             </ol>
@@ -158,9 +169,19 @@ class CompareDisplay extends React.Component {
                   <ol>
                     {Object.keys(l2results[p].results).map(p2 => (
                       <li key={p2}>
-                        {`${this.props.getLabel(p2)}: ${l2results[p].results[p2]
-                          .map(q => this.props.getLabel(q))
-                          .join(', ')}`}
+                        <b>{this.props.getLabel(p2)}:</b>{' '}
+                        {l2results[p].results[p2].map((q, i) => (
+                          <span key={q}>
+                            <a href={`https://www.wikidata.org/wiki/${q}`}>
+                              {this.props.getLabel(q)}
+                            </a>
+                            {i !== l2results[p].results[p2].length - 1 ? (
+                              <span>, </span>
+                            ) : (
+                              <span></span>
+                            )}
+                          </span>
+                        ))}
                       </li>
                     ))}
                   </ol>
