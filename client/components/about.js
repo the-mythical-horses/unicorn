@@ -127,6 +127,12 @@ const about = () => {
                     </div>
                   </div>
                   <div className="theSmalls">
+                    <div className="smallInfoH">Twitter handle</div>
+                    <div className="smallInfoD">
+                      <a href="https://twitter.com/pjswebdev">@pjswebdev</a>
+                    </div>
+                  </div>
+                  <div className="theSmalls">
                     <div className="smallInfoH">Height</div>
                     <div className="smallInfoD">6'</div>
                   </div>
