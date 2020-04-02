@@ -11,6 +11,7 @@
 8. compare input
 9. compare display
 10. login/signup page
+11. about page
 */
 
 body {
@@ -753,4 +754,52 @@ nav a {
 }
 .notmember-p {
   font-family: 'Maven Pro', sans-serif;
+}
+
+/* ********************************************************** about page */
+#about-page {
+  margin-top: 0px;
+  background-image: url('/img/welcome.svg');
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+#about-content {
+  display: flex;
+  flex-direction: column;
+  width: 1380;
+  padding: 20px;
+  padding-top: 0px;
+  margin: 30px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+.about-box {
+  width: 1300;
+}
+.about-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
+}
+.about-us {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#about-card {
+  width: 30%;
+}
+#harry-content {
+  /* background-color: rgb(205, 224, 222); */
+}
+#peter-content {
+  /* background-color: rgb(191, 191, 226); */
+}
+#eli-content {
+  /* background-color: rgb(168, 224, 241); */
 }

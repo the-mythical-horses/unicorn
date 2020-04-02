@@ -12,3 +12,4 @@ export {default as Compare} from './compare';
 export {default as Comments} from './comments';
 export {default as Home} from './home';
 export {default as CompareDisplay} from './compare-display';
+export {default as About} from './about';
