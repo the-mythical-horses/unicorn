@@ -40,6 +40,7 @@ export class UserHome extends React.Component {
             </div>
           </div>
         </div>
+
         <div id="did-you-know" className="featured-divs">
           <div id="did-you-know-header">
             <h6>
@@ -54,7 +55,7 @@ export class UserHome extends React.Component {
                   <a href="https://www.wikidata.org/wiki/Q1929542">
                     Gary the Snail
                   </a>{' '}
-                  (from{' '}
+                  (fictional character from{' '}
                   <a href="https://www.wikidata.org/wiki/Q83279">
                     Sponge Bob Square Pants
                   </a>
@@ -78,23 +79,36 @@ export class UserHome extends React.Component {
                   ● ...that{' '}
                   <a href="https://www.wikidata.org/wiki/Q12379">Mario</a> and{' '}
                   <a href="https://www.wikidata.org/wiki/Q210593">Luigi</a>{' '}
-                  (from the popular video game) share the same last name:
-                  "Mario"?
+                  (fictional characters from the popular video game) share the
+                  same last name: "Mario"?
                 </li>
-              </ul>
-            </div>
-            <div id="dyn-column2">
-              <ul>
-                <li className="dyn-li">● ...that ?</li>
+
                 <li className="dyn-li">
-                  ● ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know.
+                  ● ...that{' '}
+                  <a href="https://www.wikidata.org/wiki/Q8685">
+                    JFK International Airport
+                  </a>{' '}
+                  and{' '}
+                  <a href="https://www.wikidata.org/wiki/Q11245">
+                    One World Trade Center
+                  </a>{' '}
+                  were both designed by architect{' '}
+                  <a href="https://www.wikidata.org/wiki/Q1173984">
+                    David Childs
+                  </a>
+                  .
                 </li>
                 <li className="dyn-li">
-                  ● ...that here goes a did you knowhere goes a did you know.
-                  here goes a did you know. here goes a did you know. here goes
-                  a did you know.
+                  ● ...that the worlds longest bridge,{' '}
+                  <a href="https://www.wikidata.org/wiki/Q595768">
+                    Danyang–Kunshan Grand Bridge
+                  </a>{' '}
+                  (Beijing–Shanghai High-Speed Railway) is 24,000 feet longer
+                  than the worlds second logest bridge, the{' '}
+                  <a href="https://www.wikidata.org/wiki/Q30160840">
+                    Changhua–Kaohsiung Viaduct
+                  </a>{' '}
+                  (Taiwan High Speed Rail)?
                 </li>
               </ul>
             </div>
