@@ -86,7 +86,7 @@ const about = () => {
             </div>
 
             <div className="elisCard" id="leftCard about-card">
-              <div className="smallTitleLeft">Peter</div>
+              <div className="smallTitleLeft">Pete</div>
               <div className="smallSubTitle">Software engineer</div>
               <img className="compare-img" src="/img/Pete_Photo.jpg" />
               <div className="smallPictureDescription">
