@@ -72,8 +72,6 @@ Some challenges faced include:
 
 ---
 
-## Roadmap
-
 ## Contributing
 
 As stated earlier, Unicorn is completely open-source. We are passionate about this project and want to see it grow. We would love any and all contributions. That said here are a few guidelines for contributing:
