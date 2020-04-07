@@ -25,7 +25,7 @@ npm run start
 
 Easy. Simply make your way over to the compare page and insert any two items you wish. Press compare and watch the magic happen!
 
-![](Unicorn-Gif_1.gif)
+![](Unicorn-Gif_2.gif)
 
 ---
 
