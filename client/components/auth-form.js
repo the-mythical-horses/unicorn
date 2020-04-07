@@ -55,11 +55,11 @@ const AuthForm = props => {
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        <div id="or">or</div>
+        {/* <div id="or">or</div>
         <a id="signup-google" href="/auth/google">
           <img id="google-icon" src="/img/googleIcon.png" />{' '}
           <div id="google-text">{displayName} with Google</div>
-        </a>
+        </a> */}
         <div className="login-notmember">
           {displayName === 'Login' ? (
             <p className="notmember-p">
