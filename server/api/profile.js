@@ -18,7 +18,11 @@ router.get('/raw', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    let userId = req.user.id;
+    let userId = req.user ? req.user.id : null;
+    if (!userId) {
+      res.json({});
+      return;
+    }
     let user = await User.findByPk(userId, {
       include: [{model: Profile}]
     });
