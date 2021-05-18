@@ -1,22 +1,23 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+// const Sequelize = require('sequelize');
+// const db = require('../db');
 
-const Comment = db.define('comment', {
-  q1: {
-    type: Sequelize.STRING
-  },
+// const Comment = db.define('comment', {
+//   q1: {
+//     type: Sequelize.STRING
+//   },
 
-  q2: {
-    type: Sequelize.STRING
-  },
+//   q2: {
+//     type: Sequelize.STRING
+//   },
 
-  comment: {
-    type: Sequelize.TEXT
-  },
+//   comment: {
+//     type: Sequelize.TEXT
+//   },
 
-  date: {
-    type: Sequelize.DATE
-  }
-});
+//   date: {
+//     type: Sequelize.DATE
+//   }
+// });
 
-module.exports = Comment;
+// module.exports = Comment;
+module.exports = {};

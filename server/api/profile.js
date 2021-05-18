@@ -5,12 +5,13 @@ module.exports = router;
 
 router.get('/raw', async (req, res, next) => {
   try {
-    let profile = await Profile.findOne({
-      where: {
-        userId: req.user.id
-      }
-    });
-    res.json(profile);
+    // let profile = await Profile.findOne({
+    //   where: {
+    //     userId: req.user.id
+    //   }
+    // });
+    // res.json(profile);
+    res.send({});
   } catch (error) {
     next(error);
   }

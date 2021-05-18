@@ -44,7 +44,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/me', (req, res) => {
-  res.json(req.user);
+  res.json(null);
 });
 
 router.use('/google', require('./google'));
