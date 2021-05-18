@@ -422,7 +422,7 @@ export class Compare extends React.Component {
   render() {
     return (
       <div onClick={() => this.setState({leftSearch: [], rightSearch: []})}>
-        <button
+        {/* <button
           type="button"
           id="insert-btn"
           onClick={() =>
@@ -436,7 +436,7 @@ export class Compare extends React.Component {
           }
         >
           Insert Profile as Object 1
-        </button>
+        </button> */}
         <form id="compareForm" onSubmit={this.onSubmit}>
           <div className="in-drop">
             <div className="col s6">

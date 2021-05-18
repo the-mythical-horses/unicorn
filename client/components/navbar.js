@@ -55,7 +55,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           <div>
             <ul className="right hide-on-med-and-down">
               {/* The navbar will show these links before you log in */}
-              <li>
+              {/* <li>
                 <Link to="/login" className="link">
                   Login
                 </Link>
@@ -64,7 +64,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 <Link to="/signup" className="link">
                   Sign Up
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         )}
